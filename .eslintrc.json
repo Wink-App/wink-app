@@ -1,0 +1,108 @@
+{
+  "extends": [
+    "universe/native"
+  ],
+  "rules": {
+    "prettier/prettier": 0,
+    "jsx-a11y/alt-text": "off", // Alt text in img tag is not required
+    /**
+    * Elements with no content should be self-closing
+    * Semi-colons are required at the end of each line
+    * Put multiple props on separate lines
+    * First prop on a new line when multiple props exist, otherwise on the same line as the opening tag
+    */
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "maximum": 1,
+        "when": "multiline"
+      }
+    ],
+    "react/jsx-first-prop-new-line": [
+      "error",
+      "multiline"
+    ],
+    "react/jsx-closing-bracket-location": [
+      "error",
+      {
+        "selfClosing": "tag-aligned",
+        "nonEmpty": "after-props"
+      }
+    ],
+    /**
+    * Use double quotes for JSX and TSX attributes
+    */
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    // Empty lines between imports is okay
+    "import/newline-after-import": "off",
+    "import/order": "off",
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            "@expo", // Expo
+            "expo-router",
+            "expo-status-bar",
+            "expo-font",
+            "expo-image"
+          ],
+          [
+            "react",
+            "react-native",
+            "react-native-safe-area-context"
+          ],
+          [
+            "/lib",
+            "@supabase/auth-helpers-react",
+            "@supabase/supabase-js"
+          ],
+          [
+            "/context",
+            "/hooks"
+          ],
+          [
+            "moti"
+          ],
+          [
+            "/components" // Components
+          ],
+          [
+            "/styles" // Styles
+          ]
+        ]
+      }
+    ]
+  },
+  "plugins": [
+    "simple-import-sort"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ]
+    }
+  ]
+}

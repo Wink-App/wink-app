@@ -147,6 +147,7 @@ export const usePrice = (initialValue: string | number) => {
   return [hook, handleValue] as CustomHook;
 };
 
+// Used for Search System
 export function useDebounceEffect(effect: any, deps: DependencyList, delay = 250) {
   const callback = useCallback(effect, deps);
 

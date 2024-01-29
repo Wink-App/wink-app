@@ -7,7 +7,10 @@ export default function Layout() {
         headerShown: false,
       }}>
       <Stack.Screen
-        name="home"
+        name="phone"
+      />
+      <Stack.Screen
+        name="code"
       />
     </Stack>
   );

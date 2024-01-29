@@ -144,6 +144,7 @@ function CustomToast({
         }}>
         <Image
           source={icon}
+          priority="high"
           style={{
             height: 15,
             width: 15,

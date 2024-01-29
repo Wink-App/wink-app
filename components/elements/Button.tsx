@@ -56,7 +56,7 @@ export function ButtonText({ text, styleText, onPress }: ButtonTextProps) {
   );
 }
 
-type AuthProvider = "google" | "apple" | "facebook" | "email";
+type AuthProvider = "google" | "apple" | "facebook" | "email" | "phone";
 
 type ButtonSocialProps = {
   authProvider: AuthProvider;
@@ -85,6 +85,10 @@ const getAuthIconLabel: Record<AuthProvider, AuthIconLabel> = {
   email: {
     icon: require("../../assets/auth/Email.svg"),
     label: "Email",
+  },
+  phone: {
+    icon: require("../../assets/auth/Phone.svg"),
+    label: "Telefono",
   },
 };
 

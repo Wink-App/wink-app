@@ -1,14 +1,7 @@
 import { useRouter } from "expo-router";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  Dimensions,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import SafeAreaLayout from "../context/SafeAreaLayout";
@@ -18,7 +11,7 @@ import TransitionElement from "../components/transitions/TransitionElement";
 
 import { colorOrange, colorPurple, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
 
-const windowWidth = Dimensions.get("window").width;
+import { windowWidth } from "../utils/utils";
 
 type Slide = {
   id: number;
@@ -26,6 +19,19 @@ type Slide = {
 };
 
 export default function Index() {
+
+  const {
+    wrapper,
+    container,
+    scrollView,
+    slideWidth,
+    dots,
+    dot,
+    dotActive,
+    dotInactive,
+    actionContainer,
+    action,
+  } = styles;
 
   const router = useRouter();
 
@@ -60,10 +66,10 @@ export default function Index() {
   }, []);
 
   return (
-    <View style={styles.wrapper}>
+    <View style={wrapper}>
       <SafeAreaLayout>
-        <View style={styles.container}>
-          <View style={styles.scrollView}>
+        <View style={container}>
+          <View style={scrollView}>
             <FlatList
               data={slides}
               horizontal
@@ -71,32 +77,32 @@ export default function Index() {
               onScroll={handleScroll}
               showsHorizontalScrollIndicator={false}
               renderItem={({ item }) => (
-                <View key={item.id} style={styles.slideWidth}>
+                <View key={item.id} style={slideWidth}>
                   {item.JSX}
                 </View>
               )}
               keyExtractor={(item) => item.id.toString()}
             />
           </View>
-          <View style={styles.dots}>
+          <View style={dots}>
             {slides.map((slide, index) => (
               <View
                 key={slide.id}
                 style={[
-                  styles.dot,
+                  dot,
                   idCurrentSlide === index
-                    ? styles.dotActive
-                    : styles.dotInactive,
+                    ? dotActive
+                    : dotInactive,
                 ]}
               />
             ))}
           </View>
-          <View style={styles.actionContainer}>
+          <View style={actionContainer}>
             {hasReachedLastSlide && (
               <TransitionElement>
                 <ButtonText
                   text="Avanti"
-                  styleText={styles.action}
+                  styleText={action}
                   onPress={handleNavigateToRegister}
                 />
               </TransitionElement>
@@ -109,37 +115,61 @@ export default function Index() {
 }
 
 function SlideOne() {
+
+  const {
+    slide,
+    title,
+    body,
+  } = styles;
+
   const bodyCopy =
     "L'app che ti darà la possibilità\ndi fare shopping online e\nricevere i tuoi ordini entro\n60 minuti ovunque tu voglia!";
+
   return (
-    <View style={styles.slide}>
-      <Text style={styles.title}>Benvenuto</Text>
-      <Text style={styles.title}>su Wink</Text>
-      <Text style={styles.body}>{bodyCopy}</Text>
+    <View style={slide}>
+      <Text style={title}>Benvenuto</Text>
+      <Text style={title}>su Wink</Text>
+      <Text style={body}>{bodyCopy}</Text>
     </View>
   );
 }
 
 function SlideTwo() {
+
+  const {
+    slide,
+    title,
+    body,
+  } = styles;
+
   const bodyCopy =
     "Accedi o registrati, dopodiché\navrai a disposizione gli articoli\ndei negozi affiliati, in una\npiattaforma a portata di mano!";
+
   return (
-    <View style={styles.slide}>
-      <Text style={styles.title}>Acquista con</Text>
-      <Text style={styles.title}>semplicità</Text>
-      <Text style={styles.body}>{bodyCopy}</Text>
+    <View style={slide}>
+      <Text style={title}>Acquista con</Text>
+      <Text style={title}>semplicità</Text>
+      <Text style={body}>{bodyCopy}</Text>
     </View>
   );
 }
 
 function SlideThree() {
+
+  const {
+    slide,
+    title,
+    body,
+  } = styles;
+
   const bodyCopy =
     "Una volta aver effettuato l'acquisto,\nriceverai il tuo ordine entro\n60 minuti e avrai acquistato\ncomodamente da casa o ufficio!";
+
   return (
-    <View style={styles.slide}>
-      <Text style={styles.title}>Non è mai stato</Text>
-      <Text style={styles.title}>così veloce</Text>
-      <Text style={styles.body}>{bodyCopy}</Text>
+    <View style={slide}>
+      <Text style={title}>Non è mai stato</Text>
+      <Text style={title}>così veloce</Text>
+      <Text style={body}>{bodyCopy}</Text>
     </View>
   );
 }

@@ -3,13 +3,12 @@ import { Image } from "expo-image";
 
 import { StyleSheet, Text, View } from "react-native";
 
-import SafeAreaLayout from "../../context/SafeAreaLayout";
-
 import { ButtonAuth } from "../../components/elements/Button";
 import TransitionElement from "../../components/transitions/TransitionElement";
 
 import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
+import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
 import { windowWidth } from "../../utils/utils";
 
 const logoDir = "../../assets/logos/WinkLogo1.png";

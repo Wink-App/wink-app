@@ -2,8 +2,7 @@ import { useRouter } from "expo-router";
 
 import { StyleSheet, Text, View } from "react-native";
 
-import { useEmail } from "../../../context/hooks/inputs";
-import SafeAreaLayout from "../../../context/SafeAreaLayout";
+import { useNumber } from "../../../context/hooks/inputs";
 
 import { ButtonBack, ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
@@ -11,6 +10,7 @@ import DismissKeyboard from "../../../components/transitions/DismissKeyboard";
 
 import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../../utils/styles";
 
+import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
 import { windowHeight, windowWidth } from "../../../utils/utils";
 
 export default function Phone() {
@@ -25,7 +25,7 @@ export default function Phone() {
 
   const bodyCopy = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
-  const [email, setEmail, isValid] = useEmail("");
+  const [phoneNumber, setPhoneNumber, isValid] = useNumber("");
 
   const router = useRouter();
 
@@ -44,12 +44,13 @@ export default function Phone() {
             <Text style={title}>Inserisci il tuo numero</Text>
             <Text style={subTitle}>{bodyCopy}</Text>
             <InputLabel
-              value={email}
+              value={phoneNumber}
               placeholder="Inserisci il tuo numero"
-              inputmode="email-address"
+              isPhoneNumber
+              inputmode="phone-pad"
               autoFocus
-              onChange={(e) => setEmail(e.nativeEvent.text)}
-              clearFunction={() => setEmail("")}
+              onChange={(e) => setPhoneNumber(e.nativeEvent.text)}
+              clearFunction={() => setPhoneNumber("")}
             />
             <View
               style={{

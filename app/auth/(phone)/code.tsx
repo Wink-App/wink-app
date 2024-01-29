@@ -3,7 +3,6 @@ import { useRouter } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
 import { usePassword } from "../../../context/hooks/inputs";
-import SafeAreaLayout from "../../../context/SafeAreaLayout";
 
 import { ButtonBack, ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
@@ -11,6 +10,7 @@ import DismissKeyboard from "../../../components/transitions/DismissKeyboard";
 
 import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../../utils/styles";
 
+import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
 import { windowHeight, windowWidth } from "../../../utils/utils";
 
 export default function Code() {

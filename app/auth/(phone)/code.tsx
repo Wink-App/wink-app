@@ -2,18 +2,18 @@ import { useRouter } from "expo-router";
 
 import { StyleSheet, Text, View } from "react-native";
 
-import { useEmail } from "../../context/hooks/inputs";
-import SafeAreaLayout from "../../context/SafeAreaLayout";
+import { usePassword } from "../../../context/hooks/inputs";
+import SafeAreaLayout from "../../../context/SafeAreaLayout";
 
-import { ButtonBack, ButtonOrange } from "../../components/elements/Button";
-import InputLabel from "../../components/elements/InputLabel";
-import DismissKeyboard from "../../components/transitions/DismissKeyboard";
+import { ButtonBack, ButtonOrange } from "../../../components/elements/Button";
+import InputLabel from "../../../components/elements/InputLabel";
+import DismissKeyboard from "../../../components/transitions/DismissKeyboard";
 
-import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../utils/styles";
+import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../../utils/styles";
 
-import { windowHeight, windowWidth } from "../../utils/utils";
+import { windowHeight, windowWidth } from "../../../utils/utils";
 
-export default function Email() {
+export default function Code() {
 
   const {
     wrapper,
@@ -24,9 +24,18 @@ export default function Email() {
 
   } = styles;
 
-  const bodyCopy = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
+  // Bentornato!
+  // Usa la tua password per accedere al tuo account.
+  // email (bold)
 
-  const [email, setEmail, isValid] = useEmail("");
+  // Crea una password
+  // Scegli una password per il tuo account.
+  // email (bold)
+  // Almeno 8 caratteri
+
+  const bodyCopy = "Inserisci codice di verifica";
+
+  const [password, setPassword, isValid] = usePassword("");
 
   const router = useRouter();
 
@@ -42,15 +51,15 @@ export default function Email() {
         </View>
         <DismissKeyboard>
           <View style={container}>
-            <Text style={title}>Iniziamo con la tua email</Text>
+            <Text style={title}>Crea una password</Text>
             <Text style={subTitle}>{bodyCopy}</Text>
             <InputLabel
-              value={email}
-              placeholder="Inserisci la tua email"
-              inputmode="email-address"
+              value={password}
+              placeholder="Inserisci password"
+              inputmode="default"
               autoFocus
-              onChange={(e) => setEmail(e.nativeEvent.text)}
-              clearFunction={() => setEmail("")}
+              onChange={(e) => setPassword(e.nativeEvent.text)}
+              clearFunction={() => setPassword("")}
             />
             <View
               style={{

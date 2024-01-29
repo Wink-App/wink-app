@@ -4,7 +4,6 @@ import { Image } from "expo-image";
 import { StyleSheet, Text, View } from "react-native";
 
 import SafeAreaLayout from "../../context/SafeAreaLayout";
-import { useToast } from "../../context/toast";
 
 import { ButtonAuth } from "../../components/elements/Button";
 import TransitionElement from "../../components/transitions/TransitionElement";
@@ -28,12 +27,14 @@ export default function Home() {
   const router = useRouter();
 
   const handleEmailAuth = () => {
-    router.push("/auth/email");
+    router.push("/auth/(email)/email");
+  };
+
+  const handlePhoneAuth = () => {
+    router.push("/auth/(phone)/phone");
   };
 
   const bodyCopy = "Continuando, accetti automaticamente i nostri\n";
-
-  const { success } = useToast();
 
   return (
     <View style={wrapper}>
@@ -49,7 +50,7 @@ export default function Home() {
             </TransitionElement>
             <ButtonAuth
               authProvider="google"
-              onPress={() => success({ message: "Hello world" })}
+              onPress={() => { }}
             />
             <ButtonAuth
               authProvider="apple"
@@ -62,6 +63,10 @@ export default function Home() {
             <ButtonAuth
               authProvider="email"
               onPress={handleEmailAuth}
+            />
+            <ButtonAuth
+              authProvider="phone"
+              onPress={handlePhoneAuth}
             />
             <Text style={policy}>
               {bodyCopy}
@@ -84,7 +89,7 @@ const styles = StyleSheet.create({
   },
   whiteCircle: {
     width: windowWidth * 1.5,
-    height: "80%",
+    height: "82%",
     backgroundColor: colorWhite,
     borderTopLeftRadius: windowWidth * 1.5 / 2,
     borderTopRightRadius: windowWidth * 1.5 / 2,

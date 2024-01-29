@@ -2,18 +2,18 @@ import { useRouter } from "expo-router";
 
 import { StyleSheet, Text, View } from "react-native";
 
-import { usePassword } from "../../context/hooks/inputs";
-import SafeAreaLayout from "../../context/SafeAreaLayout";
+import { useEmail } from "../../../context/hooks/inputs";
+import SafeAreaLayout from "../../../context/SafeAreaLayout";
 
-import { ButtonBack, ButtonOrange } from "../../components/elements/Button";
-import InputLabel from "../../components/elements/InputLabel";
-import DismissKeyboard from "../../components/transitions/DismissKeyboard";
+import { ButtonBack, ButtonOrange } from "../../../components/elements/Button";
+import InputLabel from "../../../components/elements/InputLabel";
+import DismissKeyboard from "../../../components/transitions/DismissKeyboard";
 
-import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../utils/styles";
+import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../../utils/styles";
 
-import { windowHeight, windowWidth } from "../../utils/utils";
+import { windowHeight, windowWidth } from "../../../utils/utils";
 
-export default function Password() {
+export default function Email() {
 
   const {
     wrapper,
@@ -21,26 +21,16 @@ export default function Password() {
     container,
     title,
     subTitle,
-
   } = styles;
 
-  // Bentornato!
-  // Usa la tua password per accedere al tuo account.
-  // email (bold)
+  const bodyCopy = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
-  // Crea una password
-  // Scegli una password per il tuo account.
-  // email (bold)
-  // Almeno 8 caratteri
-
-  const bodyCopy = "Scegli una password per il tuo account.";
-
-  const [password, setPassword, isValid] = usePassword("");
+  const [email, setEmail, isValid] = useEmail("");
 
   const router = useRouter();
 
   const handleContinue = () => {
-    router.push("/auth/password");
+    router.push("/auth/(email)/password");
   };
 
   return (
@@ -51,15 +41,15 @@ export default function Password() {
         </View>
         <DismissKeyboard>
           <View style={container}>
-            <Text style={title}>Crea una password</Text>
+            <Text style={title}>Iniziamo con la tua email</Text>
             <Text style={subTitle}>{bodyCopy}</Text>
             <InputLabel
-              value={password}
-              placeholder="Inserisci password"
-              inputmode="default"
+              value={email}
+              placeholder="Inserisci la tua email"
+              inputmode="email-address"
               autoFocus
-              onChange={(e) => setPassword(e.nativeEvent.text)}
-              clearFunction={() => setPassword("")}
+              onChange={(e) => setEmail(e.nativeEvent.text)}
+              clearFunction={() => setEmail("")}
             />
             <View
               style={{

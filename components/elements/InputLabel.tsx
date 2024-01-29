@@ -14,7 +14,7 @@ import {
 
 import TransitionElement from "../transitions/TransitionElement";
 
-type InputMode = "default" | "email-address" | "numeric";
+type InputMode = "default" | "email-address" | "numeric" | "phone-pad";
 
 type InputLabelProps = {
   widthValue?: string;
@@ -25,6 +25,7 @@ type InputLabelProps = {
   placeholder?: string | null;
 
   isPassword?: boolean;
+  isPhoneNumber?: boolean;
   // isUsername?: boolean;
   // isSearch?: boolean;
   // isDescription?: boolean;
@@ -46,6 +47,7 @@ export default function InputLabel({
   maxValueChar,
   placeholder,
   isPassword = false,
+  isPhoneNumber = false,
   inputmode = "default",
   autoFocus = false,
   onChange,
@@ -89,6 +91,17 @@ export default function InputLabel({
           borderWidth: 0.5,
           ...stylesBase.flexRowCenter,
         }}>
+        {isPhoneNumber && (
+          <Text
+            style={{
+              fontSize: 14,
+              lineHeight: 21,
+              marginRight: 5,
+              color: secondaryText,
+            }}>
+            +39
+          </Text>
+        )}
 
         <TextInput
           ref={inputRef}

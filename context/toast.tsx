@@ -6,8 +6,8 @@ import { Text, View } from "react-native";
 
 import { colorWhite, stylesBase } from "../utils/styles";
 
+import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
 import { windowWidth } from "../utils/utils";
-import SafeAreaLayout from "./SafeAreaLayout";
 
 type ToastContextProps = {
   success: ({ message, id }: ToastProps) => void;

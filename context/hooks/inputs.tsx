@@ -52,6 +52,26 @@ export const usePassword = (initialValue: string) => {
   return [hook, handleValue, isValid] as CustomHook;
 };
 
+export const usePhoneNumber = (initialValue: string) => {
+  const [hook, setHook] = useState<string>(initialValue);
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  const handleValue = (value: string) => {
+    setHook(value);
+
+    const regex = /^[0-9]*$/;
+
+    if (regex.test(value) &&
+      value.length == 10) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  };
+
+  return [hook, handleValue, isValid] as CustomHook;
+};
+
 export const useName = (initialValue: string) => {
   const { error, dismiss } = useToast();
   const [hook, setHook] = useState<string>(initialValue);

@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 
 import { StyleSheet, Text, View } from "react-native";
 
-import { useNumber } from "../../../context/hooks/inputs";
+import { usePhoneNumber } from "../../../context/hooks/inputs";
 
 import { ButtonBack, ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
@@ -25,7 +25,7 @@ export default function Phone() {
 
   const bodyCopy = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
-  const [phoneNumber, setPhoneNumber, isValid] = useNumber("");
+  const [phoneNumber, setPhoneNumber, isValid] = usePhoneNumber("");
 
   const router = useRouter();
 
@@ -91,13 +91,13 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   title: {
-    ...stylesBase.fontPoppinsBold,
+    ...stylesBase.fontBold,
     color: colorBlack,
     fontSize: 22,
     lineHeight: 33,
   },
   subTitle: {
-    ...stylesBase.fontPoppinsRegular,
+    ...stylesBase.fontRegular,
     color: secondaryText,
     fontSize: 14,
     lineHeight: 21,

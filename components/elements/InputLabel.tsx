@@ -108,7 +108,7 @@ export default function InputLabel({
           style={{
             flex: 1,
             height: 45,
-            ...stylesBase.fontPoppinsRegular,
+            ...stylesBase.fontRegular,
           }}
           value={value}
           maxLength={maxValueChar}

@@ -31,7 +31,7 @@ export function ButtonOrange({
       enabled={enabled}>
       <Text
         style={{
-          ...stylesBase.fontPoppinsBold,
+          ...stylesBase.fontBold,
           fontSize: 16,
           color: colorBlack,
         }}>
@@ -120,7 +120,7 @@ export function ButtonAuth({
       />
       <Text
         style={{
-          ...stylesBase.fontPoppinsBold,
+          ...stylesBase.fontBold,
           fontSize: 16,
         }}>
         {label}

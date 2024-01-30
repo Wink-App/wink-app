@@ -154,7 +154,7 @@ function CustomToast({
           style={{
             paddingHorizontal: 25,
             fontSize: 16,
-            ...stylesBase.fontPoppinsRegular,
+            ...stylesBase.fontRegular,
           }}>{message}</Text>
       </View>
     </View>

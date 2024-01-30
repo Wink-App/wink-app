@@ -15,6 +15,8 @@ export default function App() {
     "Bogart-Bold-trial": require("../assets/fonts/Bogart-Bold-trial.ttf"),
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
+    // "Sukhumvitset-Medium": require("../assets/fonts/Sukhumvitset-Medium.ttf"),
+    // "Sukhumvitset-Bold": require("../assets/fonts/Sukhumvitset-Bold.ttf"),
   });
 
   const onLayoutRootView = useCallback(async () => {

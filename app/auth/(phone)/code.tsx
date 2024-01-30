@@ -100,13 +100,13 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   title: {
-    ...stylesBase.fontPoppinsBold,
+    ...stylesBase.fontBold,
     color: colorBlack,
     fontSize: 22,
     lineHeight: 33,
   },
   subTitle: {
-    ...stylesBase.fontPoppinsRegular,
+    ...stylesBase.fontRegular,
     color: secondaryText,
     fontSize: 14,
     lineHeight: 21,

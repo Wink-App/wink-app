@@ -43,8 +43,8 @@ export default function Home() {
             <TransitionElement>
               <Image
                 source={require(logoDir)}
-                style={logo}
                 priority="high"
+                style={logo}
               />
             </TransitionElement>
             <ButtonAuth

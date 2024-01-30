@@ -113,6 +113,7 @@ export function ButtonAuth({
       onPress={onPress}>
       <Image
         source={icon}
+        priority="high"
         style={{
           width: 25,
           height: 25,
@@ -163,6 +164,7 @@ export function ButtonBack({
       onPress={handlePress}>
       <Image
         source={require("../../assets/icons/Back.svg")}
+        priority="high"
         style={{
           width: 25,
           height: 25,

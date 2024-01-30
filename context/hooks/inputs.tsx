@@ -52,7 +52,7 @@ export const usePassword = (initialValue: string) => {
   return [hook, handleValue, isValid] as CustomHook;
 };
 
-export const usePhoneNumber = (initialValue: string) => {
+export const useNumber = (initialValue: string, length: number) => {
   const [hook, setHook] = useState<string>(initialValue);
   const [isValid, setIsValid] = useState<boolean>(false);
 
@@ -62,7 +62,7 @@ export const usePhoneNumber = (initialValue: string) => {
     const regex = /^[0-9]*$/;
 
     if (regex.test(value) &&
-      value.length == 10) {
+      value.length === length) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -110,6 +110,7 @@ export const useUsername = (initialValue: string) => {
   return [hook, handleValue] as CustomHook;
 };
 
+/*
 export const useNumber = (initialValue: string | number) => {
   const { error, dismiss } = useToast();
   const [hook, setHook] = useState<string | number>(initialValue);
@@ -128,6 +129,7 @@ export const useNumber = (initialValue: string | number) => {
 
   return [hook, handleValue] as CustomHook;
 };
+*/
 
 export const useProvince = (initialValue: string) => {
   const { error, dismiss } = useToast();

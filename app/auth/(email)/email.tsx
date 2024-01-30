@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { View } from "react-native";
 
 import { useEmail } from "../../../context/hooks/inputs";
+import { useProfile } from "../../../context/user";
 
 import { ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
@@ -14,13 +15,14 @@ import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 export default function Email() {
 
   const router = useRouter();
-  const [email, setEmail, isValid] = useEmail("");
+  const { getIsNewUserFromEmail } = useProfile();
 
+  const [email, setEmail, isValid] = useEmail("");
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     // Verify if email is already registered
-
+    await getIsNewUserFromEmail({ email });
 
     router.push("/auth/(email)/password");
   };

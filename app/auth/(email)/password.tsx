@@ -1,115 +1,83 @@
 import { useRouter } from "expo-router";
 
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Text, View } from "react-native";
 
 import { usePassword } from "../../../context/hooks/inputs";
+import { useProfile } from "../../../context/user";
 
-import { ButtonBack, ButtonOrange } from "../../../components/elements/Button";
+import { ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
-import DismissKeyboard from "../../../components/transitions/DismissKeyboard";
 
-import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../../../utils/styles";
+import { secondaryText, stylesBase } from "../../../utils/styles";
 
-import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
-import { windowHeight, windowWidth } from "../../../utils/utils";
+import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
 export default function Password() {
 
-  const {
-    wrapper,
-    backButton,
-    container,
-    title,
-    subTitle,
+  const router = useRouter();
+  const { isNewUser, insertedEmail } = useProfile();
 
-  } = styles;
+  useEffect(() => {
+    if (isNewUser) {
+      setTitle("Crea una password");
+      setSubTitle("Scegli una password per il tuo account.");
+    } else {
+      setTitle("Bentornato!");
+      setSubTitle("Usa la tua password per accedere al tuo account.");
+    }
+  }, [isNewUser]);
 
-  // Bentornato!
-  // Usa la tua password per accedere al tuo account.
-  // email (bold)
-
-  // Crea una password
-  // Scegli una password per il tuo account.
-  // email (bold)
-  // Almeno 8 caratteri
-
-  const bodyCopy = "Scegli una password per il tuo account.";
+  const [title, setTitle] = useState<string>("");
+  const [subTitle, setSubTitle] = useState<string>("");
 
   const [password, setPassword, isValid] = usePassword("");
 
-  const router = useRouter();
+  const handleContinue = async () => {
+    // If isNewUser, register email and password
+    // use insertedEmail and password
 
-  const handleContinue = () => {
-    router.push("/auth/password");
+    // If !isNewUser, check if password matches
+    // use password related to insertedEmail
+
+    // then
+    router.push("/home/home");
   };
 
   return (
-    <View style={wrapper}>
-      <SafeAreaLayout>
-        <View style={backButton}>
-          <ButtonBack />
-        </View>
-        <DismissKeyboard>
-          <View style={container}>
-            <Text style={title}>Crea una password</Text>
-            <Text style={subTitle}>{bodyCopy}</Text>
-            <InputLabel
-              value={password}
-              placeholder="Inserisci password"
-              inputmode="default"
-              autoFocus
-              onChange={(e) => setPassword(e.nativeEvent.text)}
-              clearFunction={() => setPassword("")}
-            />
-            <View
-              style={{
-                width: "100%",
-                ...stylesBase.flexRowCenter,
-                marginTop: 5,
-              }}>
-              <ButtonOrange
-                text="Continua"
-                onPress={handleContinue}
-                enabled={isValid}
-              />
-            </View>
-          </View>
-        </DismissKeyboard>
-      </SafeAreaLayout>
-    </View>
+    <AuthOptionLayout
+      title={title}
+      subTitle={subTitle}>
+      <Text
+        style={{
+          ...stylesBase.fontBold,
+          color: secondaryText,
+          fontSize: 14,
+          lineHeight: 21,
+          marginTop: -10,
+        }}>
+        {insertedEmail}
+      </Text>
+      <InputLabel
+        value={password}
+        placeholder="Inserisci password"
+        inputmode="default"
+        autoFocus
+        onChange={(e) => setPassword(e.nativeEvent.text)}
+        clearFunction={() => setPassword("")}
+      />
+      <View
+        style={{
+          width: "100%",
+          ...stylesBase.flexRowCenter,
+          marginTop: 5,
+        }}>
+        <ButtonOrange
+          text="Continua"
+          onPress={handleContinue}
+          enabled={isValid}
+        />
+      </View>
+    </AuthOptionLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: colorGreyBackground,
-    zIndex: 1,
-  },
-  backButton: {
-    width: windowWidth,
-    ...stylesBase.flexRowStartCenter,
-    paddingHorizontal: 20,
-    marginTop: 20,
-  },
-  container: {
-    height: "100%",
-    ...stylesBase.flexColumnStartLeft,
-    paddingTop: windowHeight * 0.1,
-    paddingHorizontal: 30,
-    gap: 15,
-  },
-  title: {
-    ...stylesBase.fontBold,
-    color: colorBlack,
-    fontSize: 22,
-    lineHeight: 33,
-  },
-  subTitle: {
-    ...stylesBase.fontRegular,
-    color: secondaryText,
-    fontSize: 14,
-    lineHeight: 21,
-    marginTop: -10,
-  },
-});

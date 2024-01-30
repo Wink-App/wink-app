@@ -43,8 +43,8 @@ export default function Home() {
             <TransitionElement>
               <Image
                 source={require(logoDir)}
-                style={logo}
                 priority="high"
+                style={logo}
               />
             </TransitionElement>
             <ButtonAuth
@@ -100,12 +100,13 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   logo: {
-    width: 200,
-    height: 200,
-    marginBottom: -10,
+    width: 170,
+    height: 170,
+    marginBottom: 5,
+    marginTop: 30,
   },
   policy: {
-    ...stylesBase.fontPoppinsRegular,
+    ...stylesBase.fontRegular,
     color: secondaryText,
     textAlign: "center",
     fontSize: 10,

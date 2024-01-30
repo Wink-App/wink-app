@@ -31,7 +31,7 @@ export function ButtonOrange({
       enabled={enabled}>
       <Text
         style={{
-          ...stylesBase.fontPoppinsBold,
+          ...stylesBase.fontBold,
           fontSize: 16,
           color: colorBlack,
         }}>
@@ -113,6 +113,7 @@ export function ButtonAuth({
       onPress={onPress}>
       <Image
         source={icon}
+        priority="high"
         style={{
           width: 25,
           height: 25,
@@ -120,7 +121,7 @@ export function ButtonAuth({
       />
       <Text
         style={{
-          ...stylesBase.fontPoppinsBold,
+          ...stylesBase.fontBold,
           fontSize: 16,
         }}>
         {label}
@@ -163,6 +164,7 @@ export function ButtonBack({
       onPress={handlePress}>
       <Image
         source={require("../../assets/icons/Back.svg")}
+        priority="high"
         style={{
           width: 25,
           height: 25,

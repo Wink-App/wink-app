@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextStyle } from "react-native";
 
-export const colorPurple = "#5D2583";
-export const colorOrange = "#FBB900";
+export const colorPurple = "#9262D2";
+export const colorOrange = "#FFC24D";
 
 export const colorWhite = "#FFFFFF";
 export const colorBlack = "#000000";
@@ -22,11 +22,13 @@ export const stylesBase = StyleSheet.create({
   fontBogartMedium: {
     fontFamily: "Bogart-Medium-trial",
   },
-  fontPoppinsBold: {
+  fontBold: {
     fontFamily: "Poppins-SemiBold",
+    // fontFamily: "Sukhumvitset-Bold",
   },
-  fontPoppinsRegular: {
+  fontRegular: {
     fontFamily: "Poppins-Regular",
+    // fontFamily: "Sukhumvitset-Medium",
   },
   flexRowCenter: {
     flexDirection: "row",

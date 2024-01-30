@@ -31,7 +31,7 @@ export default function Password() {
   const [title, setTitle] = useState<string>("");
   const [subTitle, setSubTitle] = useState<string>("");
 
-  const [password, setPassword, isValid] = usePassword("");
+  const [password, setPassword, isValid, isInvalidChar] = usePassword("");
 
   const handleContinue = async () => {
     // If isNewUser, register email and password
@@ -60,6 +60,7 @@ export default function Password() {
       </Text>
       <InputLabel
         value={password}
+        isInvalidChar={isInvalidChar}
         placeholder="Inserisci password"
         inputmode="default"
         autoFocus

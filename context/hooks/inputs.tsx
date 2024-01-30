@@ -4,16 +4,23 @@ import { useToast } from "../toast";
 
 const idToast = "inputError";
 
-type CustomHook = [string, (value: string) => void, boolean?];
+type CustomHook = [string, (value: string) => void, boolean?, boolean?];
 
 export const useEmail = (initialValue: string) => {
   const [hook, setHook] = useState<string>(initialValue);
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [isInvalidChar, setIsInvalidChar] = useState<boolean>(false);
 
   const handleValue = (value: string) => {
     setHook(value.toLocaleLowerCase());
 
     const regex = /^[a-zA-Z0-9.@]*$/;
+
+    if (value === "" || regex.test(value)) {
+      setIsInvalidChar(false);
+    } else {
+      setIsInvalidChar(true);
+    }
 
     if (regex.test(value) &&
       value.includes("@") && value.includes(".") &&
@@ -28,17 +35,24 @@ export const useEmail = (initialValue: string) => {
     }
   };
 
-  return [hook, handleValue, isValid] as CustomHook;
+  return [hook, handleValue, isValid, isInvalidChar] as CustomHook;
 };
 
 export const usePassword = (initialValue: string) => {
   const [hook, setHook] = useState<string>(initialValue);
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [isInvalidChar, setIsInvalidChar] = useState<boolean>(false);
 
   const handleValue = (value: string) => {
     setHook(value);
 
     const regex = /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+
+    if (value === "" || regex.test(value)) {
+      setIsInvalidChar(false);
+    } else {
+      setIsInvalidChar(true);
+    }
 
     if (regex.test(value) &&
       value.length >= 8 &&
@@ -49,17 +63,24 @@ export const usePassword = (initialValue: string) => {
     }
   };
 
-  return [hook, handleValue, isValid] as CustomHook;
+  return [hook, handleValue, isValid, isInvalidChar] as CustomHook;
 };
 
 export const useNumber = (initialValue: string, length: number) => {
   const [hook, setHook] = useState<string>(initialValue);
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [isInvalidChar, setIsInvalidChar] = useState<boolean>(false);
 
   const handleValue = (value: string) => {
     setHook(value);
 
     const regex = /^[0-9]*$/;
+
+    if (value === "" || regex.test(value)) {
+      setIsInvalidChar(false);
+    } else {
+      setIsInvalidChar(true);
+    }
 
     if (regex.test(value) &&
       value.length === length) {
@@ -69,8 +90,10 @@ export const useNumber = (initialValue: string, length: number) => {
     }
   };
 
-  return [hook, handleValue, isValid] as CustomHook;
+  return [hook, handleValue, isValid, isInvalidChar] as CustomHook;
 };
+
+
 
 export const useName = (initialValue: string) => {
   const { error, dismiss } = useToast();

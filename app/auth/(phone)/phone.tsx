@@ -17,7 +17,7 @@ export default function Phone() {
   const router = useRouter();
   const { getIsNewUserFromPhone } = useProfile();
 
-  const [phoneNumber, setPhoneNumber, isValid] = useNumber("", 10);
+  const [phoneNumber, setPhoneNumber, isValid, isInvalidChar] = useNumber("", 10);
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
@@ -33,9 +33,10 @@ export default function Phone() {
       subTitle={subTitle}>
       <InputLabel
         value={phoneNumber}
+        isInvalidChar={isInvalidChar}
         placeholder="Inserisci il tuo numero"
         isPhoneNumber
-        inputmode="phone-pad"
+        inputmode="number-pad"
         autoFocus
         onChange={(e) => setPhoneNumber(e.nativeEvent.text)}
         clearFunction={() => setPhoneNumber("")}

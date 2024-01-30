@@ -7,7 +7,7 @@ import { useNumber } from "../../../context/hooks/inputs";
 import { useProfile } from "../../../context/user";
 
 import { ButtonOrange } from "../../../components/elements/Button";
-import InputLabel from "../../../components/elements/InputLabel";
+import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
 
@@ -31,7 +31,7 @@ export default function Code() {
   const [title, setTitle] = useState<string>("");
   const [subTitle, setSubTitle] = useState<string>("");
 
-  const [code, setCode, isValid] = useNumber("", 6);
+  const [code, setCode, isValid, isInvalidChar] = useNumber("", 6);
 
   const handleContinue = async () => {
     // If isNewUser, register email and password
@@ -58,15 +58,14 @@ export default function Code() {
         }}>
         +39 {insertedPhone}
       </Text>
-      <InputLabel
-        value={code}
+
+      <InputVerificationCode
         maxValueChar={6}
-        placeholder="Inserisci codice"
-        inputmode="phone-pad"
+        isInvalidChar={isInvalidChar}
         autoFocus
-        onChange={(e) => setCode(e.nativeEvent.text)}
-        clearFunction={() => setCode("")}
+        onChange={(value) => setCode(value)}
       />
+
       <View
         style={{
           width: "100%",

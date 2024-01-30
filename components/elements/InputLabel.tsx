@@ -14,7 +14,7 @@ import {
 
 import TransitionElement from "../transitions/TransitionElement";
 
-type InputMode = "default" | "email-address" | "numeric" | "phone-pad";
+type InputMode = "default" | "email-address" | "number-pad";
 
 type InputLabelProps = {
   widthValue?: string;
@@ -22,6 +22,7 @@ type InputLabelProps = {
   label?: string | null;
   value: string;
   maxValueChar?: number | null;
+  isInvalidChar?: boolean;
   placeholder?: string | null;
 
   isPassword?: boolean;
@@ -45,6 +46,7 @@ export default function InputLabel({
   label,
   value,
   maxValueChar,
+  isInvalidChar = false,
   placeholder,
   isPassword = false,
   isPhoneNumber = false,
@@ -87,7 +89,7 @@ export default function InputLabel({
           paddingHorizontal: 16,
           borderRadius: 9,
           backgroundColor: colorGreyLighter,
-          borderColor: colorBorderLine,
+          borderColor: isInvalidChar ? "red" : colorBorderLine,
           borderWidth: 0.5,
           ...stylesBase.flexRowCenter,
         }}>

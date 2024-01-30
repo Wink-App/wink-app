@@ -17,7 +17,7 @@ export default function Email() {
   const router = useRouter();
   const { getIsNewUserFromEmail } = useProfile();
 
-  const [email, setEmail, isValid] = useEmail("");
+  const [email, setEmail, isValid, isInvalidChar] = useEmail("");
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
@@ -33,6 +33,7 @@ export default function Email() {
       subTitle={subTitle}>
       <InputLabel
         value={email}
+        isInvalidChar={isInvalidChar}
         placeholder="Inserisci la tua email"
         inputmode="email-address"
         autoFocus

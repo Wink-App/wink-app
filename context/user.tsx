@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
+
 import "../firebase.config";
-
 import { Profile } from "./types/profile.type";
-
 import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 
 type ContextProps = {
@@ -55,13 +54,13 @@ const Provider = ({ children }: ProviderProps) => {
     setInsertedEmail(email);
     try {
       const signinmethods = await fetchSignInMethodsForEmail(auth, email);
-      console.log(" length is ")
-      console.log(signinmethods.length)
+      console.log(" length is ");
+      console.log(signinmethods.length);
       if (signinmethods.length > 0) {
         setIsNewUser(false);
-        console.log("not a new user")
+        console.log("not a new user");
       } else {
-        console.log("yes a new user in user.tsx file")
+        console.log("yes a new user in user.tsx file");
         setIsNewUser(true);
       }
     } catch (error: any) {

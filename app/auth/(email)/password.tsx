@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-import "../../../firebase.config";
 
 import { useEffect, useState } from "react";
 import { Alert, Text, View } from "react-native";
@@ -12,9 +11,10 @@ import InputLabel from "../../../components/elements/InputLabel";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
 
+import "../../../firebase.config";
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, set, ref } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 const auth = getAuth();
 
 export default function Password() {
@@ -38,39 +38,26 @@ export default function Password() {
   const [password, setPassword, isValid, isInvalidChar] = usePassword("");
 
   const handleContinue = async () => {
-    // If isNewUser, register email and password
-    // use insertedEmail and password
     if (isNewUser) {
-      const resp = await createUserWithEmailAndPassword(auth, insertedEmail, password);
-      console.log("new user sign up -> ");
-      // console.log(resp);
-      // console.log(resp.user);
-      let db = getDatabase();
-      let userid = resp.user.uid;
-      let data = {
+      const response = await createUserWithEmailAndPassword(auth, insertedEmail, password);
+      console.log("new user sign up");
+      const db = getDatabase();
+      const userid = response.user.uid;
+      const data = {
         insertedEmail
-      }
-      const dbResponse = await set(ref(db, `users/${userid}`), data)
+      };
+      const dbResponse = await set(ref(db, `users/${userid}`), data);
       console.log(dbResponse);
       router.push("/home/home");
-      // router.push("/home/home");
     } else {
       try {
-
-        const resp = await signInWithEmailAndPassword(auth, insertedEmail, password);
+        await signInWithEmailAndPassword(auth, insertedEmail, password);
         router.push("/home/home");
       } catch (error) {
-        console.log("error in signing in user ")
-        Alert.alert("Credenziali non valide!")
+        console.log("error in signing in user ", error);
+        Alert.alert("Credenziali non valide!");
       }
-
-      // console.log("alredy user login here -> : ", resp)
-      // console.log("alredy user login here -> : ", resp.user)
     }
-    // If !isNewUser, check if password matches
-    // use password related to insertedEmail
-
-    // then
   };
 
   return (

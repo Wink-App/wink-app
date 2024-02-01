@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import "../../../firebase.config";
 
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 
 import { usePassword } from "../../../context/hooks/inputs";
 import { useProfile } from "../../../context/user";
@@ -52,14 +52,21 @@ export default function Password() {
       }
       const dbResponse = await set(ref(db, `users/${userid}`), data)
       console.log(dbResponse);
+      router.push("/home/home");
       // router.push("/home/home");
     } else {
-      const resp = await signInWithEmailAndPassword(auth, insertedEmail, password);
+      try {
+
+        const resp = await signInWithEmailAndPassword(auth, insertedEmail, password);
+        router.push("/home/home");
+      } catch (error) {
+        console.log("error in signing in user ")
+        Alert.alert("Credenziali non valide!")
+      }
+
       // console.log("alredy user login here -> : ", resp)
       // console.log("alredy user login here -> : ", resp.user)
     }
-
-    router.push("/home/home");
     // If !isNewUser, check if password matches
     // use password related to insertedEmail
 

@@ -1,6 +1,7 @@
 import { useRouter } from "expo-router";
 
 import { View } from "react-native";
+import "../../../firebase.config";
 
 import { useEmail } from "../../../context/hooks/inputs";
 import { useProfile } from "../../../context/user";
@@ -15,7 +16,7 @@ import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 export default function Email() {
 
   const router = useRouter();
-  const { getIsNewUserFromEmail } = useProfile();
+  const { getIsNewUserFromEmail, isNewUser } = useProfile();
 
   const [email, setEmail, isValid, isInvalidChar] = useEmail("");
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
@@ -23,7 +24,11 @@ export default function Email() {
   const handleContinue = async () => {
     // Verify if email is already registered
     await getIsNewUserFromEmail({ email });
-
+    if (isNewUser) {
+      console.log(" yes a new user in email screen");
+    } else {
+      console.log("not a new user in email screen");
+    }
     router.push("/auth/(email)/password");
   };
 

@@ -1,6 +1,7 @@
 import { SplashScreen, Stack } from "expo-router";
 import * as Font from "expo-font";
 
+
 import { useCallback } from "react";
 import { View } from "react-native";
 

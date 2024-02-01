@@ -1,4 +1,5 @@
 import { useRouter } from "expo-router";
+import "../../../firebase.config";
 
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
@@ -12,6 +13,9 @@ import InputLabel from "../../../components/elements/InputLabel";
 import { secondaryText, stylesBase } from "../../../utils/styles";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, set, ref } from "firebase/database";
+const auth = getAuth();
 
 export default function Password() {
 
@@ -36,12 +40,30 @@ export default function Password() {
   const handleContinue = async () => {
     // If isNewUser, register email and password
     // use insertedEmail and password
+    if (isNewUser) {
+      const resp = await createUserWithEmailAndPassword(auth, insertedEmail, password);
+      console.log("new user sign up -> ");
+      // console.log(resp);
+      // console.log(resp.user);
+      let db = getDatabase();
+      let userid = resp.user.uid;
+      let data = {
+        insertedEmail
+      }
+      const dbResponse = await set(ref(db, `users/${userid}`), data)
+      console.log(dbResponse);
+      // router.push("/home/home");
+    } else {
+      const resp = await signInWithEmailAndPassword(auth, insertedEmail, password);
+      // console.log("alredy user login here -> : ", resp)
+      // console.log("alredy user login here -> : ", resp.user)
+    }
 
+    router.push("/home/home");
     // If !isNewUser, check if password matches
     // use password related to insertedEmail
 
     // then
-    router.push("/home/home");
   };
 
   return (

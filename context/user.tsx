@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
+import "../firebase.config";
 
 import { Profile } from "./types/profile.type";
+
+import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 
 type ContextProps = {
   isNewUser: boolean | null;
@@ -19,6 +22,8 @@ type ContextProps = {
 type ProviderProps = {
   children: React.ReactNode;
 };
+
+const auth = getAuth();
 
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
 
@@ -48,9 +53,24 @@ const Provider = ({ children }: ProviderProps) => {
 
   async function getIsNewUserFromEmail({ email }: { email: string }) {
     setInsertedEmail(email);
-    // TODO: Back-End call
-
-    setIsNewUser(true);
+    try {
+      const signinmethods = await fetchSignInMethodsForEmail(auth, email);
+      console.log(" length is ")
+      console.log(signinmethods.length)
+      if (signinmethods.length > 0) {
+        setIsNewUser(false);
+        console.log("not a new user")
+      } else {
+        console.log("yes a new user in user.tsx file")
+        setIsNewUser(true);
+      }
+    } catch (error: any) {
+      if (error.code === "auth/user-not-found") {
+        console.log("yes new user is here ");
+        setIsNewUser(true);
+      }
+      console.log("Error checking user existence! -> ", error);
+    }
   }
 
   async function getIsNewUserFromPhone({ phone }: { phone: string }) {

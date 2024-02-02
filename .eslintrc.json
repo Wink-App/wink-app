@@ -73,19 +73,26 @@
             "react-native-safe-area-context"
           ],
           [
+            "/appLayouts" // App Layouts
+          ],
+          [
             "/lib",
+            "firebase",
             "@supabase/auth-helpers-react",
             "@supabase/supabase-js"
           ],
           [
-            "/context",
-            "/hooks"
+            "/context/user",
+            "/context/types",
+            "/context/hooks"
           ],
           [
-            "moti"
+            "moti",
+            "/context/toast"
           ],
           [
-            "/components" // Components
+            "/components", // Components
+            "/utils" // Utils
           ],
           [
             "/styles" // Styles

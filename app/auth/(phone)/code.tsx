@@ -3,15 +3,15 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 
-import { useNumber } from "../../../context/hooks/inputs";
+import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+
 import { useProfile } from "../../../context/user";
+import { useNumber } from "../../../context/hooks/inputs";
 
 import { ButtonOrange } from "../../../components/elements/Button";
 import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
-
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
 export default function Code() {
 
@@ -21,10 +21,10 @@ export default function Code() {
   useEffect(() => {
     if (isNewUser) {
       setTitle("Codice di verifica");
-      setSubTitle("Inserisci il codice che ti abbiamo inviato via SMS.");
+      setSubTitle("Per creare il tuo account, inserisci il codice che ti abbiamo inviato via SMS.");
     } else {
-      setTitle("Bentornato!");
-      setSubTitle("Usa la tua password per accedere al tuo account.");
+      setTitle("Codice di verifica");
+      setSubTitle("Per accedere al tuo account, inserisci il codice che ti abbiamo inviato via SMS.");
     }
   }, [isNewUser]);
 
@@ -34,13 +34,8 @@ export default function Code() {
   const [code, setCode, isValid, isInvalidChar] = useNumber("", 6);
 
   const handleContinue = async () => {
-    // If isNewUser, register email and password
-    // use insertedEmail and password
+    // Handle code verification
 
-    // If !isNewUser, check if password matches
-    // use password related to insertedEmail
-
-    // then
     router.push("/home/home");
   };
 

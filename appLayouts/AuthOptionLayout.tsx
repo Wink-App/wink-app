@@ -2,10 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { ButtonBack } from "../components/elements/Button";
 import DismissKeyboard from "../components/transitions/DismissKeyboard";
+import { windowHeight, windowWidth } from "../utils/utils";
 
 import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../utils/styles";
 
-import { windowHeight, windowWidth } from "../utils/utils";
 import SafeAreaLayout from "./SafeAreaLayout";
 
 type AuthOptionLayoutProps = {

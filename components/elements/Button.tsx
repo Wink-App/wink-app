@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
-import { Image } from "expo-image";
+import { ImageSource } from "expo-image";
 
-import { Text, TextStyle, View } from "react-native";
+import { Image, Text, TextStyle, View } from "react-native";
 import { BaseButton, TouchableOpacity } from "react-native-gesture-handler";
 
 import { colorBlack, colorGreyLighter, colorOrange, stylesBase } from "../../utils/styles";
@@ -65,7 +65,7 @@ type ButtonSocialProps = {
 };
 
 type AuthIconLabel = {
-  icon: string;
+  icon: ImageSource;
   label: string;
 };
 
@@ -113,7 +113,6 @@ export function ButtonAuth({
       onPress={onPress}>
       <Image
         source={icon}
-        priority="high"
         style={{
           width: 25,
           height: 25,
@@ -164,7 +163,6 @@ export function ButtonBack({
       onPress={handlePress}>
       <Image
         source={require("../../assets/icons/Back.svg")}
-        priority="high"
         style={{
           width: 25,
           height: 25,

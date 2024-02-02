@@ -1,13 +1,14 @@
-import { Image, ImageSource } from "expo-image";
+import { ImageSource } from "expo-image";
 
 import React, { createContext, useContext, useState } from "react";
 import { toast, ToastOptions, Toasts } from "@backpackapp-io/react-native-toast";
-import { Text, View } from "react-native";
-
-import { colorWhite, stylesBase } from "../utils/styles";
+import { Image, Text, View } from "react-native";
 
 import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
+
 import { windowWidth } from "../utils/utils";
+
+import { colorWhite, stylesBase } from "../utils/styles";
 
 type ToastContextProps = {
   success: ({ message, id }: ToastProps) => void;
@@ -144,7 +145,6 @@ function CustomToast({
         }}>
         <Image
           source={icon}
-          priority="high"
           style={{
             height: 15,
             width: 15,

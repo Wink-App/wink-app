@@ -1,17 +1,23 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 
-import { usePassword } from "../../../context/hooks/inputs";
+import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+
+import "../../../firebase.config";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+
 import { useProfile } from "../../../context/user";
+import { usePassword } from "../../../context/hooks/inputs";
 
 import { ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+const auth = getAuth();
 
 export default function Password() {
 
@@ -34,14 +40,28 @@ export default function Password() {
   const [password, setPassword, isValid, isInvalidChar] = usePassword("");
 
   const handleContinue = async () => {
-    // If isNewUser, register email and password
-    // use insertedEmail and password
+    if (isNewUser) {
+      const response = await createUserWithEmailAndPassword(auth, insertedEmail, password);
+      const userid = response.user.uid;
 
-    // If !isNewUser, check if password matches
-    // use password related to insertedEmail
+      const db = getDatabase();
+      // Do we need to put insertedEmail in this data object?
+      const data = {
+        insertedEmail
+      };
 
-    // then
-    router.push("/home/home");
+      await set(ref(db, `users/${userid}`), data);
+      router.push("/home/home");
+    } else {
+      try {
+        await signInWithEmailAndPassword(auth, insertedEmail, password);
+        router.push("/home/home");
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        Alert.alert("Si è verificato un errore durante l'accesso. Riprova.");
+      }
+    }
   };
 
   return (

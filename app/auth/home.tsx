@@ -1,17 +1,13 @@
 import { useRouter } from "expo-router";
-import { Image } from "expo-image";
 
-import { StyleSheet, Text, View } from "react-native";
-
-import { ButtonAuth } from "../../components/elements/Button";
-import TransitionElement from "../../components/transitions/TransitionElement";
-
-import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
+
+import { ButtonAuth } from "../../components/elements/Button";
 import { windowWidth } from "../../utils/utils";
 
-const logoDir = "../../assets/logos/WinkLogo1.png";
+import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
 export default function Home() {
 
@@ -22,6 +18,8 @@ export default function Home() {
     logo,
     policy,
   } = styles;
+
+  const logoDir = require("../../assets/logos/WinkLogo1.png");
 
   const router = useRouter();
 
@@ -40,13 +38,10 @@ export default function Home() {
       <View style={whiteCircle}>
         <SafeAreaLayout>
           <View style={container}>
-            <TransitionElement>
-              <Image
-                source={require(logoDir)}
-                priority="high"
-                style={logo}
-              />
-            </TransitionElement>
+            <Image
+              source={logoDir}
+              style={logo}
+            />
             <ButtonAuth
               authProvider="google"
               onPress={() => { }}

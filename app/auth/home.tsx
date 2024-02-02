@@ -1,5 +1,6 @@
 import { useRouter } from "expo-router";
 
+import { useEffect } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
@@ -8,6 +9,9 @@ import { ButtonAuth } from "../../components/elements/Button";
 import { windowWidth } from "../../utils/utils";
 
 import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
+
+import { ResponseType } from "expo-auth-session";
+import * as Google from "expo-auth-session/providers/google";
 
 export default function Home() {
 
@@ -31,6 +35,27 @@ export default function Home() {
     router.push("/auth/(phone)/phone");
   };
 
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: "471190546218-djk8ta92vv527dlouetu8ih4fnm67075.apps.googleusercontent.com",
+    responseType: ResponseType.Token
+  });
+
+  const handleGoogleAuth = async () => {
+    await promptAsync();
+    // console.log("req is : ", request);
+    // console.log("response is : ", response);
+    console.warn("handle Google Auth");
+  };
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      // https://expo.dev/accounts/muneeb-jutt/projects/expo-app
+      console.log("id token");
+      console.log(id_token);
+    }
+  }, [response]);
+
   const bodyCopy = "Continuando, accetti automaticamente i nostri\n";
 
   return (
@@ -44,7 +69,7 @@ export default function Home() {
             />
             <ButtonAuth
               authProvider="google"
-              onPress={() => { }}
+              onPress={() => { handleGoogleAuth(); }}
             />
             <ButtonAuth
               authProvider="apple"

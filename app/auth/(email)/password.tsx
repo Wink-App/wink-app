@@ -3,18 +3,20 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, Text, View } from "react-native";
 
-import { usePassword } from "../../../context/hooks/inputs";
+import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+
+import "../../../firebase.config";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+
 import { useProfile } from "../../../context/user";
+import { usePassword } from "../../../context/hooks/inputs";
 
 import { ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
 
-import "../../../firebase.config";
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
 const auth = getAuth();
 
 export default function Password() {
@@ -40,22 +42,24 @@ export default function Password() {
   const handleContinue = async () => {
     if (isNewUser) {
       const response = await createUserWithEmailAndPassword(auth, insertedEmail, password);
-      console.log("new user sign up");
-      const db = getDatabase();
       const userid = response.user.uid;
+
+      const db = getDatabase();
+      // Do we need to put insertedEmail in this data object?
       const data = {
         insertedEmail
       };
-      const dbResponse = await set(ref(db, `users/${userid}`), data);
-      console.log(dbResponse);
+
+      await set(ref(db, `users/${userid}`), data);
       router.push("/home/home");
     } else {
       try {
         await signInWithEmailAndPassword(auth, insertedEmail, password);
         router.push("/home/home");
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        console.log("error in signing in user ", error);
-        Alert.alert("Credenziali non valide!");
+        Alert.alert("Si è verificato un errore durante l'accesso. Riprova.");
       }
     }
   };

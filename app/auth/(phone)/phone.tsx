@@ -2,15 +2,15 @@ import { useRouter } from "expo-router";
 
 import { View } from "react-native";
 
-import { useNumber } from "../../../context/hooks/inputs";
+import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+
 import { useProfile } from "../../../context/user";
+import { useNumber } from "../../../context/hooks/inputs";
 
 import { ButtonOrange } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
 
 import { stylesBase } from "../../../utils/styles";
-
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
 export default function Phone() {
 
@@ -21,9 +21,7 @@ export default function Phone() {
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
-    // Verify if phoneNumber is already registered
     await getIsNewUserFromPhone({ phone: phoneNumber });
-
     router.push("/auth/(phone)/code");
   };
 

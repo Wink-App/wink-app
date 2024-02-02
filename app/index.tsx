@@ -4,13 +4,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
+import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
+
 import { ButtonText } from "../components/elements/Button";
 import TransitionElement from "../components/transitions/TransitionElement";
+import { windowWidth } from "../utils/utils";
 
 import { colorOrange, colorPurple, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
-
-import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
-import { windowWidth } from "../utils/utils";
 
 type Slide = {
   id: number;

@@ -1,12 +1,12 @@
 import { SplashScreen, Stack } from "expo-router";
 import * as Font from "expo-font";
 
-
 import { useCallback } from "react";
 import { View } from "react-native";
 
-import ToastProvider from "../context/toast";
 import Provider from "../context/user";
+
+import ToastProvider from "../context/toast";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -31,7 +31,6 @@ export default function App() {
   }
 
   return (
-
     <Provider>
       <ToastProvider>
         <View

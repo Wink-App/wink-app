@@ -1,19 +1,16 @@
 import { useRouter } from "expo-router";
 
-import { StyleSheet, Text, View, Image } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+
+import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
 
 import { ButtonAuth } from "../../components/elements/Button";
+import { windowWidth } from "../../utils/utils";
 
 import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
-import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
-import { windowWidth } from "../../utils/utils";
-import TransitionElement from "../../components/transitions/TransitionElement";
-// import { Image } from "expo-image";
-
-
 export default function Home() {
-  const logoDir = require("../../assets/logos/WinkLogo1.png");
+
   const {
     wrapper,
     whiteCircle,
@@ -21,6 +18,8 @@ export default function Home() {
     logo,
     policy,
   } = styles;
+
+  const logoDir = require("../../assets/logos/WinkLogo1.png");
 
   const router = useRouter();
 
@@ -39,12 +38,10 @@ export default function Home() {
       <View style={whiteCircle}>
         <SafeAreaLayout>
           <View style={container}>
-            <TransitionElement>
-              <Image
-                source={logoDir}
-                style={logo}
-              />
-            </TransitionElement>
+            <Image
+              source={logoDir}
+              style={logo}
+            />
             <ButtonAuth
               authProvider="google"
               onPress={() => { }}

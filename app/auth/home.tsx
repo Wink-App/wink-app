@@ -97,8 +97,8 @@ const styles = StyleSheet.create({
   logo: {
     width: 170,
     height: 170,
-    marginBottom: 5,
     marginTop: 30,
+    marginBottom: 5,
   },
   policy: {
     ...stylesBase.fontRegular,

@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
 
 import "../firebase.config";
-import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
+import { SetState } from "./types/types";
 
 type ContextProps = {
   isNewUser: boolean | null;
@@ -11,6 +12,7 @@ type ContextProps = {
   getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
 
   insertedEmail: string;
+  setInsertedEmail: SetState<string>;
   insertedPhone: string;
 
   profile: Profile | null;
@@ -43,6 +45,7 @@ const Provider = ({ children }: ProviderProps) => {
     getIsNewUserFromPhone,
 
     insertedEmail,
+    setInsertedEmail,
     insertedPhone,
 
     profile,
@@ -53,6 +56,8 @@ const Provider = ({ children }: ProviderProps) => {
 
   async function getIsNewUserFromEmail({ email }: { email: string }) {
     setInsertedEmail(email);
+    setIsNewUser(false);
+    /*
     try {
       const signInMethods = await fetchSignInMethodsForEmail(auth, email);
       if (signInMethods.length > 0) {
@@ -64,7 +69,7 @@ const Provider = ({ children }: ProviderProps) => {
       if (error.code === "auth/user-not-found") {
         setIsNewUser(true);
       }
-    }
+    } */
   }
 
   async function getIsNewUserFromPhone({ phone }: { phone: string }) {

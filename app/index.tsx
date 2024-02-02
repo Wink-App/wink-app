@@ -101,7 +101,7 @@ export default function Index() {
               <TransitionElement>
                 <ButtonText
                   text="Avanti"
-                  styleText={action}
+                  style={action}
                   onPress={handleNavigateToRegister}
                 />
               </TransitionElement>

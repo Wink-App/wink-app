@@ -12,7 +12,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import { useProfile } from "../../../context/user";
 import { usePassword } from "../../../context/hooks/inputs";
 
-import { ButtonOrange } from "../../../components/elements/Button";
+import { ButtonOrange, ButtonText } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
@@ -36,6 +36,10 @@ export default function Password() {
 
   const [title, setTitle] = useState<string>("");
   const [subTitle, setSubTitle] = useState<string>("");
+
+  const handleForgotPassword = () => {
+    router.push("/auth/(email)/forgot");
+  };
 
   const [password, setPassword, isValid, isInvalidChar] = usePassword("");
 
@@ -87,6 +91,24 @@ export default function Password() {
         onChange={(e) => setPassword(e.nativeEvent.text)}
         clearFunction={() => setPassword("")}
       />
+      {isNewUser === false && (
+        <View
+          style={{
+            width: "100%",
+            ...stylesBase.flexRowEndCenter,
+          }}>
+          <ButtonText
+            text="Password dimenticata?"
+            underlined
+            style={{
+              ...stylesBase.fontBold,
+              color: secondaryText,
+              fontSize: 12,
+            }}
+            onPress={handleForgotPassword}
+          />
+        </View>
+      )}
       <View
         style={{
           width: "100%",

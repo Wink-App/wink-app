@@ -45,6 +45,11 @@ export const stylesBase = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+  flexRowEndCenter: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
   flexColumnCenter: {
     flexDirection: "column",
     justifyContent: "center",
@@ -75,11 +80,17 @@ export const stylesBase = StyleSheet.create({
 type TextUnderlinedProps = {
   children: React.ReactNode;
   style?: TextStyle;
+  onPress?: () => void;
 };
 
-export function TextUnderlined({ children, style = {} }: TextUnderlinedProps) {
+export function TextUnderlined({
+  children,
+  style = {},
+  onPress = () => { },
+}: TextUnderlinedProps) {
   return (
     <Text
+      onPress={onPress}
       style={{
         textDecorationLine: "underline",
         textDecorationColor: colorBorderLine,

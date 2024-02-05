@@ -4,6 +4,8 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
 
+import useGoogleAuth from "../../context/hooks/useGoogleAuth";
+
 import { ButtonAuth } from "../../components/elements/Button";
 import { windowWidth } from "../../utils/utils";
 
@@ -22,6 +24,8 @@ export default function Home() {
   const logoDir = require("../../assets/logos/WinkLogo1.png");
 
   const router = useRouter();
+
+  const { handleGoogleAuth } = useGoogleAuth();
 
   const handleEmailAuth = () => {
     router.push("/auth/(email)/email");
@@ -44,7 +48,7 @@ export default function Home() {
             />
             <ButtonAuth
               authProvider="google"
-              onPress={() => { }}
+              onPress={handleGoogleAuth}
             />
             <ButtonAuth
               authProvider="apple"
@@ -97,8 +101,8 @@ const styles = StyleSheet.create({
   logo: {
     width: 170,
     height: 170,
-    marginBottom: 5,
     marginTop: 30,
+    marginBottom: 5,
   },
   policy: {
     ...stylesBase.fontRegular,

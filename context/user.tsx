@@ -1,17 +1,25 @@
 import React, { createContext, useContext, useState } from "react";
 
 import "../firebase.config";
-import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
+import {
+  ConfirmationResult,
+  fetchSignInMethodsForEmail,
+  getAuth,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
+import { getIsNewUserFromPhoneProps, SetState } from "./types/types";
 
 type ContextProps = {
   isNewUser: boolean | null;
   getIsNewUserFromEmail: ({ email }: { email: string }) => Promise<void>;
-  getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
+  getIsNewUserFromPhone: ({ phone, recaptchaVerifier }: getIsNewUserFromPhoneProps) => Promise<void>;
 
   insertedEmail: string;
+  setInsertedEmail: SetState<string>;
   insertedPhone: string;
+  phoneSignUpResult: ConfirmationResult | undefined;
 
   profile: Profile | null;
   loadingProfile: boolean;
@@ -23,7 +31,7 @@ type ProviderProps = {
   children: React.ReactNode;
 };
 
-const auth = getAuth();
+const myAuth = getAuth();
 
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
 
@@ -33,6 +41,7 @@ const Provider = ({ children }: ProviderProps) => {
 
   const [insertedEmail, setInsertedEmail] = useState<string>("");
   const [insertedPhone, setInsertedPhone] = useState<string>("");
+  const [phoneSignUpResult, setPhoneSignUpResult] = useState<ConfirmationResult>();
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
@@ -43,7 +52,9 @@ const Provider = ({ children }: ProviderProps) => {
     getIsNewUserFromPhone,
 
     insertedEmail,
+    setInsertedEmail,
     insertedPhone,
+    phoneSignUpResult,
 
     profile,
     loadingProfile,
@@ -52,9 +63,10 @@ const Provider = ({ children }: ProviderProps) => {
   };
 
   async function getIsNewUserFromEmail({ email }: { email: string }) {
-    setInsertedEmail(email);
+    // setInsertedEmail(email);
+    // setIsNewUser(false);
     try {
-      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      const signInMethods = await fetchSignInMethodsForEmail(myAuth, email);
       if (signInMethods.length > 0) {
         setIsNewUser(false);
       } else {
@@ -67,11 +79,21 @@ const Provider = ({ children }: ProviderProps) => {
     }
   }
 
-  async function getIsNewUserFromPhone({ phone }: { phone: string }) {
+  async function getIsNewUserFromPhone({ phone, recaptchaVerifier }: getIsNewUserFromPhoneProps) {
     setInsertedPhone(phone);
-    // TODO: Back-End call
-
-    setIsNewUser(true);
+    try {
+      const phoneNumber = `+39${phone}`;
+      const result = await signInWithPhoneNumber(
+        myAuth,
+        phoneNumber,
+        recaptchaVerifier.current
+      );
+      setPhoneSignUpResult(result);
+      setIsNewUser(true);
+    } catch (error: any) {
+      console.error("Error sending verification code:", error);
+      setIsNewUser(false);
+    }
   }
 
   async function getProfile() {

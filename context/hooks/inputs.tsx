@@ -11,8 +11,9 @@ export const useEmail = (initialValue: string) => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [isInvalidChar, setIsInvalidChar] = useState<boolean>(false);
 
-  const handleValue = (value: string) => {
-    setHook(value.toLocaleLowerCase());
+  const handleValue = (inputValue: string) => {
+    const value = inputValue.toLocaleLowerCase().trim();
+    setHook(value);
 
     const regex = /^[a-zA-Z0-9.@]*$/;
 

@@ -28,7 +28,7 @@ export default function Phone() {
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
-    await getIsNewUserFromPhone({ phone: phoneNumber }, { recaptchaVerifier });
+    await getIsNewUserFromPhone({ phone: phoneNumber, recaptchaVerifier });
     if (isNewUser) {
       router.push("/auth/(phone)/code");
     }

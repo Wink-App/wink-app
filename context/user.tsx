@@ -1,19 +1,23 @@
 import React, { createContext, useContext, useState } from "react";
 
 import "../firebase.config";
+
 import { getAuth } from "firebase/auth";
+import { fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
 import { SetState } from "./types/types";
 
+
 type ContextProps = {
   isNewUser: boolean | null;
   getIsNewUserFromEmail: ({ email }: { email: string }) => Promise<void>;
-  getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
+  getIsNewUserFromPhone: ({ phone }: { phone: string }, { recaptchaVerifier }: { recaptchaVerifier: any }) => Promise<void>;
 
   insertedEmail: string;
   setInsertedEmail: SetState<string>;
   insertedPhone: string;
+  phoneSignUpResult: any;
 
   profile: Profile | null;
   loadingProfile: boolean;
@@ -25,7 +29,7 @@ type ProviderProps = {
   children: React.ReactNode;
 };
 
-const auth = getAuth();
+const myauth = getAuth();
 
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
 
@@ -35,6 +39,7 @@ const Provider = ({ children }: ProviderProps) => {
 
   const [insertedEmail, setInsertedEmail] = useState<string>("");
   const [insertedPhone, setInsertedPhone] = useState<string>("");
+  const [phoneSignUpResult, setConfirmationResult] = useState<any>({});
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
@@ -47,6 +52,7 @@ const Provider = ({ children }: ProviderProps) => {
     insertedEmail,
     setInsertedEmail,
     insertedPhone,
+    phoneSignUpResult,
 
     profile,
     loadingProfile,
@@ -59,7 +65,7 @@ const Provider = ({ children }: ProviderProps) => {
     setIsNewUser(false);
     /*
     try {
-      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      const signInMethods = await fetchSignInMethodsForEmail(myauth, email);
       if (signInMethods.length > 0) {
         setIsNewUser(false);
       } else {
@@ -72,11 +78,21 @@ const Provider = ({ children }: ProviderProps) => {
     } */
   }
 
-  async function getIsNewUserFromPhone({ phone }: { phone: string }) {
-    setInsertedPhone(phone);
-    // TODO: Back-End call
-
-    setIsNewUser(true);
+  async function getIsNewUserFromPhone({ phone }: { phone: string }, { recaptchaVerifier }: { recaptchaVerifier: any }) {
+    try {
+      setInsertedPhone(phone);
+      const phno = `+39${phone}`;
+      const result = await signInWithPhoneNumber(
+        myauth,
+        phno,
+        recaptchaVerifier.current
+      );
+      console.log(result);
+      setConfirmationResult(result);
+      setIsNewUser(true);
+    } catch (error) {
+      console.error("Error sending verification code:", error);
+    }
   }
 
   async function getProfile() {

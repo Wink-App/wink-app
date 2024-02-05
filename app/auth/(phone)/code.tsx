@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
@@ -30,13 +30,24 @@ export default function Code() {
 
   const [title, setTitle] = useState<string>("");
   const [subTitle, setSubTitle] = useState<string>("");
+  const { phoneSignUpResult } = useProfile();
 
   const [code, setCode, isValid, isInvalidChar] = useNumber("", 6);
 
   const handleContinue = async () => {
-    // Handle code verification
-
-    router.push("/home/home");
+    try {
+      const result = await phoneSignUpResult.confirm(code);
+      console.log(result);
+      router.push("/home/home");
+    } catch (error: any) {
+      if (error.code == "auth/invalid-verification-code") {
+        Alert.alert("Invalid code!");
+      }
+      if (error.code == "auth/code-expired") {
+        Alert.alert("Code expired!");
+        router.back();
+      }
+    }
   };
 
   return (

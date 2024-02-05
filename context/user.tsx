@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
 
 import "../firebase.config";
+
+import { getAuth } from "firebase/auth";
 import { fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
+import { SetState } from "./types/types";
 
 
 type ContextProps = {
@@ -12,6 +15,7 @@ type ContextProps = {
   getIsNewUserFromPhone: ({ phone }: { phone: string }, { recaptchaVerifier }: { recaptchaVerifier: any }) => Promise<void>;
 
   insertedEmail: string;
+  setInsertedEmail: SetState<string>;
   insertedPhone: string;
   phoneSignUpResult: any;
 
@@ -46,6 +50,7 @@ const Provider = ({ children }: ProviderProps) => {
     getIsNewUserFromPhone,
 
     insertedEmail,
+    setInsertedEmail,
     insertedPhone,
     phoneSignUpResult,
 
@@ -57,6 +62,8 @@ const Provider = ({ children }: ProviderProps) => {
 
   async function getIsNewUserFromEmail({ email }: { email: string }) {
     setInsertedEmail(email);
+    setIsNewUser(false);
+    /*
     try {
       const signInMethods = await fetchSignInMethodsForEmail(myauth, email);
       if (signInMethods.length > 0) {
@@ -68,7 +75,7 @@ const Provider = ({ children }: ProviderProps) => {
       if (error.code === "auth/user-not-found") {
         setIsNewUser(true);
       }
-    }
+    } */
   }
 
   async function getIsNewUserFromPhone({ phone }: { phone: string }, { recaptchaVerifier }: { recaptchaVerifier: any }) {

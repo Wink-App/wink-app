@@ -1,10 +1,10 @@
 import { useRouter } from "expo-router";
-import { ImageSource } from "expo-image";
+import { Image, ImageSource } from "expo-image";
 
-import { Image, Text, TextStyle, View } from "react-native";
+import { Text, TextStyle, View } from "react-native";
 import { BaseButton, TouchableOpacity } from "react-native-gesture-handler";
 
-import { colorBlack, colorGreyLighter, colorOrange, stylesBase } from "../../utils/styles";
+import { colorBlack, colorBorderLine, colorGreyLighter, colorOrange, stylesBase } from "../../utils/styles";
 
 type ButtonOrangeProps = {
   text: string;
@@ -44,14 +44,32 @@ export function ButtonOrange({
 
 type ButtonTextProps = {
   text: string;
-  styleText: TextStyle;
-  onPress: () => void;
+  underlined?: boolean;
+  style?: TextStyle;
+  onPress?: () => void;
 };
 
-export function ButtonText({ text, styleText, onPress }: ButtonTextProps) {
+export function ButtonText({
+  text,
+  underlined = false,
+  style = {},
+  onPress = () => { },
+}: ButtonTextProps) {
+
+  const underlineStyle: TextStyle = underlined ? {
+    textDecorationLine: "underline",
+    textDecorationColor: colorBorderLine,
+  } : {};
+
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={styleText}>{text}</Text>
+      <Text
+        style={{
+          ...style,
+          ...underlineStyle,
+        }}>
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 }

@@ -1,12 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 import "../firebase.config";
-import {
-  ConfirmationResult,
-  fetchSignInMethodsForEmail,
-  getAuth,
-  signInWithPhoneNumber,
-} from "firebase/auth";
+import { ConfirmationResult, fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
 import { getIsNewUserFromPhoneProps, SetState } from "./types/types";

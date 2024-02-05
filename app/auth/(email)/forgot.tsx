@@ -20,16 +20,18 @@ export default function Forgot() {
   const router = useRouter();
   const { insertedEmail, setInsertedEmail } = useProfile();
 
-  const [email, setEmail, isValid, isInvalidChar] = useEmail(insertedEmail || "");
+  const [email, setEmail, isValid, isInvalidChar] = useEmail("");
 
   useEffect(() => {
-    if (email) setInsertedEmail(email);
-  }, [email]);
+    if (email === "" && insertedEmail.length > 0) {
+      setEmail(insertedEmail);
+    }
+  }, [insertedEmail]);
 
   const subTitle = "Ti invieremo un link via email per reimpostare la tua password.";
 
   const handleSend = async () => {
-    // 
+    setInsertedEmail(email);
     router.push("/auth/(email)/check");
   };
 

@@ -54,7 +54,7 @@ export default function Check() {
           style={{
             ...stylesBase.fontBold,
             color: secondaryText,
-            fontSize: 16,
+            fontSize: 14,
           }}
           onPress={() => { }}
         />

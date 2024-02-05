@@ -20,11 +20,7 @@ export default function Forgot() {
   const router = useRouter();
   const { insertedEmail, setInsertedEmail } = useProfile();
 
-  const [email, setEmail, isValid, isInvalidChar] = useEmail("");
-
-  useEffect(() => {
-    if (insertedEmail) setEmail(insertedEmail);
-  }, [insertedEmail]);
+  const [email, setEmail, isValid, isInvalidChar] = useEmail(insertedEmail || "");
 
   useEffect(() => {
     if (email) setInsertedEmail(email);

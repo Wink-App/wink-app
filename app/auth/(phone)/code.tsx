@@ -16,7 +16,7 @@ import { secondaryText, stylesBase } from "../../../utils/styles";
 export default function Code() {
 
   const router = useRouter();
-  const { isNewUser, insertedPhone } = useProfile();
+  const { isNewUser, insertedPhone, phoneSignUpResult } = useProfile();
 
   useEffect(() => {
     if (isNewUser) {
@@ -30,21 +30,19 @@ export default function Code() {
 
   const [title, setTitle] = useState<string>("");
   const [subTitle, setSubTitle] = useState<string>("");
-  const { phoneSignUpResult } = useProfile();
 
   const [code, setCode, isValid, isInvalidChar] = useNumber("", 6);
 
   const handleContinue = async () => {
     try {
-      const result = await phoneSignUpResult.confirm(code);
-      console.log(result);
+      await phoneSignUpResult.confirm(code);
       router.push("/home/home");
     } catch (error: any) {
-      if (error.code == "auth/invalid-verification-code") {
-        Alert.alert("Invalid code!");
+      if (error.code === "auth/invalid-verification-code") {
+        Alert.alert("Il codice non è valido, riprova.");
       }
-      if (error.code == "auth/code-expired") {
-        Alert.alert("Code expired!");
+      if (error.code === "auth/code-expired") {
+        Alert.alert("Il codice è scaduto, riprova.");
         router.back();
       }
     }

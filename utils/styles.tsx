@@ -75,6 +75,11 @@ export const stylesBase = StyleSheet.create({
     justifyContent: "flex-end",
     alignItems: "center",
   },
+  flexColumnSpaceBetCen: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 });
 
 type TextUnderlinedProps = {

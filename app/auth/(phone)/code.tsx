@@ -36,8 +36,8 @@ export default function Code() {
 
   const handleContinue = async () => {
     try {
-      const result = await phoneSignUpResult.confirm(code);
-      console.log(result);
+      // const result = await phoneSignUpResult.confirm(code);
+      // console.log(result);
       router.push("/home/home");
     } catch (error: any) {
       if (error.code == "auth/invalid-verification-code") {

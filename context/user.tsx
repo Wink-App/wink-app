@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
+import auth from "@react-native-firebase/auth";
 
 import "../firebase.config";
-import { fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
+import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
 
@@ -9,7 +10,7 @@ import { Profile } from "./types/profile.type";
 type ContextProps = {
   isNewUser: boolean | null;
   getIsNewUserFromEmail: ({ email }: { email: string }) => Promise<void>;
-  getIsNewUserFromPhone: ({ phone }: { phone: string }, { recaptchaVerifier }: { recaptchaVerifier: any }) => Promise<void>;
+  getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
 
   insertedEmail: string;
   insertedPhone: string;
@@ -26,6 +27,7 @@ type ProviderProps = {
 };
 
 const myauth = getAuth();
+
 
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
 
@@ -71,14 +73,12 @@ const Provider = ({ children }: ProviderProps) => {
     }
   }
 
-  async function getIsNewUserFromPhone({ phone }: { phone: string }, { recaptchaVerifier }: { recaptchaVerifier: any }) {
+  async function getIsNewUserFromPhone({ phone }: { phone: string }) {
     try {
       setInsertedPhone(phone);
-      const phno = `+39${phone}`;
-      const result = await signInWithPhoneNumber(
-        myauth,
+      const phno = `+92${phone}`;
+      const result = await auth().signInWithPhoneNumber(
         phno,
-        recaptchaVerifier.current
       );
       console.log(result);
       setConfirmationResult(result);

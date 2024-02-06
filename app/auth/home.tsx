@@ -1,17 +1,21 @@
 import { useRouter } from "expo-router";
 
 import { useEffect } from "react";
+import auth from "@react-native-firebase/auth";
+import {
+  GoogleSignin
+} from "@react-native-google-signin/google-signin";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
+
+import { getDatabase, ref, set } from "firebase/database";
 
 import { ButtonAuth } from "../../components/elements/Button";
 import { windowWidth } from "../../utils/utils";
 
 import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
-import { ResponseType } from "expo-auth-session";
-import * as Google from "expo-auth-session/providers/google";
 
 export default function Home() {
 
@@ -35,26 +39,44 @@ export default function Home() {
     router.push("/auth/(phone)/phone");
   };
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: "471190546218-djk8ta92vv527dlouetu8ih4fnm67075.apps.googleusercontent.com",
-    responseType: ResponseType.Token
-  });
 
   const handleGoogleAuth = async () => {
-    await promptAsync();
-    // console.log("req is : ", request);
-    // console.log("response is : ", response);
+    console.log("above");
+    await GoogleSignin.hasPlayServices();
+    console.log("here");
+    const userinfo = await GoogleSignin.signIn();
+    const { idToken } = await GoogleSignin.signIn();
+    const googlecredentials = auth.GoogleAuthProvider.credential(idToken);
+    const authresult = await auth().signInWithCredential(googlecredentials);
+    const db = getDatabase();
+    if (authresult.additionalUserInfo.isNewUser) {
+      console.log("new user");
+      const data = {
+        name: userinfo.user.name,
+        email: userinfo.user.email,
+        profile: userinfo.user.photo
+      };
+      await set(ref(db, `users/${authresult.user.uid}`), data);
+      router.push("/home/home");
+    } else {
+      console.log("not new user");
+      router.push("/home/home");
+    }
+
+    console.log("user Info is : ", userinfo.user);
+    console.log("auth result is : ", authresult);
+
     console.warn("handle Google Auth");
   };
 
   useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
-      // https://expo.dev/accounts/muneeb-jutt/projects/expo-app
-      console.log("id token");
-      console.log(id_token);
-    }
-  }, [response]);
+    GoogleSignin.configure({
+      offlineAccess: false,
+      webClientId:
+        "1079002699250-hm004798nlhjr22mrstln0hn5bfpl5ug.apps.googleusercontent.com",
+      scopes: ["profile", "email"],
+    });
+  }, []);
 
   const bodyCopy = "Continuando, accetti automaticamente i nostri\n";
 

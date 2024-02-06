@@ -16,14 +16,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "GoogleService-Info.plist",
+      "bundleIdentifier": "com.fleacttech.winkdev"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "google-services.json",
+      "package": "com.fleacttech.winkdev"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -32,7 +35,8 @@
     "plugins": [
       "expo-router",
       "@react-native-firebase/app",
-      "@react-native-firebase/auth"
+      "@react-native-firebase/auth",
+      "@react-native-google-signin/google-signin"
     ],
     "experiments": {
       "typedRoutes": true
@@ -42,14 +46,14 @@
         "origin": false
       },
       "eas": {
-        "projectId": "105b319e-3f41-4b33-aeeb-48781480b24f"
+        "projectId": "ce70be5b-22df-416e-823c-c5ce62a106aa"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/105b319e-3f41-4b33-aeeb-48781480b24f"
+      "url": "https://u.expo.dev/ce70be5b-22df-416e-823c-c5ce62a106aa"
     }
   }
 }

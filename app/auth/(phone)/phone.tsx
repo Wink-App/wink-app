@@ -1,11 +1,9 @@
 import { useRouter } from "expo-router";
 
-import { useRef } from "react";
 import { View } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import { getAuth } from "firebase/auth";
 
 import { useProfile } from "../../../context/user";
@@ -20,7 +18,7 @@ const auth = getAuth();
 
 export default function Phone() {
 
-  const recaptchaVerifier = useRef(null);
+  // const recaptchaVerifier = useRef(null);
   const router = useRouter();
   const { getIsNewUserFromPhone, isNewUser } = useProfile();
 
@@ -28,10 +26,10 @@ export default function Phone() {
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
-    await getIsNewUserFromPhone({ phone: phoneNumber }, { recaptchaVerifier });
-    if (isNewUser) {
-      router.push("/auth/(phone)/code");
-    }
+    await getIsNewUserFromPhone({ phone: phoneNumber });
+    // if (isNewUser) {
+    router.push("/auth/(phone)/code");
+    // }
   };
 
   return (
@@ -60,10 +58,10 @@ export default function Phone() {
           enabled={isValid}
         />
       </View>
-      <FirebaseRecaptchaVerifierModal
+      {/* <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifier}
         firebaseConfig={auth.app.options}
-      />
+      /> */}
     </AuthOptionLayout>
   );
 }

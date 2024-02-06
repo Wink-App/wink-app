@@ -12,7 +12,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import { useProfile } from "../../../context/user";
 import { usePassword } from "../../../context/hooks/inputs";
 
-import { ButtonOrange, ButtonText } from "../../../components/elements/Button";
+import { ButtonPrimary, ButtonText } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
@@ -49,7 +49,7 @@ export default function Password() {
       const userid = response.user.uid;
 
       const db = getDatabase();
-      // Do we need to put insertedEmail in this data object?
+      // TODO: Do we need to put insertedEmail in this data object?
       const data = {
         insertedEmail
       };
@@ -71,7 +71,17 @@ export default function Password() {
   return (
     <AuthOptionLayout
       title={title}
-      subTitle={subTitle}>
+      subTitle={subTitle}
+      Button={
+        <ButtonPrimary
+          text="Continua"
+          fullWidth
+          purple
+          style={{ marginBottom: 10 }}
+          onPress={handleContinue}
+          enabled={isValid}
+        />
+      }>
       <Text
         style={{
           ...stylesBase.fontBold,
@@ -109,18 +119,6 @@ export default function Password() {
           />
         </View>
       )}
-      <View
-        style={{
-          width: "100%",
-          ...stylesBase.flexRowCenter,
-          marginTop: 5,
-        }}>
-        <ButtonOrange
-          text="Continua"
-          onPress={handleContinue}
-          enabled={isValid}
-        />
-      </View>
     </AuthOptionLayout>
   );
 }

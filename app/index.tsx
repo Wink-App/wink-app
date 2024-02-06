@@ -61,7 +61,7 @@ export default function Index() {
   }, [idCurrentSlide]);
 
   const handleNavigateToRegister = useCallback(() => {
-    router.push("/auth/home");
+    router.push("/auth/");
   }, []);
 
   return (

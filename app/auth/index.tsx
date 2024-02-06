@@ -11,7 +11,7 @@ import { windowWidth } from "../../utils/utils";
 
 import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
-export default function Home() {
+export default function Index() {
 
   const {
     wrapper,

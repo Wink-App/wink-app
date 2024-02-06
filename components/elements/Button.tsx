@@ -1,31 +1,55 @@
 import { useRouter } from "expo-router";
 import { Image, ImageSource } from "expo-image";
 
-import { Text, TextStyle, View } from "react-native";
+import { Text, TextStyle, View, ViewStyle } from "react-native";
 import { BaseButton, TouchableOpacity } from "react-native-gesture-handler";
 
-import { colorBlack, colorBorderLine, colorGreyLighter, colorOrange, stylesBase } from "../../utils/styles";
+import {
+  colorBlack,
+  colorBorderLine,
+  colorGreyLighter,
+  colorOrange,
+  colorPurple,
+  colorWhite,
+  stylesBase,
+} from "../../utils/styles";
 
-type ButtonOrangeProps = {
+type ButtonPrimaryProps = {
   text: string;
+  fullWidth?: boolean;
+  purple?: boolean;
+  orange?: boolean;
+  style?: ViewStyle;
   onPress?: () => void;
   enabled?: boolean;
 };
 
-export function ButtonOrange({
+export function ButtonPrimary({
   text,
+  fullWidth = false,
+  purple = false,
+  orange = false,
+  style = {},
   onPress = () => { },
   enabled = true,
-}: ButtonOrangeProps) {
+}: ButtonPrimaryProps) {
+
+  const widthStyle: ViewStyle = fullWidth ?
+    { width: "100%" } : { paddingHorizontal: 25 };
+
+  const bgColor = purple && colorPurple || orange && colorOrange || "transparent";
+  const textColor = purple && colorWhite || orange && colorBlack || colorBlack;
+
   return (
     <BaseButton
       style={{
+        ...widthStyle,
         height: 50,
         borderRadius: 25,
-        ...stylesBase.flexRowSpaceBetCen,
-        paddingHorizontal: 25,
-        backgroundColor: colorOrange,
+        ...stylesBase.flexRowCenter,
+        backgroundColor: bgColor,
         opacity: enabled ? 1 : 0.5,
+        ...style,
       }}
       onPress={onPress}
       enabled={enabled}>
@@ -33,7 +57,7 @@ export function ButtonOrange({
         style={{
           ...stylesBase.fontBold,
           fontSize: 16,
-          color: colorBlack,
+          color: textColor,
         }}>
         {text}
       </Text>
@@ -65,6 +89,8 @@ export function ButtonText({
     <TouchableOpacity onPress={onPress}>
       <Text
         style={{
+          height: 50,
+          textAlign: "center",
           ...style,
           ...underlineStyle,
         }}>
@@ -187,6 +213,19 @@ export function ButtonBack({
         }}
       />
     </TouchableOpacity>
+  );
+}
+
+export function FullLineButtonBack({ style = {} }: { style?: ViewStyle }) {
+  return (
+    <View
+      style={{
+        width: "100%",
+        ...stylesBase.flexRowStartCenter,
+        ...style
+      }}>
+      <ButtonBack />
+    </View>
   );
 }
 

@@ -1,7 +1,5 @@
 import { useRouter } from "expo-router";
 
-import { View } from "react-native";
-
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
 import "../../../firebase.config";
@@ -9,10 +7,8 @@ import "../../../firebase.config";
 import { useProfile } from "../../../context/user";
 import { useEmail } from "../../../context/hooks/inputs";
 
-import { ButtonOrange } from "../../../components/elements/Button";
+import { ButtonPrimary } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
-
-import { stylesBase } from "../../../utils/styles";
 
 export default function Email() {
 
@@ -30,7 +26,17 @@ export default function Email() {
   return (
     <AuthOptionLayout
       title="Iniziamo con la tua email"
-      subTitle={subTitle}>
+      subTitle={subTitle}
+      Button={
+        <ButtonPrimary
+          text="Continua"
+          fullWidth
+          purple
+          style={{ marginBottom: 10 }}
+          onPress={handleContinue}
+          enabled={isValid}
+        />
+      }>
       <InputLabel
         value={email}
         isInvalidChar={isInvalidChar}
@@ -40,18 +46,6 @@ export default function Email() {
         onChange={(e) => setEmail(e.nativeEvent.text)}
         clearFunction={() => setEmail("")}
       />
-      <View
-        style={{
-          width: "100%",
-          ...stylesBase.flexRowCenter,
-          marginTop: 5,
-        }}>
-        <ButtonOrange
-          text="Continua"
-          onPress={handleContinue}
-          enabled={isValid}
-        />
-      </View>
     </AuthOptionLayout>
   );
 }

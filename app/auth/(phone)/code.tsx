@@ -1,14 +1,14 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, Text } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
 import { useProfile } from "../../../context/user";
 import { useNumber } from "../../../context/hooks/inputs";
 
-import { ButtonOrange } from "../../../components/elements/Button";
+import { ButtonPrimary } from "../../../components/elements/Button";
 import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
@@ -51,7 +51,17 @@ export default function Code() {
   return (
     <AuthOptionLayout
       title={title}
-      subTitle={subTitle}>
+      subTitle={subTitle}
+      Button={
+        <ButtonPrimary
+          text="Continua"
+          fullWidth
+          purple
+          style={{ marginBottom: 10 }}
+          onPress={handleContinue}
+          enabled={isValid}
+        />
+      }>
       <Text
         style={{
           ...stylesBase.fontBold,
@@ -62,26 +72,12 @@ export default function Code() {
         }}>
         +39 {insertedPhone}
       </Text>
-
       <InputVerificationCode
         maxValueChar={6}
         isInvalidChar={isInvalidChar}
         autoFocus
         onChange={(value) => setCode(value)}
       />
-
-      <View
-        style={{
-          width: "100%",
-          ...stylesBase.flexRowCenter,
-          marginTop: 5,
-        }}>
-        <ButtonOrange
-          text="Continua"
-          onPress={handleContinue}
-          enabled={isValid}
-        />
-      </View>
     </AuthOptionLayout>
   );
 }

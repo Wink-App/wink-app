@@ -1,14 +1,16 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert, Text } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+
+import { getDatabase, ref, set } from "firebase/database";
 
 import { useProfile } from "../../../context/user";
 import { useNumber } from "../../../context/hooks/inputs";
 
-import { ButtonOrange } from "../../../components/elements/Button";
+import { ButtonPrimary } from "../../../components/elements/Button";
 import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
@@ -36,8 +38,15 @@ export default function Code() {
 
   const handleContinue = async () => {
     try {
-      // const result = await phoneSignUpResult.confirm(code);
-      // console.log(result);
+      const result = await phoneSignUpResult.confirm(code);
+      const db = getDatabase();
+      console.log(result);
+      const data = {
+        phone: result.user.phoneNumber
+      };
+      if (result.additionalUserInfo.isNewUser) {
+        await set(ref(db, `users/${result.user.uid}`), data);
+      };
       router.push("/home/home");
     } catch (error: any) {
       if (error.code == "auth/invalid-verification-code") {
@@ -51,9 +60,54 @@ export default function Code() {
   };
 
   return (
+    // <AuthOptionLayout
+    //   title={title}
+    //   subTitle={subTitle}>
+    //   <Text
+    //     style={{
+    //       ...stylesBase.fontBold,
+    //       color: secondaryText,
+    //       fontSize: 14,
+    //       lineHeight: 21,
+    //       marginTop: -10,
+    //     }}>
+    //     +39 {insertedPhone}
+    //   </Text>
+
+    //   <InputVerificationCode
+    //     maxValueChar={6}
+    //     isInvalidChar={isInvalidChar}
+    //     autoFocus
+    //     onChange={(value) => setCode(value)}
+    //   />
+
+    //   <View
+    //     style={{
+    //       width: "100%",
+    //       ...stylesBase.flexRowCenter,
+    //       marginTop: 5,
+    //     }}>
+    //     <ButtonOrange
+    //       text="Continua"
+    //       onPress={handleContinue}
+    //       enabled={isValid}
+    //     />
+    //   </View>
+    // </AuthOptionLayout>
+
     <AuthOptionLayout
       title={title}
-      subTitle={subTitle}>
+      subTitle={subTitle}
+      Button={
+        <ButtonPrimary
+          text="Continua"
+          fullWidth
+          purple
+          style={{ marginBottom: 10 }}
+          onPress={handleContinue}
+          enabled={isValid}
+        />
+      }>
       <Text
         style={{
           ...stylesBase.fontBold,
@@ -64,26 +118,12 @@ export default function Code() {
         }}>
         +39 {insertedPhone}
       </Text>
-
       <InputVerificationCode
         maxValueChar={6}
         isInvalidChar={isInvalidChar}
         autoFocus
         onChange={(value) => setCode(value)}
       />
-
-      <View
-        style={{
-          width: "100%",
-          ...stylesBase.flexRowCenter,
-          marginTop: 5,
-        }}>
-        <ButtonOrange
-          text="Continua"
-          onPress={handleContinue}
-          enabled={isValid}
-        />
-      </View>
     </AuthOptionLayout>
   );
 }

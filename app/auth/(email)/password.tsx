@@ -12,7 +12,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import { useProfile } from "../../../context/user";
 import { usePassword } from "../../../context/hooks/inputs";
 
-import { ButtonOrange } from "../../../components/elements/Button";
+import { ButtonPrimary, ButtonText } from "../../../components/elements/Button";
 import InputLabel from "../../../components/elements/InputLabel";
 
 import { secondaryText, stylesBase } from "../../../utils/styles";
@@ -38,6 +38,10 @@ export default function Password() {
   const [subTitle, setSubTitle] = useState<string>("");
 
   const [password, setPassword, isValid, isInvalidChar] = usePassword("");
+
+  const handleForgotPassword = () => {
+    router.push("/auth/(email)/forgot");
+  };
 
   const handleContinue = async () => {
     if (isNewUser) {
@@ -65,9 +69,55 @@ export default function Password() {
   };
 
   return (
+    // <AuthOptionLayout
+    //   title={title}
+    //   subTitle={subTitle}>
+    //   <Text
+    //     style={{
+    //       ...stylesBase.fontBold,
+    //       color: secondaryText,
+    //       fontSize: 14,
+    //       lineHeight: 21,
+    //       marginTop: -10,
+    //     }}>
+    //     {insertedEmail}
+    //   </Text>
+    //   <InputLabel
+    //     value={password}
+    //     isInvalidChar={isInvalidChar}
+    //     placeholder="Inserisci password"
+    //     inputmode="default"
+    //     autoFocus
+    //     onChange={(e) => setPassword(e.nativeEvent.text)}
+    //     clearFunction={() => setPassword("")}
+    //   />
+    //   <View
+    //     style={{
+    //       width: "100%",
+    //       ...stylesBase.flexRowCenter,
+    //       marginTop: 5,
+    //     }}>
+    //     <ButtonOrange
+    //       text="Continua"
+    //       onPress={handleContinue}
+    //       enabled={isValid}
+    //     />
+    //   </View>
+    // </AuthOptionLayout>
+
     <AuthOptionLayout
       title={title}
-      subTitle={subTitle}>
+      subTitle={subTitle}
+      Button={
+        <ButtonPrimary
+          text="Continua"
+          fullWidth
+          purple
+          style={{ marginBottom: 10 }}
+          onPress={handleContinue}
+          enabled={isValid}
+        />
+      }>
       <Text
         style={{
           ...stylesBase.fontBold,
@@ -87,18 +137,24 @@ export default function Password() {
         onChange={(e) => setPassword(e.nativeEvent.text)}
         clearFunction={() => setPassword("")}
       />
-      <View
-        style={{
-          width: "100%",
-          ...stylesBase.flexRowCenter,
-          marginTop: 5,
-        }}>
-        <ButtonOrange
-          text="Continua"
-          onPress={handleContinue}
-          enabled={isValid}
-        />
-      </View>
+      {isNewUser === false && (
+        <View
+          style={{
+            width: "100%",
+            ...stylesBase.flexRowEndCenter,
+          }}>
+          <ButtonText
+            text="Password dimenticata?"
+            underlined
+            style={{
+              ...stylesBase.fontBold,
+              color: secondaryText,
+              fontSize: 12,
+            }}
+            onPress={handleForgotPassword}
+          />
+        </View>
+      )}
     </AuthOptionLayout>
   );
 }

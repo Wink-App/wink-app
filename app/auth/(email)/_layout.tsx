@@ -12,6 +12,12 @@ export default function Layout() {
       <Stack.Screen
         name="password"
       />
+      <Stack.Screen
+        name="forgot"
+      />
+      <Stack.Screen
+        name="check"
+      />
     </Stack>
   );
 }

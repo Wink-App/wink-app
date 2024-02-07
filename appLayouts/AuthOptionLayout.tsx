@@ -1,69 +1,70 @@
+
+
 import { StyleSheet, Text, View } from "react-native";
 
-import { ButtonBack } from "../components/elements/Button";
-import DismissKeyboard from "../components/transitions/DismissKeyboard";
-import { windowHeight, windowWidth } from "../utils/utils";
+import { FullLineButtonBack } from "../components/elements/Button";
+import { AvoidKeyboard, DismissKeyboard } from "../components/transitions/Keyboard";
+import { windowHeight } from "../utils/utils";
 
 import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../utils/styles";
 
 import SafeAreaLayout from "./SafeAreaLayout";
 
 type AuthOptionLayoutProps = {
-  children: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
   title: string;
   subTitle: string;
+  Button: JSX.Element | JSX.Element[];
 };
 
 export default function AuthOptionLayout({
   children,
   title,
   subTitle,
+  Button,
 }: AuthOptionLayoutProps) {
-
-  const {
-    wrapper,
-    backButton,
-    container,
-  } = styles;
-
   return (
-    <View style={wrapper}>
+    <AvoidKeyboard style={{ backgroundColor: colorGreyBackground }}>
       <SafeAreaLayout>
-        <View style={backButton}>
-          <ButtonBack />
-        </View>
         <DismissKeyboard>
-          <View style={container}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subTitle}>{subTitle}</Text>
-            {children}
+          <View
+            style={{
+              height: "100%",
+              ...stylesBase.flexColumnSpaceBetCen,
+              paddingHorizontal: 30,
+            }}>
+            <View
+              style={{
+                width: "100%",
+                ...stylesBase.flexColumnStartLeft,
+                gap: windowHeight * 0.1,
+              }}>
+              <FullLineButtonBack
+                style={{
+                  marginTop: 20,
+                  marginLeft: -10,
+                }}
+              />
+              <View
+                style={{
+                  width: "100%",
+                  ...stylesBase.flexColumnStartLeft,
+                  gap: 15,
+                }}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.subTitle}>{subTitle}</Text>
+                {children}
+              </View>
+            </View>
+            {Button}
           </View>
         </DismissKeyboard>
       </SafeAreaLayout>
-    </View>
+    </AvoidKeyboard>
   );
 }
 
-
 const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: colorGreyBackground,
-    zIndex: 1,
-  },
-  backButton: {
-    width: windowWidth,
-    ...stylesBase.flexRowStartCenter,
-    paddingHorizontal: 20,
-    marginTop: 20,
-  },
-  container: {
-    height: "100%",
-    ...stylesBase.flexColumnStartLeft,
-    paddingTop: windowHeight * 0.1,
-    paddingHorizontal: 30,
-    gap: 15,
-  },
   title: {
     ...stylesBase.fontBold,
     color: colorBlack,
@@ -78,3 +79,84 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
 });
+
+// import { StyleSheet, Text, View } from "react-native";
+
+// import { ButtonBack } from "../components/elements/Button";
+// import DismissKeyboard from "../components/transitions/DismissKeyboard";
+// import { windowHeight, windowWidth } from "../utils/utils";
+
+// import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../utils/styles";
+
+// import SafeAreaLayout from "./SafeAreaLayout";
+
+// type AuthOptionLayoutProps = {
+//   children: React.ReactNode;
+//   title: string;
+//   subTitle: string;
+// };
+
+// export default function AuthOptionLayout({
+//   children,
+//   title,
+//   subTitle,
+// }: AuthOptionLayoutProps) {
+
+//   const {
+//     wrapper,
+//     backButton,
+//     container,
+//   } = styles;
+
+//   return (
+//     <View style={wrapper}>
+//       <SafeAreaLayout>
+//         <View style={backButton}>
+//           <ButtonBack />
+//         </View>
+//         <DismissKeyboard>
+//           <View style={container}>
+//             <Text style={styles.title}>{title}</Text>
+//             <Text style={styles.subTitle}>{subTitle}</Text>
+//             {children}
+//           </View>
+//         </DismissKeyboard>
+//       </SafeAreaLayout>
+//     </View>
+//   );
+// }
+
+
+// const styles = StyleSheet.create({
+//   wrapper: {
+//     height: "100%",
+//     backgroundColor: colorGreyBackground,
+//     zIndex: 1,
+//   },
+//   backButton: {
+//     width: windowWidth,
+//     ...stylesBase.flexRowStartCenter,
+//     paddingHorizontal: 20,
+//     marginTop: 20,
+//   },
+//   container: {
+//     height: "100%",
+//     ...stylesBase.flexColumnStartLeft,
+//     paddingTop: windowHeight * 0.1,
+//     paddingHorizontal: 30,
+//     gap: 15,
+//   },
+//   title: {
+//     ...stylesBase.fontBold,
+//     color: colorBlack,
+//     fontSize: 22,
+//     lineHeight: 33,
+//   },
+//   subTitle: {
+//     ...stylesBase.fontRegular,
+//     color: secondaryText,
+//     fontSize: 14,
+//     lineHeight: 21,
+//     marginTop: -10,
+//   },
+// });

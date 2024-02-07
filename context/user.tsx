@@ -5,6 +5,7 @@ import "../firebase.config";
 import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
+import { SetState } from "./types/types";
 
 
 type ContextProps = {
@@ -13,6 +14,7 @@ type ContextProps = {
   getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
 
   insertedEmail: string;
+  setInsertedEmail: SetState<string>;
   insertedPhone: string;
   phoneSignUpResult: any;
 
@@ -48,6 +50,7 @@ const Provider = ({ children }: ProviderProps) => {
     getIsNewUserFromPhone,
 
     insertedEmail,
+    setInsertedEmail,
     insertedPhone,
     phoneSignUpResult,
 

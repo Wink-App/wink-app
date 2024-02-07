@@ -1,20 +1,21 @@
 import React, { createContext, useContext, useState } from "react";
+import auth from "@react-native-firebase/auth";
 
 import "../firebase.config";
-import { ConfirmationResult, fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
+import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
-import { getIsNewUserFromPhoneProps, SetState } from "./types/types";
+import { SetState } from "./types/types";
 
 type ContextProps = {
   isNewUser: boolean | null;
   getIsNewUserFromEmail: ({ email }: { email: string }) => Promise<void>;
-  getIsNewUserFromPhone: ({ phone, recaptchaVerifier }: getIsNewUserFromPhoneProps) => Promise<void>;
+  getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
 
   insertedEmail: string;
   setInsertedEmail: SetState<string>;
   insertedPhone: string;
-  phoneSignUpResult: ConfirmationResult | undefined;
+  phoneSignUpResult: any;
 
   profile: Profile | null;
   loadingProfile: boolean;
@@ -28,6 +29,7 @@ type ProviderProps = {
 
 const myAuth = getAuth();
 
+
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
 
 const Provider = ({ children }: ProviderProps) => {
@@ -36,7 +38,7 @@ const Provider = ({ children }: ProviderProps) => {
 
   const [insertedEmail, setInsertedEmail] = useState<string>("");
   const [insertedPhone, setInsertedPhone] = useState<string>("");
-  const [phoneSignUpResult, setPhoneSignUpResult] = useState<ConfirmationResult>();
+  const [phoneSignUpResult, setPhoneSignUpResult] = useState<any>({});
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
@@ -58,8 +60,7 @@ const Provider = ({ children }: ProviderProps) => {
   };
 
   async function getIsNewUserFromEmail({ email }: { email: string }) {
-    // setInsertedEmail(email);
-    // setIsNewUser(false);
+    setInsertedEmail(email);
     try {
       const signInMethods = await fetchSignInMethodsForEmail(myAuth, email);
       if (signInMethods.length > 0) {
@@ -74,15 +75,11 @@ const Provider = ({ children }: ProviderProps) => {
     }
   }
 
-  async function getIsNewUserFromPhone({ phone, recaptchaVerifier }: getIsNewUserFromPhoneProps) {
-    setInsertedPhone(phone);
+  async function getIsNewUserFromPhone({ phone }: { phone: string }) {
     try {
-      const phoneNumber = `+39${phone}`;
-      const result = await signInWithPhoneNumber(
-        myAuth,
-        phoneNumber,
-        recaptchaVerifier.current
-      );
+      setInsertedPhone(phone);
+      const phoneNumber = `+92${phone}`;
+      const result = await auth().signInWithPhoneNumber(phoneNumber);
       setPhoneSignUpResult(result);
       setIsNewUser(true);
     } catch (error: any) {

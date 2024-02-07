@@ -43,6 +43,10 @@ export default function Password() {
 
   const [password, setPassword, isValid, isInvalidChar] = usePassword("");
 
+  const handleForgotPassword = () => {
+    router.push("/auth/(email)/forgot");
+  };
+
   const handleContinue = async () => {
     if (isNewUser) {
       const response = await createUserWithEmailAndPassword(auth, insertedEmail, password);
@@ -69,6 +73,42 @@ export default function Password() {
   };
 
   return (
+    // <AuthOptionLayout
+    //   title={title}
+    //   subTitle={subTitle}>
+    //   <Text
+    //     style={{
+    //       ...stylesBase.fontBold,
+    //       color: secondaryText,
+    //       fontSize: 14,
+    //       lineHeight: 21,
+    //       marginTop: -10,
+    //     }}>
+    //     {insertedEmail}
+    //   </Text>
+    //   <InputLabel
+    //     value={password}
+    //     isInvalidChar={isInvalidChar}
+    //     placeholder="Inserisci password"
+    //     inputmode="default"
+    //     autoFocus
+    //     onChange={(e) => setPassword(e.nativeEvent.text)}
+    //     clearFunction={() => setPassword("")}
+    //   />
+    //   <View
+    //     style={{
+    //       width: "100%",
+    //       ...stylesBase.flexRowCenter,
+    //       marginTop: 5,
+    //     }}>
+    //     <ButtonOrange
+    //       text="Continua"
+    //       onPress={handleContinue}
+    //       enabled={isValid}
+    //     />
+    //   </View>
+    // </AuthOptionLayout>
+
     <AuthOptionLayout
       title={title}
       subTitle={subTitle}

@@ -1,27 +1,50 @@
-import { ResponseType } from "expo-auth-session";
-import * as Google from "expo-auth-session/providers/google";
+import { useRouter } from "expo-router";
 
 import { useEffect } from "react";
+import auth from "@react-native-firebase/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+
+import { getDatabase, ref, set } from "firebase/database";
 
 export default function useGoogleAuth() {
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: "471190546218-djk8ta92vv527dlouetu8ih4fnm67075.apps.googleusercontent.com",
-    responseType: ResponseType.Token
-  });
+
+  const router = useRouter();
 
   useEffect(() => {
-    if (response?.type === "success") {
-      const { id_token } = response.params;
-      console.log("id token");
-      console.log(id_token);
-    }
-  }, [response]);
+    GoogleSignin.configure({
+      offlineAccess: false,
+      webClientId:
+        "1079002699250-hm004798nlhjr22mrstln0hn5bfpl5ug.apps.googleusercontent.com",
+      scopes: ["profile", "email"],
+    });
+  }, []);
 
   const handleGoogleAuth = async () => {
-    try {
-      await promptAsync();
-    } catch (error) {
-      console.error("Google Auth failed", error);
+
+    await GoogleSignin.hasPlayServices();
+
+    const userInfo = await GoogleSignin.signIn();
+    const { idToken } = await GoogleSignin.signIn();
+
+    const googleCredentials = auth.GoogleAuthProvider.credential(idToken);
+
+    const authResult = await auth().signInWithCredential(googleCredentials);
+
+    const db = getDatabase();
+
+    if (authResult.additionalUserInfo.isNewUser) {
+      // New user
+      const data = {
+        name: userInfo.user.name,
+        email: userInfo.user.email,
+        profile: userInfo.user.photo
+      };
+
+      await set(ref(db, `users/${authResult.user.uid}`), data);
+      router.push("/home/home");
+    } else {
+      // Not new user
+      router.push("/home/home");
     }
   };
 

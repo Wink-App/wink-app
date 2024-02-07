@@ -4,6 +4,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
 
+import useFacebookAuth from "../../context/hooks/useFacebookAuth";
 import useGoogleAuth from "../../context/hooks/useGoogleAuth";
 
 import { ButtonAuth } from "../../components/elements/Button";
@@ -11,7 +12,7 @@ import { windowWidth } from "../../utils/utils";
 
 import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
-export default function Index() {
+export default function Home() {
 
   const {
     wrapper,
@@ -26,6 +27,7 @@ export default function Index() {
   const router = useRouter();
 
   const { handleGoogleAuth } = useGoogleAuth();
+  const { handleFacebookAuth } = useFacebookAuth();
 
   const handleEmailAuth = () => {
     router.push("/auth/(email)/email");
@@ -56,7 +58,7 @@ export default function Index() {
             />
             <ButtonAuth
               authProvider="facebook"
-              onPress={() => { }}
+              onPress={handleFacebookAuth}
             />
             <ButtonAuth
               authProvider="email"

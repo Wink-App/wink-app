@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
+import { RecaptchaVerifier } from "firebase/auth";
+
 import { useProfile } from "../../../context/user";
 import { useNumber } from "../../../context/hooks/inputs";
 
@@ -26,9 +28,18 @@ export default function Phone() {
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
-    await getIsNewUserFromPhone({ phone: phoneNumber });
+    await getIsNewUserFromPhone({ phone: phoneNumber, recaptchaVerifier: {} as RecaptchaVerifier });
     router.push("/auth/(phone)/code");
   };
+  // TODO: Regarding the RecaptchaVerifier
+  /**
+   * You were using const recaptchaVerifier = useRef(null);
+   * And before </AuthOptionLayout>:
+   * <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifier}
+        firebaseConfig={auth.app.options}
+      />
+   */
 
   return (
     <AuthOptionLayout

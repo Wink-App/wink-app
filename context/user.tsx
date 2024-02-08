@@ -76,14 +76,14 @@ const Provider = ({ children }: ProviderProps) => {
   }
 
   async function getIsNewUserFromPhone({ phone }: { phone: string }) {
+    setInsertedPhone(phone);
     try {
-      setInsertedPhone(phone);
       const phoneNumber = `+92${phone}`;
       const result = await auth().signInWithPhoneNumber(phoneNumber);
       setPhoneSignUpResult(result);
       setIsNewUser(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: any) {
-      console.error("Error sending verification code:", error);
       setIsNewUser(false);
     }
   }

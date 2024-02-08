@@ -1,5 +1,7 @@
 import { useRouter } from "expo-router";
 
+import { useEffect } from "react";
+
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
 import { useProfile } from "../../../context/user";
@@ -11,9 +13,16 @@ import InputLabel from "../../../components/elements/InputLabel";
 export default function Phone() {
 
   const router = useRouter();
-  const { getIsNewUserFromPhone } = useProfile();
+  const { insertedPhone, getIsNewUserFromPhone } = useProfile();
 
   const [phoneNumber, setPhoneNumber, isValid, isInvalidChar] = useNumber("", 10);
+
+  useEffect(() => {
+    if (phoneNumber === "" && insertedPhone.length > 0) {
+      setPhoneNumber(insertedPhone);
+    }
+  }, [insertedPhone]);
+
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {

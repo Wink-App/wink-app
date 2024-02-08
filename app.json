@@ -12,9 +12,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#9262D2"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "googleServicesFile": "GoogleService-Info.plist",
@@ -44,9 +42,6 @@
     "extra": {
       "router": {
         "origin": false
-      },
-      "eas": {
-        "projectId": "ce70be5b-22df-416e-823c-c5ce62a106aa"
       }
     },
     "runtimeVersion": {

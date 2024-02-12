@@ -62,8 +62,12 @@ export default function Password() {
         router.push("/home/home");
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        Alert.alert("Si è verificato un errore durante l'accesso. Riprova.");
+      } catch (error: any) {
+        if (error.code === "auth/wrong-password") {
+          Alert.alert("La tua email o password è incorretta. Riprova.");
+        } else {
+          Alert.alert("Si è verificato un errore durante l'accesso. Riprova.");
+        }
       }
     }
   };
@@ -96,7 +100,9 @@ export default function Password() {
         value={password}
         isInvalidChar={isInvalidChar}
         placeholder="Inserisci password"
+        isPassword
         inputmode="default"
+        autoComplete={isNewUser ? "new-password" : "current-password"}
         autoFocus
         onChange={(e) => setPassword(e.nativeEvent.text)}
         clearFunction={() => setPassword("")}

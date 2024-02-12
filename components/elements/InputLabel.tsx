@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NativeSyntheticEvent, Text, TextInputChangeEventData, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
@@ -15,6 +15,9 @@ import {
 import TransitionElement from "../transitions/TransitionElement";
 
 type InputMode = "default" | "email-address" | "number-pad";
+
+// email does not enable devide keychain. password is iOS only.
+type AutoComplete = "off" | "email" | "password" | "username" | "current-password" | "new-password";
 
 type InputLabelProps = {
   widthValue?: string;
@@ -34,6 +37,7 @@ type InputLabelProps = {
   // Element?: JSX.Element | null;
 
   inputmode?: InputMode;
+  autoComplete?: AutoComplete;
 
   autoFocus?: boolean;
 
@@ -51,6 +55,7 @@ export default function InputLabel({
   isPassword = false,
   isPhoneNumber = false,
   inputmode = "default",
+  autoComplete = "off",
   autoFocus = false,
   onChange,
   clearFunction,
@@ -65,6 +70,12 @@ export default function InputLabel({
       }, 800);
     }
   }, [autoFocus]);
+
+  const [showPassword, setShowPassword] = useState<boolean>(isPassword);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <View
@@ -119,12 +130,13 @@ export default function InputLabel({
           onChange={onChange}
           clearButtonMode="never"
           keyboardType={inputmode}
-          secureTextEntry={isPassword}
+          secureTextEntry={showPassword}
           spellCheck={false}
-        // autoCorrect={false}
+          clearTextOnFocus={false}
+          autoComplete={autoComplete}
         />
 
-        {clearFunction && value && (
+        {isPassword && value ? (
           <TransitionElement>
             <TouchableOpacity
               style={{
@@ -134,9 +146,9 @@ export default function InputLabel({
                 backgroundColor: colorGreyDarker,
                 borderRadius: 20,
               }}
-              onPress={clearFunction}>
+              onPress={toggleShowPassword}>
               <Image
-                source={require("../../assets/icons/X.svg")}
+                source={showPassword ? require("../../assets/icons/Visible.svg") : require("../../assets/icons/Hidden.svg")}
                 style={{
                   height: 15,
                   width: 15,
@@ -144,7 +156,28 @@ export default function InputLabel({
               />
             </TouchableOpacity>
           </TransitionElement>
-        )}
+        ) :
+          clearFunction && value && (
+            <TransitionElement>
+              <TouchableOpacity
+                style={{
+                  height: 25,
+                  width: 25,
+                  ...stylesBase.flexRowCenter,
+                  backgroundColor: colorGreyDarker,
+                  borderRadius: 20,
+                }}
+                onPress={clearFunction}>
+                <Image
+                  source={require("../../assets/icons/X.svg")}
+                  style={{
+                    height: 15,
+                    width: 15,
+                  }}
+                />
+              </TouchableOpacity>
+            </TransitionElement>
+          )}
       </View>
     </View>
   );

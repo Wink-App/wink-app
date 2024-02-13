@@ -35,7 +35,7 @@ export default function AuthOptionLayout({
               style={{
                 width: "100%",
                 ...stylesBase.flexColumnStartLeft,
-                gap: windowHeight * 0.1,
+                gap: windowHeight * 0.065,
               }}>
               <FullLineButtonBack
                 style={{

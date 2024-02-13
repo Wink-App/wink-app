@@ -88,8 +88,9 @@ export default function InputLabel({
             fontSize: 14,
             lineHeight: 21,
             marginLeft: 3,
-            marginBottom: 3,
+            marginBottom: 5,
             color: secondaryText,
+            ...stylesBase.fontRegular,
           }}>
           {label}
         </Text>
@@ -136,7 +137,7 @@ export default function InputLabel({
           autoComplete={autoComplete}
         />
 
-        {isPassword && value ? (
+        {isPassword && value && (
           <TransitionElement>
             <TouchableOpacity
               style={{
@@ -145,6 +146,7 @@ export default function InputLabel({
                 ...stylesBase.flexRowCenter,
                 backgroundColor: colorGreyDarker,
                 borderRadius: 20,
+                marginRight: 10,
               }}
               onPress={toggleShowPassword}>
               <Image
@@ -156,28 +158,28 @@ export default function InputLabel({
               />
             </TouchableOpacity>
           </TransitionElement>
-        ) :
-          clearFunction && value && (
-            <TransitionElement>
-              <TouchableOpacity
+        )}
+        {clearFunction && value && (
+          <TransitionElement>
+            <TouchableOpacity
+              style={{
+                height: 25,
+                width: 25,
+                ...stylesBase.flexRowCenter,
+                backgroundColor: colorGreyDarker,
+                borderRadius: 20,
+              }}
+              onPress={clearFunction}>
+              <Image
+                source={require("../../assets/icons/X.svg")}
                 style={{
-                  height: 25,
-                  width: 25,
-                  ...stylesBase.flexRowCenter,
-                  backgroundColor: colorGreyDarker,
-                  borderRadius: 20,
+                  height: 15,
+                  width: 15,
                 }}
-                onPress={clearFunction}>
-                <Image
-                  source={require("../../assets/icons/X.svg")}
-                  style={{
-                    height: 15,
-                    width: 15,
-                  }}
-                />
-              </TouchableOpacity>
-            </TransitionElement>
-          )}
+              />
+            </TouchableOpacity>
+          </TransitionElement>
+        )}
       </View>
     </View>
   );

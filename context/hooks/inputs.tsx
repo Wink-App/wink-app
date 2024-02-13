@@ -1,10 +1,12 @@
 import { DependencyList, useCallback, useEffect, useState } from "react";
 
+import { colorGreen, secondaryText } from "../../utils/styles";
+
 import { useToast } from "../toast";
 
 const idToast = "inputError";
 
-type CustomHook = [string, (value: string) => void, boolean?, boolean?];
+type CustomHook = [string, (value: string) => void, boolean?, boolean?, PasswordRules?];
 
 export const useEmail = (initialValue: string) => {
   const [hook, setHook] = useState<string>(initialValue);
@@ -39,15 +41,30 @@ export const useEmail = (initialValue: string) => {
   return [hook, handleValue, isValid, isInvalidChar] as CustomHook;
 };
 
+type PasswordRules = {
+  colorLenght: string;
+  colorLetter: string;
+  colorNumber: string;
+  colorSpecialChar: string;
+};
+
+const passwordRulesBase = {
+  colorLenght: secondaryText,
+  colorLetter: secondaryText,
+  colorNumber: secondaryText,
+  colorSpecialChar: secondaryText,
+};
+
 export const usePassword = (initialValue: string) => {
   const [hook, setHook] = useState<string>(initialValue);
   const [isValid, setIsValid] = useState<boolean>(false);
   const [isInvalidChar, setIsInvalidChar] = useState<boolean>(false);
+  const [rules, setRules] = useState<PasswordRules>(passwordRulesBase);
 
   const handleValue = (value: string) => {
     setHook(value);
 
-    const regex = /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
+    const regex = /^[a-zA-Z0-9!@#$€£%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/;
 
     if (value === "" || regex.test(value)) {
       setIsInvalidChar(false);
@@ -55,16 +72,28 @@ export const usePassword = (initialValue: string) => {
       setIsInvalidChar(true);
     }
 
-    if (regex.test(value) &&
-      value.length >= 8 &&
-      value.length <= 50) {
+    const hasLength = value.length >= 9 && value.length <= 50;
+    const hasLetter = /[a-zA-Z]/.test(value);
+    const hasNumber = /[0-9]/.test(value);
+    const hasSpecialChar = /[!@#$€£%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(value);
+
+    setRules({
+      colorLenght: hasLength ? colorGreen : secondaryText,
+      colorLetter: hasLetter ? colorGreen : secondaryText,
+      colorNumber: hasNumber ? colorGreen : secondaryText,
+      colorSpecialChar: hasSpecialChar ? colorGreen : secondaryText,
+    });
+
+    const allRules = hasLength && hasLetter && hasNumber && hasSpecialChar;
+
+    if (regex.test(value) && allRules) {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
   };
 
-  return [hook, handleValue, isValid, isInvalidChar] as CustomHook;
+  return [hook, handleValue, isValid, isInvalidChar, rules] as CustomHook;
 };
 
 export const useNumber = (initialValue: string, length: number) => {

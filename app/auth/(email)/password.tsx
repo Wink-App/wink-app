@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
@@ -43,20 +43,12 @@ export default function Password() {
   };
 
   const [password, setPassword, isValid, isInvalidChar, rules] = usePassword("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [confirmPassword, setConfirmPassword, isValidConfirm, isInvalidCharConfirm] = usePassword("");
   const [arePasswordsEqual, setArePasswordsEqual] = useState<boolean>(null);
   const [enableContinue, setEnableContinue] = useState<boolean>(false);
 
   const handleContinue = async () => {
-    if (isNewUser) {
-      if (password !== confirmPassword) {
-        setArePasswordsEqual(false);
-        return;
-      } else {
-        setArePasswordsEqual(true);
-      }
-    }
-
     if (isNewUser) {
       const response = await createUserWithEmailAndPassword(auth, insertedEmail, password);
       const userid = response.user.uid;
@@ -77,9 +69,9 @@ export default function Password() {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error: any) {
         if (error.code === "auth/wrong-password") {
-          Alert.alert("La tua email o password è incorretta. Riprova.");
+          setErrorMessage("La tua email o password è incorretta. Riprova.");
         } else {
-          Alert.alert("Si è verificato un errore durante l'accesso. Riprova.");
+          setErrorMessage("Si è verificato un errore. Riprova.");
         }
       }
     }
@@ -95,7 +87,10 @@ export default function Password() {
         setArePasswordsEqual(false);
       }
     }
-  }, [password, confirmPassword], 250);
+    if (errorMessage) {
+      setErrorMessage("");
+    }
+  }, [password, confirmPassword], 300);
 
   useEffect(() => {
     if (isNewUser) {
@@ -105,10 +100,8 @@ export default function Password() {
         setEnableContinue(false);
       }
     } else {
-      if (isValid) {
+      if (password !== "" && !errorMessage) {
         setEnableContinue(true);
-      } else {
-        setEnableContinue(false);
       }
     }
   }, [password, confirmPassword, arePasswordsEqual]);
@@ -148,37 +141,53 @@ export default function Password() {
         onChange={(e) => setPassword(e.nativeEvent.text)}
         clearFunction={() => setPassword("")}
       />
-      <TextBullet
-        color={secondaryText}
-        style={{
-          fontSize: 14,
-          lineHeight: 21,
-          marginTop: -5,
-        }}>
-        Almeno <TextBold color={rules.colorLenght}>9 caratteri</TextBold>
-      </TextBullet>
-      <TextBullet
-        color={secondaryText}
-        style={{
-          fontSize: 14,
-          lineHeight: 21,
-          marginTop: -10,
-        }}>
-        <TextBold color={rules.colorLetter}>Lettera</TextBold>,&nbsp;
-        <TextBold color={rules.colorNumber}>numero</TextBold>,&nbsp;
-        <TextBold color={rules.colorSpecialChar}>carattere speciale</TextBold>
-      </TextBullet>
+      {isNewUser === false && errorMessage && (
+        <TransitionElement>
+          <Text
+            style={{
+              ...stylesBase.fontBold,
+              color: "red",
+              fontSize: 14,
+              lineHeight: 21,
+              marginTop: -5,
+            }}>
+            {errorMessage}
+          </Text>
+        </TransitionElement>
+      )}
       {isNewUser === true && (
-        <InputLabel
-          value={confirmPassword}
-          isInvalidChar={isInvalidCharConfirm}
-          placeholder="Conferma password"
-          isPassword
-          inputmode="default"
-          autoComplete="current-password"
-          onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
-          clearFunction={() => setConfirmPassword("")}
-        />
+        <>
+          <TextBullet
+            color={secondaryText}
+            style={{
+              fontSize: 14,
+              lineHeight: 21,
+              marginTop: -5,
+            }}>
+            Almeno <TextBold color={rules.colorLenght}>9 caratteri</TextBold>
+          </TextBullet>
+          <TextBullet
+            color={secondaryText}
+            style={{
+              fontSize: 14,
+              lineHeight: 21,
+              marginTop: -10,
+            }}>
+            <TextBold color={rules.colorLetter}>Lettera</TextBold>,&nbsp;
+            <TextBold color={rules.colorNumber}>numero</TextBold>,&nbsp;
+            <TextBold color={rules.colorSpecialChar}>carattere speciale</TextBold>
+          </TextBullet>
+          <InputLabel
+            value={confirmPassword}
+            isInvalidChar={isInvalidCharConfirm}
+            placeholder="Conferma password"
+            isPassword
+            inputmode="default"
+            autoComplete="current-password"
+            onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
+            clearFunction={() => setConfirmPassword("")}
+          />
+        </>
       )}
       {isNewUser === true && arePasswordsEqual === false && (
         <TransitionElement>

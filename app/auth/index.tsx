@@ -27,12 +27,18 @@ export default function Home() {
   const router = useRouter();
 
   const { handleGoogleAuth } = useGoogleAuth();
+
+  const handleAppleAuth = () => {
+    router.push("/main/home/");
+  };
+
   const { handleFacebookAuth } = useFacebookAuth();
 
   const handleEmailAuth = () => {
     router.push("/auth/(email)/email");
   };
 
+  // TODO: Temprary shortcut to go Home
   const handlePhoneAuth = () => {
     router.push("/auth/(phone)/phone");
   };
@@ -54,7 +60,7 @@ export default function Home() {
             />
             <ButtonAuth
               authProvider="apple"
-              onPress={() => { }}
+              onPress={handleAppleAuth}
             />
             <ButtonAuth
               authProvider="facebook"

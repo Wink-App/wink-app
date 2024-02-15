@@ -55,6 +55,7 @@ export default function Forgot() {
         isInvalidChar={isInvalidChar}
         placeholder="Inserisci la tua email"
         inputmode="email-address"
+        autoComplete="email"
         autoFocus
         onChange={(e) => setEmail(e.nativeEvent.text)}
         clearFunction={() => setEmail("")}

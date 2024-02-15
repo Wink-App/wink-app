@@ -1,16 +1,15 @@
 import React, { createContext, useContext, useState } from "react";
-import auth from "@react-native-firebase/auth";
 
 import "../firebase.config";
-import { fetchSignInMethodsForEmail, getAuth } from "firebase/auth";
+import { fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
 
 import { Profile } from "./types/profile.type";
-import { SetState } from "./types/types";
+import { getIsNewUserFromPhoneProps, SetState } from "./types/types";
 
 type ContextProps = {
   isNewUser: boolean | null;
   getIsNewUserFromEmail: ({ email }: { email: string }) => Promise<void>;
-  getIsNewUserFromPhone: ({ phone }: { phone: string }) => Promise<void>;
+  getIsNewUserFromPhone: ({ phone, recaptchaVerifier }: getIsNewUserFromPhoneProps) => Promise<void>;
 
   insertedEmail: string;
   setInsertedEmail: SetState<string>;
@@ -28,7 +27,6 @@ type ProviderProps = {
 };
 
 const myAuth = getAuth();
-
 
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
 
@@ -75,15 +73,15 @@ const Provider = ({ children }: ProviderProps) => {
     }
   }
 
-  async function getIsNewUserFromPhone({ phone }: { phone: string }) {
+  async function getIsNewUserFromPhone({ phone, recaptchaVerifier }: getIsNewUserFromPhoneProps) {
+    setInsertedPhone(phone);
     try {
-      setInsertedPhone(phone);
       const phoneNumber = `+92${phone}`;
-      const result = await auth().signInWithPhoneNumber(phoneNumber);
+      const result = await signInWithPhoneNumber(myAuth, phoneNumber, recaptchaVerifier);
       setPhoneSignUpResult(result);
       setIsNewUser(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error: any) {
-      console.error("Error sending verification code:", error);
       setIsNewUser(false);
     }
   }

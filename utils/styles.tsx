@@ -5,6 +5,7 @@ export const colorOrange = "#FFC24D";
 
 export const colorWhite = "#FFFFFF";
 export const colorBlack = "#000000";
+export const colorGreen = "#34A853";
 
 export const colorGreyBackground = "#eeeeee";
 export const colorGreyDarker = "#e8e8e8";
@@ -104,4 +105,31 @@ export function TextUnderlined({
       {children}
     </Text>
   );
+}
+
+type TextBulletProps = {
+  children: React.ReactNode;
+  color?: TextStyle["color"];
+  style?: TextStyle;
+};
+
+export function TextBullet({
+  children,
+  color,
+  style = {},
+}: TextBulletProps) {
+  return (
+    <Text style={{ ...stylesBase.fontRegular, color, ...style }}>
+      &nbsp;•&nbsp;&nbsp;{children}
+    </Text>
+  );
+}
+
+type TextBoldProps = {
+  children: React.ReactNode;
+  color?: TextStyle["color"];
+};
+
+export function TextBold({ children, color }: TextBoldProps) {
+  return <Text style={{ ...stylesBase.fontBold, color }}>{children}</Text>;
 }

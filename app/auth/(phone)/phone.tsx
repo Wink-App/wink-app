@@ -1,6 +1,10 @@
 import { useRouter } from "expo-router";
 
+import { useEffect } from "react";
+
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+
+import { RecaptchaVerifier } from "firebase/auth";
 
 import { useProfile } from "../../../context/user";
 import { useNumber } from "../../../context/hooks/inputs";
@@ -11,15 +15,31 @@ import InputLabel from "../../../components/elements/InputLabel";
 export default function Phone() {
 
   const router = useRouter();
-  const { getIsNewUserFromPhone } = useProfile();
+  const { insertedPhone, getIsNewUserFromPhone } = useProfile();
 
   const [phoneNumber, setPhoneNumber, isValid, isInvalidChar] = useNumber("", 10);
+
+  useEffect(() => {
+    if (phoneNumber === "" && insertedPhone.length > 0) {
+      setPhoneNumber(insertedPhone);
+    }
+  }, [insertedPhone]);
+
   const subTitle = "Controlleremo se hai già un account. In caso\ncontrario, ne creeremo uno nuovo.";
 
   const handleContinue = async () => {
-    await getIsNewUserFromPhone({ phone: phoneNumber });
+    await getIsNewUserFromPhone({ phone: phoneNumber, recaptchaVerifier: {} as RecaptchaVerifier });
     router.push("/auth/(phone)/code");
   };
+  // TODO: Regarding the RecaptchaVerifier
+  /**
+   * You were using const recaptchaVerifier = useRef(null);
+   * And before </AuthOptionLayout>:
+   * <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifier}
+        firebaseConfig={auth.app.options}
+      />
+   */
 
   return (
     <AuthOptionLayout

@@ -45,7 +45,7 @@ export default function Code() {
       if (result.additionalUserInfo.isNewUser) {
         await set(ref(db, `users/${result.user.uid}`), data);
       };
-      router.push("/home/home");
+      router.push("/main/home/");
     } catch (error: any) {
       if (error.code === "auth/invalid-verification-code") {
         Alert.alert("Il codice non è valido, riprova.");

@@ -25,11 +25,9 @@ export const stylesBase = StyleSheet.create({
   },
   fontBold: {
     fontFamily: "Poppins-SemiBold",
-    // fontFamily: "Sukhumvitset-Bold",
   },
   fontRegular: {
     fontFamily: "Poppins-Regular",
-    // fontFamily: "Sukhumvitset-Medium",
   },
   flexRowCenter: {
     flexDirection: "row",
@@ -40,6 +38,11 @@ export const stylesBase = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
+  },
+  flexRowStartBottom: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
   },
   flexRowSpaceBetCen: {
     flexDirection: "row",
@@ -125,11 +128,17 @@ export function TextBullet({
   );
 }
 
-type TextBoldProps = {
+type TextProps = {
   children: React.ReactNode;
+  fontSize?: TextStyle["fontSize"];
   color?: TextStyle["color"];
 };
 
-export function TextBold({ children, color }: TextBoldProps) {
-  return <Text style={{ ...stylesBase.fontBold, color }}>{children}</Text>;
+export function TextBold({ children, fontSize, color }: TextProps) {
+  const style = {
+    ...stylesBase.fontBold,
+    fontSize,
+    color,
+  };
+  return <Text style={style}>{children}</Text>;
 }

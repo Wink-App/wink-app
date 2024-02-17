@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 
-import { Text, View } from "react-native";
+import { View } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
@@ -9,8 +9,9 @@ import "../../../firebase.config";
 import { useProfile } from "../../../context/user";
 
 import { ButtonPrimary, ButtonText } from "../../../components/elements/Button";
+import { TextMid } from "../../../utils/text/Text";
 
-import { secondaryText, stylesBase } from "../../../utils/styles";
+import { stylesBase } from "../../../utils/styles";
 
 export default function Check() {
 
@@ -36,38 +37,29 @@ export default function Check() {
           style={{
             width: "100%",
             ...stylesBase.flexColumnCenter,
-            marginTop: 5,
-            gap: 15,
           }}>
           <ButtonPrimary
             text="Torna al login"
             fullWidth
             purple
-            style={{ marginBottom: 10 }}
             onPress={handleRedirect}
           />
           <ButtonText
-            text="Reinvia email"
-            underlined
-            style={{
-              ...stylesBase.fontBold,
-              color: secondaryText,
-              fontSize: 14,
-            }}
-            onPress={handleResend}
-          />
+            style={{ height: 50, marginBottom: 10 }}
+            onPress={handleResend}>
+            <TextMid bold secondary underlined>Reinvia email</TextMid>
+          </ButtonText>
         </View>
       }>
-      <Text
+      <TextMid
+        bold
+        secondary
         style={{
-          ...stylesBase.fontBold,
-          color: secondaryText,
-          fontSize: 14,
           lineHeight: 21,
           marginTop: -10,
         }}>
         {insertedEmail}
-      </Text>
+      </TextMid>
     </AuthOptionLayout>
   );
 }

@@ -8,6 +8,7 @@ import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
 
 import { ButtonText } from "../components/elements/Button";
 import TransitionElement from "../components/transitions/TransitionElement";
+import { TextBig } from "../utils/text/Text";
 import { windowWidth } from "../utils/utils";
 
 import { colorOrange, colorPurple, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
@@ -100,10 +101,10 @@ export default function Index() {
             {hasReachedLastSlide && (
               <TransitionElement>
                 <ButtonText
-                  text="Avanti"
-                  style={action}
-                  onPress={handleNavigateToRegister}
-                />
+                  style={{ height: 50 }}
+                  onPress={handleNavigateToRegister}>
+                  <TextBig style={action}>Avanti</TextBig>
+                </ButtonText>
               </TransitionElement>
             )}
           </View>
@@ -230,7 +231,6 @@ const styles = StyleSheet.create({
   action: {
     ...stylesBase.fontBogartMedium,
     color: secondaryTextLight,
-    fontSize: 16,
     lineHeight: 24,
   },
 });

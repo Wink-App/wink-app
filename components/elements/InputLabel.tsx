@@ -1,8 +1,10 @@
 import { Image } from "expo-image";
 
 import { useEffect, useRef, useState } from "react";
-import { NativeSyntheticEvent, Text, TextInputChangeEventData, View } from "react-native";
+import { NativeSyntheticEvent, TextInputChangeEventData, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+
+import { TextMid } from "../../utils/text/Text";
 
 import {
   colorBorderLine,
@@ -83,17 +85,15 @@ export default function InputLabel({
         ...stylesBase.flexColumnStartLeft,
       }}>
       {label && (
-        <Text
+        <TextMid
+          secondary
           style={{
-            fontSize: 14,
             lineHeight: 21,
             marginLeft: 3,
             marginBottom: 5,
-            color: secondaryText,
-            ...stylesBase.fontRegular,
           }}>
           {label}
-        </Text>
+        </TextMid>
       )}
 
       <View
@@ -106,15 +106,14 @@ export default function InputLabel({
           ...stylesBase.flexRowCenter,
         }}>
         {isPhoneNumber && (
-          <Text
+          <TextMid
+            secondary
             style={{
-              fontSize: 14,
               lineHeight: 21,
               marginRight: 5,
-              color: secondaryText,
             }}>
             +39
-          </Text>
+          </TextMid>
         )}
 
         <TextInput

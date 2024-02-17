@@ -2,9 +2,10 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { FullLineButtonBack } from "../components/elements/Button";
 import { AvoidKeyboard, DismissKeyboard } from "../components/transitions/Keyboard";
+import { TextMid } from "../utils/text/Text";
 import { windowHeight } from "../utils/utils";
 
-import { colorBlack, colorGreyBackground, secondaryText, stylesBase } from "../utils/styles";
+import { colorBlack, colorGreyBackground, stylesBase } from "../utils/styles";
 
 import SafeAreaLayout from "./SafeAreaLayout";
 
@@ -50,7 +51,7 @@ export default function AuthOptionLayout({
                   gap: 15,
                 }}>
                 <Text style={styles.title}>{title}</Text>
-                <Text style={styles.subTitle}>{subTitle}</Text>
+                <TextMid secondary style={styles.subTitle}>{subTitle}</TextMid>
                 {children}
               </View>
             </View>
@@ -70,9 +71,6 @@ const styles = StyleSheet.create({
     lineHeight: 33,
   },
   subTitle: {
-    ...stylesBase.fontRegular,
-    color: secondaryText,
-    fontSize: 14,
     lineHeight: 21,
     marginTop: -10,
   },

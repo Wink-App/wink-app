@@ -1,12 +1,13 @@
 import { useRouter } from "expo-router";
 import { Image, ImageSource } from "expo-image";
 
-import { Text, TextStyle, View, ViewStyle } from "react-native";
+import { TextStyle, View, ViewStyle } from "react-native";
 import { BaseButton, TouchableOpacity } from "react-native-gesture-handler";
+
+import { TextBig } from "../../utils/text/Text";
 
 import {
   colorBlack,
-  colorBorderLine,
   colorGreyLighter,
   colorOrange,
   colorPurple,
@@ -53,49 +54,37 @@ export function ButtonPrimary({
       }}
       onPress={onPress}
       enabled={enabled}>
-      <Text
+      <TextBig
+        bold
         style={{
-          ...stylesBase.fontBold,
-          fontSize: 16,
           color: textColor,
         }}>
         {text}
-      </Text>
+      </TextBig>
     </BaseButton>
   );
 }
 
 
 type ButtonTextProps = {
-  text: string;
-  underlined?: boolean;
+  children: React.ReactNode;
   style?: TextStyle;
   onPress?: () => void;
 };
 
 export function ButtonText({
-  text,
-  underlined = false,
+  children,
   style = {},
   onPress = () => { },
 }: ButtonTextProps) {
-
-  const underlineStyle: TextStyle = underlined ? {
-    textDecorationLine: "underline",
-    textDecorationColor: colorBorderLine,
-  } : {};
-
   return (
-    <TouchableOpacity onPress={onPress}>
-      <Text
-        style={{
-          height: 50,
-          textAlign: "center",
-          ...style,
-          ...underlineStyle,
-        }}>
-        {text}
-      </Text>
+    <TouchableOpacity
+      style={{
+        ...stylesBase.flexRowCenter,
+        ...style
+      }}
+      onPress={onPress}>
+      {children}
     </TouchableOpacity>
   );
 }
@@ -162,13 +151,7 @@ export function ButtonAuth({
           height: 25,
         }}
       />
-      <Text
-        style={{
-          ...stylesBase.fontBold,
-          fontSize: 16,
-        }}>
-        {label}
-      </Text>
+      <TextBig bold>{label}</TextBig>
       <View
         style={{
           width: 25,

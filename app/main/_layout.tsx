@@ -34,10 +34,12 @@ export default function Layout() {
         options={{
           title: "Home",
           tabBarIcon: ({ focused }: TabBarIconProps) => (
-            <Image source={icons.home} style={{
-              ...iconStyle,
-              tintColor: focused ? "black" : "grey",
-            }}
+            <Image
+              source={icons.home}
+              style={{
+                ...iconStyle,
+                tintColor: focused ? "black" : "grey",
+              }}
             />
           ),
         }}
@@ -47,10 +49,12 @@ export default function Layout() {
         options={{
           title: "Cerca",
           tabBarIcon: ({ focused }: TabBarIconProps) => (
-            <Image source={icons.search} style={{
-              ...iconStyle,
-              tintColor: focused ? "black" : "grey",
-            }}
+            <Image
+              source={icons.search}
+              style={{
+                ...iconStyle,
+                tintColor: focused ? "black" : "grey",
+              }}
             />
           ),
         }}
@@ -60,10 +64,12 @@ export default function Layout() {
         options={{
           title: "Preferiti",
           tabBarIcon: ({ focused }: TabBarIconProps) => (
-            <Image source={icons.favourites} style={{
-              ...iconStyle,
-              tintColor: focused ? "black" : "grey",
-            }}
+            <Image
+              source={icons.favourites}
+              style={{
+                ...iconStyle,
+                tintColor: focused ? "black" : "grey",
+              }}
             />
           ),
         }}
@@ -73,10 +79,12 @@ export default function Layout() {
         options={{
           title: "Borsa",
           tabBarIcon: ({ focused }: TabBarIconProps) => (
-            <Image source={icons.bag} style={{
-              ...iconStyle,
-              tintColor: focused ? "black" : "grey",
-            }}
+            <Image
+              source={icons.bag}
+              style={{
+                ...iconStyle,
+                tintColor: focused ? "black" : "grey",
+              }}
             />
           ),
         }}
@@ -86,10 +94,12 @@ export default function Layout() {
         options={{
           title: "Profilo",
           tabBarIcon: ({ focused }: TabBarIconProps) => (
-            <Image source={icons.profile} style={{
-              ...iconStyle,
-              tintColor: focused ? "black" : "grey",
-            }}
+            <Image
+              source={icons.profile}
+              style={{
+                ...iconStyle,
+                tintColor: focused ? "black" : "grey",
+              }}
             />
           ),
         }}

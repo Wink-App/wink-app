@@ -4,8 +4,9 @@ import { Product } from "../../context/types/product.type";
 
 import { TextMid, TextSmall } from "../../utils/text/Text";
 
-import { stylesBase, TextUnderlined } from "../../utils/styles";
+import { stylesBase } from "../../utils/styles";
 
+import { ButtonText } from "../elements/Button";
 import Price from "./Price";
 
 type ProductCProps = {
@@ -14,6 +15,10 @@ type ProductCProps = {
 
 export default function ProductC({ product }: ProductCProps) {
   const { container, image, info } = styles;
+
+  const handlePress = () => {
+    // TODO
+  };
   return (
     <View style={container}>
       <Image
@@ -24,7 +29,11 @@ export default function ProductC({ product }: ProductCProps) {
         <TextMid bold>{product.name}</TextMid>
         <TextMid><Price>{product.price}</Price></TextMid>
         <TextSmall secondary>{product.time}</TextSmall>
-        <TextSmall secondary><TextUnderlined>Altro da {product.storeName}</TextUnderlined></TextSmall>
+        <ButtonText onPress={handlePress}>
+          <TextSmall secondary underlined>
+            Altro da {product.storeName}
+          </TextSmall>
+        </ButtonText>
       </View>
     </View>
   );
@@ -33,7 +42,7 @@ export default function ProductC({ product }: ProductCProps) {
 const styles = StyleSheet.create({
   container: {
     width: 150,
-    height: 280,
+    height: 275,
     ...stylesBase.flexColumnStartLeft,
     gap: 10,
     marginLeft: 20,
@@ -44,6 +53,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 175,
     objectFit: "cover",
+    borderRadius: 5,
   },
   info: {
     ...stylesBase.flexColumnStartLeft,

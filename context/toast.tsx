@@ -2,10 +2,11 @@ import { ImageSource } from "expo-image";
 
 import React, { createContext, useContext, useState } from "react";
 import { toast, ToastOptions, Toasts } from "@backpackapp-io/react-native-toast";
-import { Image, Text, View } from "react-native";
+import { Image, View } from "react-native";
 
 import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
 
+import { TextBig } from "../utils/text/Text";
 import { windowWidth } from "../utils/utils";
 
 import { colorWhite, stylesBase } from "../utils/styles";
@@ -150,12 +151,12 @@ function CustomToast({
             width: 15,
           }}
         />
-        <Text
+        <TextBig
           style={{
             paddingHorizontal: 25,
-            fontSize: 16,
-            ...stylesBase.fontRegular,
-          }}>{message}</Text>
+          }}>
+          {message}
+        </TextBig>
       </View>
     </View>
   );

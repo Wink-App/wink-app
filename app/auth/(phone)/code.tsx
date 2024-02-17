@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { Alert, Text } from "react-native";
+import { Alert } from "react-native";
 
 import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
 
@@ -12,8 +12,7 @@ import { useNumber } from "../../../context/hooks/inputs";
 
 import { ButtonPrimary } from "../../../components/elements/Button";
 import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
-
-import { secondaryText, stylesBase } from "../../../utils/styles";
+import { TextMid } from "../../../utils/text/Text";
 
 export default function Code() {
 
@@ -71,16 +70,15 @@ export default function Code() {
           enabled={isValid}
         />
       }>
-      <Text
+      <TextMid
+        bold
+        secondary
         style={{
-          ...stylesBase.fontBold,
-          color: secondaryText,
-          fontSize: 14,
           lineHeight: 21,
           marginTop: -10,
         }}>
         +39 {insertedPhone}
-      </Text>
+      </TextMid>
       <InputVerificationCode
         maxValueChar={6}
         isInvalidChar={isInvalidChar}

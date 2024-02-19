@@ -3,24 +3,27 @@ import { ScrollView } from "react-native-gesture-handler";
 
 import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
 
-import { products1, products2, products3 } from "../../../context/types/product.type";
+import { sections } from "../../../context/types/section.type";
 
 import { ButtonText } from "../../../components/elements/Button";
-import CategoryList from "../../../components/home/category";
-import ProductC from "../../../components/product/ProductC";
-import HorizontalScroll from "../../../components/wrappers/HorizontalScroll";
-import { TextBig, TextMid, TextSmall } from "../../../utils/text/Text";
-import { windowWidth } from "../../../utils/utils";
+import CategoryList from "../../../components/home/CategoryList";
+import SectionC from "../../../components/home/SectionC";
+import { TextMid, TextSmall } from "../../../utils/text/Text";
 
 import { stylesBase } from "../../../utils/styles";
 
 export default function Home() {
+  const {
+    container,
+    scroll,
+  } = styles;
+
   const handlePress = () => {
     // TODO
   };
   return (
     <SafeAreaLayout>
-      <View style={styles.container}>
+      <View style={container}>
         <Image
           source={require("../../../assets/logos/WinkLogo2.png")}
           style={{ height: 35, objectFit: "contain" }}
@@ -33,7 +36,7 @@ export default function Home() {
           </TextMid>
         </ButtonText>
         <ScrollView
-          contentContainerStyle={styles.scroll}>
+          contentContainerStyle={scroll}>
           <CategoryList />
           <View
             style={{
@@ -41,58 +44,13 @@ export default function Home() {
               ...stylesBase.flexColumnStartLeft,
               gap: 20,
             }}>
-            <SectionLabel>Esplora le novità</SectionLabel>
-            <HorizontalScroll>
-              {products1.map((product) => (
-                <ProductC key={product.id} product={product} />
-              ))}
-            </HorizontalScroll>
-            <SectionLabel>Saldi</SectionLabel>
-            <HorizontalScroll>
-              {products2.map((product) => (
-                <ProductC key={product.id} product={product} />
-              ))}
-            </HorizontalScroll>
-            <SectionLabel>Scarpe</SectionLabel>
-            <HorizontalScroll>
-              {products3.map((product) => (
-                <ProductC key={product.id} product={product} />
-              ))}
-            </HorizontalScroll>
+            {sections.map((section) => (
+              <SectionC key={section.id} section={section} />
+            ))}
           </View>
         </ScrollView>
       </View>
     </SafeAreaLayout>
-  );
-}
-
-function SectionLabel({ children }: { children: string }) {
-  const handlePress = () => {
-    // TODO
-  };
-  return (
-    <View
-      style={{
-        width: windowWidth,
-        ...stylesBase.flexRowSpaceBetCen,
-        gap: 10,
-      }}>
-      <TextBig style={styles.sectionLabel}>
-        {children}
-      </TextBig>
-      <ButtonText
-        onPress={handlePress}
-        style={{
-          paddingRight: 20,
-          marginBottom: -1.25,
-          ...stylesBase.flexRowCenter
-        }}>
-        <TextMid secondary style={styles.seeAll}>
-          Vedi tutto
-          <TextSmall secondary> {">"}</TextSmall>
-        </TextMid>
-      </ButtonText>
-    </View>
   );
 }
 
@@ -106,12 +64,5 @@ const styles = StyleSheet.create({
     ...stylesBase.flexColumnStartLeft,
     gap: 20,
     paddingBottom: 110,
-  },
-  sectionLabel: {
-    lineHeight: 24,
-    paddingLeft: 20,
-  },
-  seeAll: {
-    lineHeight: 24,
   },
 });

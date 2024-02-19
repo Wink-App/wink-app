@@ -1,0 +1,83 @@
+import { useRouter } from "expo-router";
+
+import { View } from "react-native";
+
+import { Section } from "../../context/types/section.type";
+
+import { TextBig, TextMid, TextSmall } from "../../utils/text/Text";
+import { windowWidth } from "../../utils/utils";
+
+import { stylesBase } from "../../utils/styles";
+
+import { useHome } from "../../app/main/home/_layout";
+import { ButtonText } from "../elements/Button";
+import ProductC from "../product/ProductC";
+import HorizontalScroll from "../wrappers/HorizontalScroll";
+
+export default function SectionC({ section }: { section: Section }) {
+
+  const router = useRouter();
+  const { setSelectedSection } = useHome();
+
+  const handlePress = () => {
+    setSelectedSection(section);
+    router.push("/main/home/section");
+  };
+
+  return (
+    <>
+      <SectionHeader onPress={handlePress}>{section.name}</SectionHeader>
+      <HorizontalScroll>
+        {section.products.map((product) => (
+          <ProductC key={product.id} product={product} />
+        ))}
+      </HorizontalScroll>
+    </>
+  );
+}
+
+type SectionHeaderProps = {
+  children: string;
+  onPress: () => void;
+};
+
+function SectionHeader({ children, onPress }: SectionHeaderProps) {
+  const {
+    sectionLabel,
+    seeAll,
+  } = styles;
+  return (
+    <View
+      style={{
+        width: windowWidth,
+        ...stylesBase.flexRowSpaceBetCen,
+        gap: 10,
+      }}>
+      <TextBig style={sectionLabel}>
+        {children}
+      </TextBig>
+      <ButtonText
+        onPress={onPress}
+        style={{
+          paddingRight: 20,
+          marginBottom: -1.25,
+          ...stylesBase.flexRowCenter
+        }}>
+        <TextMid secondary style={seeAll}>
+          Vedi tutto
+          <TextSmall secondary> {">"}</TextSmall>
+        </TextMid>
+      </ButtonText>
+    </View>
+  );
+}
+
+const styles = {
+  sectionLabel: {
+    lineHeight: 40,
+    paddingLeft: 20,
+  },
+  seeAll: {
+    lineHeight: 40,
+  },
+};

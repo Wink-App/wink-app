@@ -24,6 +24,7 @@ export default function Layout() {
 
   return (
     <Tabs
+      initialRouteName="home"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: "black",

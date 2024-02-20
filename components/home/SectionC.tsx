@@ -9,7 +9,7 @@ import { windowWidth } from "../../utils/utils";
 
 import { stylesBase } from "../../utils/styles";
 
-import { useHome } from "../../app/main/home/_layout";
+import { useHome } from "../../app/main/tabs/home/_layout";
 import { ButtonText } from "../elements/Button";
 import ProductC from "../product/ProductC";
 import HorizontalScroll from "../wrappers/HorizontalScroll";
@@ -21,7 +21,7 @@ export default function SectionC({ section }: { section: Section }) {
 
   const handlePress = () => {
     setSelectedSection(section);
-    router.push("/main/home/section");
+    router.push("/main/tabs/home/section");
   };
 
   return (

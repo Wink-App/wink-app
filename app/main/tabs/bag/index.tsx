@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
+import SafeAreaLayout from "@/appLayouts/SafeAreaLayout";
 
-import { stylesBase } from "../../../utils/styles";
+import { stylesBase } from "@/utils/styles";
 
 export default function Bag() {
   return (

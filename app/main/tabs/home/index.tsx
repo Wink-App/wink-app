@@ -4,16 +4,16 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Image, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
+import SafeAreaLayout from "@/appLayouts/SafeAreaLayout";
 
-import { sections } from "../../../context/types/section.type";
+import { sections } from "@/context/types/section.type";
 
-import { ButtonText } from "../../../components/elements/Button";
-import CategoryList from "../../../components/home/CategoryList";
-import SectionC from "../../../components/home/SectionC";
-import { TextMid, TextSmall } from "../../../utils/text/Text";
+import { ButtonText } from "@/components/elements/Button";
+import CategoryList from "@/components/home/CategoryList";
+import SectionC from "@/components/home/SectionC";
+import { TextMid, TextSmall } from "@/utils/text/Text";
 
-import { stylesBase } from "../../../utils/styles";
+import { stylesBase } from "@/utils/styles";
 
 export default function Home() {
   const {
@@ -25,13 +25,13 @@ export default function Home() {
   const tabBarHeight = useBottomTabBarHeight();
 
   const handlePress = () => {
-    router.push("/main/home/location");
+    router.push("/main/tabs/home/location");
   };
   return (
     <SafeAreaLayout>
       <View style={container}>
         <Image
-          source={require("../../../assets/logos/WinkLogo2.png")}
+          source={require("@/assets/logos/WinkLogo2.png")}
           style={{ height: 35, objectFit: "contain" }}
         />
         <ButtonText

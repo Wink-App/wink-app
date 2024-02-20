@@ -3,16 +3,16 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
 import { getDatabase, ref, set } from "firebase/database";
 
-import { useProfile } from "../../../context/user";
-import { useNumber } from "../../../context/hooks/inputs";
+import { useProfile } from "@/context/user";
+import { useNumber } from "@/context/hooks/inputs";
 
-import { ButtonPrimary } from "../../../components/elements/Button";
-import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
-import { TextMid } from "../../../utils/text/Text";
+import { ButtonPrimary } from "@/components/elements/Button";
+import { InputVerificationCode } from "@/components/elements/InputVerificationCode";
+import { TextMid } from "@/utils/text/Text";
 
 export default function Code() {
 

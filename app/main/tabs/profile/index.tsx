@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
+import SafeAreaLayout from "@/appLayouts/SafeAreaLayout";
 
-import { stylesBase } from "../../../utils/styles";
+import { stylesBase } from "@/utils/styles";
 
-export default function Search() {
+export default function Profile() {
   return (
     <SafeAreaLayout>
       <View
@@ -12,7 +12,7 @@ export default function Search() {
           width: "100%",
           ...stylesBase.flexColumnCenter
         }}>
-        <Text>Search</Text>
+        <Text>Profile</Text>
       </View>
     </SafeAreaLayout>
   );

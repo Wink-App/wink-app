@@ -3,21 +3,21 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
-import "../../../firebase.config";
+import "@/firebase.config";
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 
-import { useProfile } from "../../../context/user";
-import { useDebounceEffect, usePassword } from "../../../context/hooks/inputs";
+import { useProfile } from "@/context/user";
+import { useDebounceEffect, usePassword } from "@/context/hooks/inputs";
 
-import { ButtonPrimary, ButtonText } from "../../../components/elements/Button";
-import InputLabel from "../../../components/elements/InputLabel";
-import TransitionElement from "../../../components/transitions/TransitionElement";
-import { TextMid } from "../../../utils/text/Text";
+import { ButtonPrimary, ButtonText } from "@/components/elements/Button";
+import InputLabel from "@/components/elements/InputLabel";
+import TransitionElement from "@/components/transitions/TransitionElement";
+import { TextMid } from "@/utils/text/Text";
 
-import { secondaryText, stylesBase, TextBold, TextBullet } from "../../../utils/styles";
+import { secondaryText, stylesBase, TextBold, TextBullet } from "@/utils/styles";
 
 const auth = getAuth();
 

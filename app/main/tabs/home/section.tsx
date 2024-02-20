@@ -1,8 +1,8 @@
 import { View } from "react-native";
 
-import SafeAreaLayout from "../../../appLayouts/SafeAreaLayout";
+import SafeAreaLayout from "@/appLayouts/SafeAreaLayout";
 
-import { TextBig } from "../../../utils/text/Text";
+import { TextBig } from "@/utils/text/Text";
 
 import { useHome } from "./_layout";
 

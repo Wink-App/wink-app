@@ -18,6 +18,12 @@
     "jsx": "react-native",
     "incremental": true,
     "strictNullChecks": false,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
   },
   "include": [
     "**/*.ts",

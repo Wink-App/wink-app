@@ -1,3 +1,6 @@
+import { useRouter } from "expo-router";
+
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { Image, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -18,8 +21,11 @@ export default function Home() {
     scroll,
   } = styles;
 
+  const router = useRouter();
+  const tabBarHeight = useBottomTabBarHeight();
+
   const handlePress = () => {
-    // TODO
+    router.push("/main/home/location");
   };
   return (
     <SafeAreaLayout>
@@ -36,7 +42,10 @@ export default function Home() {
           </TextMid>
         </ButtonText>
         <ScrollView
-          contentContainerStyle={scroll}>
+          contentContainerStyle={{
+            ...scroll,
+            paddingBottom: tabBarHeight + 20,
+          }}>
           <CategoryList />
           <View
             style={{
@@ -63,6 +72,5 @@ const styles = StyleSheet.create({
   scroll: {
     ...stylesBase.flexColumnStartLeft,
     gap: 20,
-    paddingBottom: 110,
   },
 });

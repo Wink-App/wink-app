@@ -7,6 +7,8 @@ type TabBarIconProps = {
 
 export default function Layout() {
 
+  const routes = ["home", "search", "favourites", "bag", "profile"];
+
   const icons = {
     home: require("../../assets/icons/Home.svg"),
     search: require("../../assets/icons/Search.svg"),
@@ -25,11 +27,17 @@ export default function Layout() {
   return (
     <Tabs
       initialRouteName="home"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarActiveTintColor: "black",
         tabBarInactiveTintColor: "grey",
-      }}>
+        /* tabBarStyle: ((route) => {
+          const routeName = route.name as string;
+          return {
+            display: routes.includes(routeName) ? "flex" : "none",
+          };
+        })(route), */
+      })}>
       <Tabs.Screen
         name="home"
         options={{

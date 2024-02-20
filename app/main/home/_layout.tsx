@@ -1,6 +1,6 @@
-import { Stack } from "expo-router";
+import { Stack, useNavigation } from "expo-router";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 import { Section } from "../../../context/types/section.type";
 import { SetState } from "../../../context/types/types";
@@ -26,17 +26,42 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 export const useHome = () => useContext(Context);
 
 export default function Layout() {
+
+  const navigation = useNavigation();
+  const [routeName, setRouteName] = useState<string>("");
+
+  useEffect(() => {
+    if (routeName) {
+      console.log("useEffect", routeName);
+      navigation.setOptions({
+        tabBarStyle: {
+          display: routeName === "index" ? "flex" : "none",
+        },
+      });
+    }
+  }, [routeName]);
+
   return (
     <Provider>
       <Stack
-        screenOptions={{
+        screenOptions={({ route }) => ({
           headerShown: false,
-        }}>
+          /* tabBarStyle: ((route) => {
+            const routeName = route.name as string;
+            setRouteName(routeName);
+          })(route), */
+        })}>
         <Stack.Screen
           name="index"
         />
         <Stack.Screen
           name="section"
+        />
+        <Stack.Screen
+          name="location"
+          options={{
+            presentation: "modal",
+          }}
         />
       </Stack>
     </Provider>

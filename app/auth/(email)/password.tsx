@@ -61,11 +61,11 @@ export default function Password() {
       };
 
       await set(ref(db, `users/${userid}`), data);
-      router.push("/main/home/");
+      router.push("/main/tabs/home/");
     } else {
       try {
         await signInWithEmailAndPassword(auth, insertedEmail, password);
-        router.push("/main/home/");
+        router.push("/main/tabs/home/");
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error: any) {

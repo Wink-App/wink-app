@@ -12,7 +12,7 @@ import { stylesBase } from "../../utils/styles";
 import { useHome } from "../../app/main/tabs/home/_layout";
 import { ButtonText } from "../elements/Button";
 import ProductC from "../product/ProductC";
-import HorizontalScroll from "../wrappers/HorizontalScroll";
+import { HorizontalScroll } from "../wrappers/Scroll";
 
 export default function SectionC({ section }: { section: Section }) {
 
@@ -27,7 +27,9 @@ export default function SectionC({ section }: { section: Section }) {
   return (
     <>
       <SectionHeader onPress={handlePress}>{section.name}</SectionHeader>
-      <HorizontalScroll>
+      <HorizontalScroll
+        ItemSeparatorComponent={<View style={{ width: 20 }} />}
+        contentContainerStyle={{ paddingHorizontal: 20 }}>
         {section.products.map((product) => (
           <ProductC key={product.id} product={product} />
         ))}
@@ -51,7 +53,6 @@ function SectionHeader({ children, onPress }: SectionHeaderProps) {
       style={{
         width: windowWidth,
         ...stylesBase.flexRowSpaceBetCen,
-        gap: 10,
       }}>
       <TextBig style={sectionLabel}>
         {children}

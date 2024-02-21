@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
     height: 275,
     ...stylesBase.flexColumnStartLeft,
     gap: 10,
-    marginLeft: 20,
     // borderWidth: 1,
     // borderColor: "red",
   },

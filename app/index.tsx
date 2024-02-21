@@ -2,29 +2,31 @@ import { useRouter } from "expo-router";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
 
 import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
 
 import { ButtonText } from "../components/elements/Button";
 import TransitionElement from "../components/transitions/TransitionElement";
+import { HorizontalScroll } from "@/components/wrappers/Scroll";
 import { TextBig } from "../utils/text/Text";
 import { windowWidth } from "../utils/utils";
 
 import { colorOrange, colorPurple, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
 
-type Slide = {
-  id: number;
-  JSX: JSX.Element;
+type SlideProps = {
+  id?: number;
+  text: {
+    firstLine: string;
+    secondLine: string;
+    body: string;
+  };
 };
 
 export default function Index() {
-
   const {
     wrapper,
     container,
     scrollView,
-    slideWidth,
     dots,
     dot,
     dotActive,
@@ -35,10 +37,31 @@ export default function Index() {
 
   const router = useRouter();
 
-  const slides: Slide[] = useMemo(() => [
-    { id: 0, JSX: <SlideOne /> },
-    { id: 1, JSX: <SlideTwo /> },
-    { id: 2, JSX: <SlideThree /> },
+  const slides: SlideProps[] = useMemo(() => [
+    {
+      id: 0,
+      text: {
+        firstLine: "Benvenuto",
+        secondLine: "su Wink",
+        body: "L'app che ti darà la possibilità\ndi fare shopping online e\nricevere i tuoi ordini entro\n60 minuti ovunque tu voglia!"
+      }
+    },
+    {
+      id: 1,
+      text: {
+        firstLine: "Acquista con",
+        secondLine: "semplicità",
+        body: "Accedi o registrati, dopodiché\navrai a disposizione gli articoli\ndei negozi affiliati, in una\npiattaforma a portata di mano!"
+      }
+    },
+    {
+      id: 2,
+      text: {
+        firstLine: "Non è mai stato",
+        secondLine: "così veloce",
+        body: "Una volta aver effettuato l'acquisto,\nriceverai il tuo ordine entro\n60 minuti e avrai acquistato\ncomodamente da casa o ufficio!"
+      }
+    },
   ], []);
 
   const [idCurrentSlide, setIdCurrentSlide] = useState<number>(slides[0].id);
@@ -70,19 +93,13 @@ export default function Index() {
       <SafeAreaLayout>
         <View style={container}>
           <View style={scrollView}>
-            <FlatList
-              data={slides}
-              horizontal
+            <HorizontalScroll
               pagingEnabled
-              onScroll={handleScroll}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <View key={item.id} style={slideWidth}>
-                  {item.JSX}
-                </View>
-              )}
-              keyExtractor={(item) => item.id.toString()}
-            />
+              onScroll={handleScroll}>
+              {slides.map((slide) => (
+                <Slide key={slide.id} text={slide.text} />
+              ))}
+            </HorizontalScroll>
           </View>
           <View style={dots}>
             {slides.map((slide, index) => (
@@ -109,67 +126,22 @@ export default function Index() {
             )}
           </View>
         </View>
-      </SafeAreaLayout>
-    </View>
+      </SafeAreaLayout >
+    </View >
   );
 }
 
-function SlideOne() {
-
+function Slide({ text }: SlideProps) {
   const {
     slide,
     title,
     body,
   } = styles;
-
-  const bodyCopy =
-    "L'app che ti darà la possibilità\ndi fare shopping online e\nricevere i tuoi ordini entro\n60 minuti ovunque tu voglia!";
-
   return (
     <View style={slide}>
-      <Text style={title}>Benvenuto</Text>
-      <Text style={title}>su Wink</Text>
-      <Text style={body}>{bodyCopy}</Text>
-    </View>
-  );
-}
-
-function SlideTwo() {
-
-  const {
-    slide,
-    title,
-    body,
-  } = styles;
-
-  const bodyCopy =
-    "Accedi o registrati, dopodiché\navrai a disposizione gli articoli\ndei negozi affiliati, in una\npiattaforma a portata di mano!";
-
-  return (
-    <View style={slide}>
-      <Text style={title}>Acquista con</Text>
-      <Text style={title}>semplicità</Text>
-      <Text style={body}>{bodyCopy}</Text>
-    </View>
-  );
-}
-
-function SlideThree() {
-
-  const {
-    slide,
-    title,
-    body,
-  } = styles;
-
-  const bodyCopy =
-    "Una volta aver effettuato l'acquisto,\nriceverai il tuo ordine entro\n60 minuti e avrai acquistato\ncomodamente da casa o ufficio!";
-
-  return (
-    <View style={slide}>
-      <Text style={title}>Non è mai stato</Text>
-      <Text style={title}>così veloce</Text>
-      <Text style={body}>{bodyCopy}</Text>
+      <Text style={title}>{text.firstLine}</Text>
+      <Text style={title}>{text.secondLine}</Text>
+      <Text style={body}>{text.body}</Text>
     </View>
   );
 }
@@ -186,10 +158,8 @@ const styles = StyleSheet.create({
   scrollView: {
     height: 325,
   },
-  slideWidth: {
-    width: windowWidth,
-  },
   slide: {
+    width: windowWidth,
     ...stylesBase.flexColumnStartLeft,
     height: 300,
     paddingHorizontal: 30,

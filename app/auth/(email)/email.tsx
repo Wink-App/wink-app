@@ -1,14 +1,14 @@
 import { useRouter } from "expo-router";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
-import "../../../firebase.config";
+import "@/firebase.config";
 
-import { useProfile } from "../../../context/user";
-import { useEmail } from "../../../context/hooks/inputs";
+import { useProfile } from "@/context/user";
+import { useEmail } from "@/context/hooks/inputs";
 
-import { ButtonPrimary } from "../../../components/elements/Button";
-import InputLabel from "../../../components/elements/InputLabel";
+import { ButtonPrimary } from "@/components/elements/Button";
+import InputLabel from "@/components/elements/InputLabel";
 
 export default function Email() {
 

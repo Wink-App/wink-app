@@ -28,8 +28,9 @@ export default function Home() {
 
   const { handleGoogleAuth } = useGoogleAuth();
 
+  // TODO: Temprary shortcut to go Home
   const handleAppleAuth = () => {
-    router.push("/main/home/");
+    router.push("/main/tabs/home/");
   };
 
   const { handleFacebookAuth } = useFacebookAuth();
@@ -38,7 +39,6 @@ export default function Home() {
     router.push("/auth/(email)/email");
   };
 
-  // TODO: Temprary shortcut to go Home
   const handlePhoneAuth = () => {
     router.push("/auth/(phone)/phone");
   };

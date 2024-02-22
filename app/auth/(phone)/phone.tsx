@@ -2,15 +2,15 @@ import { useRouter } from "expo-router";
 
 import { useEffect } from "react";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
 import { RecaptchaVerifier } from "firebase/auth";
 
-import { useProfile } from "../../../context/user";
-import { useNumber } from "../../../context/hooks/inputs";
+import { useProfile } from "@/context/user";
+import { useNumber } from "@/context/hooks/inputs";
 
-import { ButtonPrimary } from "../../../components/elements/Button";
-import InputLabel from "../../../components/elements/InputLabel";
+import { ButtonPrimary } from "@/components/elements/Button";
+import InputLabel from "@/components/elements/InputLabel";
 
 export default function Phone() {
 

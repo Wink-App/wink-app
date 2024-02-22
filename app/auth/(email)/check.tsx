@@ -2,16 +2,16 @@ import { useRouter } from "expo-router";
 
 import { View } from "react-native";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
-import "../../../firebase.config";
+import "@/firebase.config";
 
-import { useProfile } from "../../../context/user";
+import { useProfile } from "@/context/user";
 
-import { ButtonPrimary, ButtonText } from "../../../components/elements/Button";
-import { TextMid } from "../../../utils/text/Text";
+import { ButtonPrimary, ButtonText } from "@/components/elements/Button";
+import { TextMid } from "@/utils/text/Text";
 
-import { stylesBase } from "../../../utils/styles";
+import { stylesBase } from "@/utils/styles";
 
 export default function Check() {
 

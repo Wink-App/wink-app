@@ -2,26 +2,16 @@ import { useState } from "react";
 import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+import { categories, Category } from "../../context/types/category.type";
+
 import { TextMid } from "../../utils/text/Text";
 
 import { colorBorderLine, stylesBase } from "../../utils/styles";
 
-type Category = {
-  id: number;
-  label: string;
-};
-
 // TODO: We'll probably need to move the state out to use the category selected to query the products
 
 export default function CategoryList() {
-  const categories = [
-    { id: 1, label: "Uomo" },
-    { id: 2, label: "Donna" },
-    { id: 3, label: "Bambino" },
-  ];
-
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-
   return (
     <View
       style={{
@@ -44,13 +34,13 @@ export default function CategoryList() {
   );
 }
 
-type CategoryProps = {
+type CategoryCProps = {
   category: Category;
   isSelected: boolean;
   onSelect: () => void;
 };
 
-function CategoryC({ category, isSelected, onSelect }: CategoryProps) {
+function CategoryC({ category, isSelected, onSelect }: CategoryCProps) {
   return (
     <TouchableOpacity
       key={category.id}

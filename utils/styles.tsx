@@ -17,6 +17,10 @@ export const secondaryTextLight = "rgba(255, 255, 255, 0.7)";
 export const colorBorderLine = "#0000002a";
 
 export const stylesBase = StyleSheet.create({
+  redBorder: {
+    borderWidth: 1,
+    borderColor: "red",
+  },
   fontBogartBold: {
     fontFamily: "Bogart-Bold-trial",
   },

@@ -44,6 +44,9 @@ export default function App() {
             <Stack.Screen
               name="auth"
             />
+            <Stack.Screen
+              name="main"
+            />
           </Stack>
         </View>
       </ToastProvider>

@@ -3,16 +3,16 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert } from "react-native";
 
-import AuthOptionLayout from "../../../appLayouts/AuthOptionLayout";
+import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
 import { getDatabase, ref, set } from "firebase/database";
 
-import { useProfile } from "../../../context/user";
-import { useNumber } from "../../../context/hooks/inputs";
+import { useProfile } from "@/context/user";
+import { useNumber } from "@/context/hooks/inputs";
 
-import { ButtonPrimary } from "../../../components/elements/Button";
-import { InputVerificationCode } from "../../../components/elements/InputVerificationCode";
-import { TextMid } from "../../../utils/text/Text";
+import { ButtonPrimary } from "@/components/elements/Button";
+import { InputVerificationCode } from "@/components/elements/InputVerificationCode";
+import { TextMid } from "@/utils/text/Text";
 
 export default function Code() {
 
@@ -44,7 +44,7 @@ export default function Code() {
       if (result.additionalUserInfo.isNewUser) {
         await set(ref(db, `users/${result.user.uid}`), data);
       };
-      router.push("/main/home/");
+      router.push("/main/tabs/home/");
     } catch (error: any) {
       if (error.code === "auth/invalid-verification-code") {
         Alert.alert("Il codice non è valido, riprova.");

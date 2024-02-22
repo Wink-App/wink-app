@@ -4,8 +4,9 @@ type ScrollProps = {
   children: any[];
   pagingEnabled?: boolean;
   numColumns?: number;
-  ItemSeparatorComponent?: JSX.Element | any;
   ListEmptyComponent?: JSX.Element;
+  ItemSeparatorComponent?: JSX.Element | any;
+  columnWrapperStyle?: ViewStyle;
   contentContainerStyle?: ViewStyle;
   onScroll?: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 };
@@ -13,8 +14,8 @@ type ScrollProps = {
 export function HorizontalScroll({
   children,
   pagingEnabled = false,
-  ItemSeparatorComponent = null,
   ListEmptyComponent = null,
+  ItemSeparatorComponent = null,
   contentContainerStyle = {},
   onScroll,
 }: ScrollProps) {
@@ -24,8 +25,8 @@ export function HorizontalScroll({
       data={children}
       pagingEnabled={pagingEnabled}
       showsHorizontalScrollIndicator={false}
-      ItemSeparatorComponent={ItemSeparatorComponent}
       ListEmptyComponent={ListEmptyComponent}
+      ItemSeparatorComponent={ItemSeparatorComponent}
       contentContainerStyle={contentContainerStyle}
       onScroll={onScroll}
       renderItem={({ item }) => item}
@@ -36,8 +37,9 @@ export function HorizontalScroll({
 export function VerticalScroll({
   children,
   numColumns = 1,
-  ItemSeparatorComponent = null,
   ListEmptyComponent = null,
+  ItemSeparatorComponent = null,
+  columnWrapperStyle = { justifyContent: "space-between" },
   contentContainerStyle = {},
   onScroll,
 }: ScrollProps) {
@@ -48,6 +50,7 @@ export function VerticalScroll({
       showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={ItemSeparatorComponent}
       ListEmptyComponent={ListEmptyComponent}
+      columnWrapperStyle={columnWrapperStyle}
       contentContainerStyle={contentContainerStyle}
       onScroll={onScroll}
       renderItem={({ item }) => item}

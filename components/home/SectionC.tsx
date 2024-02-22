@@ -31,7 +31,7 @@ export default function SectionC({ section }: { section: Section }) {
         ItemSeparatorComponent={<View style={{ width: 20 }} />}
         contentContainerStyle={{ paddingHorizontal: 20 }}>
         {section.products.map((product) => (
-          <ProductC key={product.id} product={product} />
+          <ProductC key={product.id} product={product} view="Home" />
         ))}
       </HorizontalScroll>
     </>

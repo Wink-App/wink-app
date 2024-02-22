@@ -7,23 +7,52 @@ import { TextMid, TextSmall } from "../../utils/text/Text";
 import { stylesBase } from "../../utils/styles";
 
 import { ButtonText } from "../elements/Button";
+import ButtonAddFav from "./ButtonAddFav";
 import Price from "./Price";
+
+type CurrentView = "Home" | "Section";
 
 type ProductCProps = {
   product: Product;
+  view: CurrentView;
 };
 
-export default function ProductC({ product }: ProductCProps) {
+const itemHomeHeight = 275;
+const itemSectionHeight = 300;
+
+const size: Record<CurrentView, any> = {
+  Home: {
+    width: 150,
+    height: itemHomeHeight,
+    imageHeight: itemHomeHeight - 100,
+  },
+  Section: {
+    width: "47.5%",
+    height: itemSectionHeight,
+    imageHeight: itemSectionHeight - 100,
+  },
+};
+
+export default function ProductC({ product, view }: ProductCProps) {
   const { container, image, info } = styles;
 
   const handlePress = () => {
     // TODO
   };
+
   return (
-    <View style={container}>
+    <View
+      style={{
+        ...container,
+        width: size[view].width,
+      }}>
+      <ButtonAddFav />
       <Image
         source={{ uri: product.image }}
-        style={image}
+        style={{
+          ...image,
+          height: size[view].imageHeight,
+        }}
       />
       <View style={info}>
         <TextMid bold>{product.name}</TextMid>
@@ -41,16 +70,13 @@ export default function ProductC({ product }: ProductCProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 150,
-    height: 275,
+    position: "relative",
     ...stylesBase.flexColumnStartLeft,
     gap: 10,
-    // borderWidth: 1,
-    // borderColor: "red",
+    // ...stylesBase.redBorder,
   },
   image: {
     width: "100%",
-    height: 175,
     objectFit: "cover",
     borderRadius: 5,
   },

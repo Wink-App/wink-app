@@ -10,7 +10,7 @@ export const sections: Section[] = [
   {
     id: "1",
     name: "Esplora le novità",
-    products: products1,
+    products: [...products1, ...products2],
   },
   {
     id: "2",

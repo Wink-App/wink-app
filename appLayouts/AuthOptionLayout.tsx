@@ -39,10 +39,7 @@ export default function AuthOptionLayout({
                 gap: windowHeight * 0.065,
               }}>
               <FullLineButtonBack
-                style={{
-                  marginTop: 20,
-                  marginLeft: -10,
-                }}
+                style={{ marginTop: 20 }}
               />
               <View
                 style={{

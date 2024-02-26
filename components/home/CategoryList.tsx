@@ -16,11 +16,7 @@ export default function CategoryList() {
     <View
       style={{
         width: "100%",
-        // ...stylesBase.flexRowStartCenter,
         ...stylesBase.flexRowCenter,
-        // paddingLeft: 20,
-        // borderBottomWidth: 1,
-        // borderColor: colorBorderLine,
         paddingTop: 5,
         gap: 20,
         backgroundColor: colorPurple,
@@ -56,7 +52,7 @@ function CategoryC({ category, isSelected, onSelect }: CategoryCProps) {
         bold={isSelected}
         style={{
           lineHeight: 40,
-          color: isSelected ? "white" : secondaryTextLight //"grey"secondaryTextLight,
+          color: isSelected ? "white" : secondaryTextLight,
         }}>
         {category.label}
       </TextMid>

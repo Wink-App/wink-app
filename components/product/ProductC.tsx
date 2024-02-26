@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   container: {
     position: "relative",
     ...stylesBase.flexColumnStartLeft,
-    // ...stylesBase.redBorder,
   },
   body: {
     width: "100%",

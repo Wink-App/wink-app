@@ -1,4 +1,3 @@
-
 export default function useFacebookAuth() {
 
   const handleFacebookAuth = async () => {

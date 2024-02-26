@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 350,
     objectFit: "cover",
-    // borderRadius: 8,
   },
   container: {
     width: "100%",

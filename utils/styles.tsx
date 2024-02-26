@@ -42,19 +42,14 @@ export const stylesBase = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  flexRowSpaceBetCenter: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   flexRowStartCenter: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  flexRowStartBottom: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "flex-end",
-  },
-  flexRowSpaceBetCen: {
-    flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
   },
   flexRowEndCenter: {
@@ -77,17 +72,12 @@ export const stylesBase = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  flexColumnCenterLeft: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "flex-start",
-  },
   flexColumnEndCenter: {
     flexDirection: "column",
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  flexColumnSpaceBetCen: {
+  flexColumnSpaceBetCenter: {
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",

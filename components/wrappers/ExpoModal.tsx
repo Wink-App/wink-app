@@ -52,7 +52,7 @@ export function ModalBottomHalf({
         <View
           style={{
             width: "100%",
-            ...stylesBase.flexRowSpaceBetCen,
+            ...stylesBase.flexRowSpaceBetCenter,
           }}>
           {ModalTitle}
           <TouchableOpacity onPress={handleClose}>

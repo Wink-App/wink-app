@@ -22,7 +22,7 @@ export function HeaderBackElements({
     <View
       style={{
         width: "100%",
-        ...stylesBase.flexRowSpaceBetCen,
+        ...stylesBase.flexRowSpaceBetCenter,
         paddingHorizontal: padding ? 20 : 0,
       }}>
       <ButtonBack />

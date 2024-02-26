@@ -144,7 +144,7 @@ export function ButtonAuth({
         width: 300,
         height: 50,
         borderRadius: 25,
-        ...stylesBase.flexRowSpaceBetCen,
+        ...stylesBase.flexRowSpaceBetCenter,
         paddingHorizontal: 15,
       }}
       onPress={onPress}>

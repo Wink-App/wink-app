@@ -52,7 +52,7 @@ function SectionHeader({ children, onPress }: SectionHeaderProps) {
     <View
       style={{
         width: windowWidth,
-        ...stylesBase.flexRowSpaceBetCen,
+        ...stylesBase.flexRowSpaceBetCenter,
       }}>
       <TextBig style={sectionLabel}>
         {children}

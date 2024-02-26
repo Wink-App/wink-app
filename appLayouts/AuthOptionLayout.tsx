@@ -29,7 +29,7 @@ export default function AuthOptionLayout({
           <View
             style={{
               height: "100%",
-              ...stylesBase.flexColumnSpaceBetCen,
+              ...stylesBase.flexColumnSpaceBetCenter,
               paddingHorizontal: 30,
             }}>
             <View

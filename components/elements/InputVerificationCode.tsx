@@ -59,7 +59,7 @@ export function InputVerificationCode({
     <View
       style={{
         width: "100%",
-        ...stylesBase.flexRowSpaceBetCen
+        ...stylesBase.flexRowSpaceBetCenter
       }}>
       {Array.from({ length: maxValueChar }, (_, i) => {
         const [isFocused, setIsFocused] = useState(false);

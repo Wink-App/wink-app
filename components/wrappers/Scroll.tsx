@@ -1,4 +1,30 @@
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent, ViewStyle } from "react-native";
+import React from "react";
+import { FlatList, NativeScrollEvent, NativeSyntheticEvent, StyleSheet, ViewStyle } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+
+import { windowWidth } from "@/utils/utils";
+
+import { stylesBase } from "@/utils/styles";
+
+type ExpoScrollViewProps = {
+  children: React.ReactNode;
+  style?: ViewStyle;
+};
+
+export function ExpoScrollView({ children, style = {} }: ExpoScrollViewProps) {
+  const { container } = styles;
+  const renderStyle = { ...container, ...style };
+  return <ScrollView contentContainerStyle={renderStyle}>{children}</ScrollView>;
+}
+
+const styles = StyleSheet.create({
+  container: {
+    width: windowWidth,
+    ...stylesBase.flexColumnStartLeft,
+    gap: 20,
+    paddingBottom: 40,
+  },
+});
 
 type ScrollProps = {
   children: any[];

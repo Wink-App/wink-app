@@ -1,5 +1,8 @@
-import { Image, StyleSheet, View } from "react-native";
+import { useRouter } from "expo-router";
 
+import { Image, Pressable, StyleSheet, View } from "react-native";
+
+import { useProfile } from "@/context/user";
 import { Product } from "../../context/types/product.type";
 
 import { TextMid, TextSmall } from "../../utils/text/Text";
@@ -34,9 +37,19 @@ const size: Record<CurrentView, any> = {
 };
 
 export default function ProductC({ product, view }: ProductCProps) {
-  const { container, image, info } = styles;
+  const { container, body, image, info } = styles;
 
+  const router = useRouter();
+  const { setSelectedProduct } = useProfile();
+
+  const handlePressIn = () => {
+    setSelectedProduct(product);
+  };
   const handlePress = () => {
+    router.push("/main/tabs/home/product");
+  };
+
+  const handlePressStore = () => {
     // TODO
   };
 
@@ -47,23 +60,28 @@ export default function ProductC({ product, view }: ProductCProps) {
         width: size[view].width,
       }}>
       <ButtonAddFav />
-      <Image
-        source={{ uri: product.image }}
-        style={{
-          ...image,
-          height: size[view].imageHeight,
-        }}
-      />
-      <View style={info}>
-        <TextMid bold>{product.name}</TextMid>
-        <TextMid><Price>{product.price}</Price></TextMid>
-        <TextSmall secondary>{product.time}</TextSmall>
-        <ButtonText onPress={handlePress}>
-          <TextSmall secondary underlined>
-            Altro da {product.storeName}
-          </TextSmall>
-        </ButtonText>
-      </View>
+      <Pressable
+        onPressIn={handlePressIn}
+        onPress={handlePress}
+        style={body}>
+        <Image
+          source={{ uri: product.image }}
+          style={{
+            ...image,
+            height: size[view].imageHeight,
+          }}
+        />
+        <View style={info}>
+          <TextMid bold>{product.name}</TextMid>
+          <TextMid><Price>{product.price}</Price></TextMid>
+          <TextSmall secondary>{product.time}</TextSmall>
+        </View>
+      </Pressable>
+      <ButtonText onPress={handlePressStore}>
+        <TextSmall secondary underlined>
+          Altro da {product.storeName}
+        </TextSmall>
+      </ButtonText>
     </View>
   );
 }
@@ -72,8 +90,12 @@ const styles = StyleSheet.create({
   container: {
     position: "relative",
     ...stylesBase.flexColumnStartLeft,
-    gap: 10,
     // ...stylesBase.redBorder,
+  },
+  body: {
+    width: "100%",
+    ...stylesBase.flexColumnStartLeft,
+    gap: 10,
   },
   image: {
     width: "100%",

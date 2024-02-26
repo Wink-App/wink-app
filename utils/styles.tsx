@@ -21,6 +21,10 @@ export const stylesBase = StyleSheet.create({
     borderWidth: 1,
     borderColor: "red",
   },
+  borderTop: {
+    borderTopWidth: 1,
+    borderTopColor: colorBorderLine,
+  },
   fontBogartBold: {
     fontFamily: "Bogart-Bold-trial",
   },

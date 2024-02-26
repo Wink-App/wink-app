@@ -6,6 +6,7 @@ type TextProps = {
   children: React.ReactNode;
   bold?: boolean;
   secondary?: boolean;
+  white?: boolean;
   underlined?: boolean;
   style?: TextStyle;
 };
@@ -14,11 +15,12 @@ export function TextSmall({
   children,
   bold = false,
   secondary = false,
+  white = false,
   underlined = false,
   style = {},
 }: TextProps) {
   const fontWeight = bold ? stylesBase.fontBold : stylesBase.fontRegular;
-  const color = secondary ? secondaryText : "black";
+  const color = secondary ? secondaryText : white ? "white" : "black";
   const underline: TextStyle = underlined ? { textDecorationLine: "underline", textDecorationColor: colorBorderLine, } : {};
   return <Text style={{ fontSize: 12, ...fontWeight, color, ...underline, ...style }}>{children}</Text>;
 }
@@ -27,11 +29,12 @@ export function TextMid({
   children,
   bold = false,
   secondary = false,
+  white = false,
   underlined = false,
   style = {},
 }: TextProps) {
   const fontWeight = bold ? stylesBase.fontBold : stylesBase.fontRegular;
-  const color = secondary ? secondaryText : "black";
+  const color = secondary ? secondaryText : white ? "white" : "black";
   const underline: TextStyle = underlined ? { textDecorationLine: "underline", textDecorationColor: colorBorderLine, } : {};
   return <Text style={{ fontSize: 14, ...fontWeight, color, ...underline, ...style }}>{children}</Text>;
 }

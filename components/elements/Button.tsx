@@ -8,6 +8,7 @@ import { TextBig } from "../../utils/text/Text";
 
 import {
   colorBlack,
+  colorBorderLine,
   colorGreyLighter,
   colorOrange,
   colorPurple,
@@ -20,6 +21,7 @@ type ButtonPrimaryProps = {
   fullWidth?: boolean;
   purple?: boolean;
   orange?: boolean;
+  border?: boolean;
   style?: ViewStyle;
   onPress?: () => void;
   enabled?: boolean;
@@ -30,6 +32,7 @@ export function ButtonPrimary({
   fullWidth = false,
   purple = false,
   orange = false,
+  border = false,
   style = {},
   onPress = () => { },
   enabled = true,
@@ -40,6 +43,7 @@ export function ButtonPrimary({
 
   const bgColor = purple && colorPurple || orange && colorOrange || "transparent";
   const textColor = purple && colorWhite || orange && colorBlack || colorBlack;
+  const borderStyle = border && { borderWidth: 1, borderColor: colorBorderLine } || {};
 
   return (
     <BaseButton
@@ -50,6 +54,7 @@ export function ButtonPrimary({
         ...stylesBase.flexRowCenter,
         backgroundColor: bgColor,
         opacity: enabled ? 1 : 0.5,
+        ...borderStyle,
         ...style,
       }}
       onPress={onPress}
@@ -64,7 +69,6 @@ export function ButtonPrimary({
     </BaseButton>
   );
 }
-
 
 type ButtonTextProps = {
   children: React.ReactNode;

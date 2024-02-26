@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 import { secondaryTextLight, stylesBase } from "@/utils/styles";
 
@@ -7,13 +7,13 @@ import ExpoSvg from "../elements/ExpoSvg";
 export default function ButtonAddFav() {
   const { container, fav } = styles;
   return (
-    <View
+    <Pressable
       style={container}>
       <ExpoSvg
         source={require("@/assets/icons/Favourites.svg")}
         style={fav}
       />
-    </View>
+    </Pressable>
   );
 }
 

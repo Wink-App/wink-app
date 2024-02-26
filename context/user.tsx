@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 import "../firebase.config";
 import { fetchSignInMethodsForEmail, getAuth, signInWithPhoneNumber } from "firebase/auth";
 
+import { Product } from "./types/product.type";
 import { Profile } from "./types/profile.type";
 import { getIsNewUserFromPhoneProps, SetState } from "./types/types";
 
@@ -19,6 +20,9 @@ type ContextProps = {
   profile: Profile | null;
   loadingProfile: boolean;
   getProfile: () => Promise<void>;
+
+  selectedProduct: Product;
+  setSelectedProduct: SetState<Product>;
 
 };
 
@@ -41,6 +45,8 @@ const Provider = ({ children }: ProviderProps) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
 
+  const [selectedProduct, setSelectedProduct] = useState<Product>({} as Product);
+
   const contextValues: ContextProps = {
     isNewUser,
     getIsNewUserFromEmail,
@@ -54,6 +60,9 @@ const Provider = ({ children }: ProviderProps) => {
     profile,
     loadingProfile,
     getProfile,
+
+    selectedProduct,
+    setSelectedProduct,
 
   };
 

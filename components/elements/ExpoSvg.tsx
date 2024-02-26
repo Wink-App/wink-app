@@ -2,12 +2,15 @@ import { Image, ImageSource, ImageStyle } from "expo-image";
 
 type ExpoSvgProps = {
   source: ImageSource;
-  style: ImageStyle;
+  size?: number;
+  style?: ImageStyle;
 };
 
 export default function ExpoSvg({
   source,
-  style,
+  size,
+  style = {},
 }: ExpoSvgProps) {
-  return <Image source={source} style={style} />;
+  const renderStyle = size ? { width: size, height: size, ...style } : style;
+  return <Image source={source} style={renderStyle} />;
 }

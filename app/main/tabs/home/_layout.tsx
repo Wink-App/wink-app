@@ -8,6 +8,7 @@ import { SetState } from "@/context/types/types";
 type ContextProps = {
   selectedSection: Section;
   setSelectedSection: SetState<Section>;
+
 };
 
 const Context = createContext({} as ContextProps) as React.Context<ContextProps>;
@@ -18,6 +19,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
   const contextValues: ContextProps = {
     selectedSection,
     setSelectedSection,
+
   };
 
   return <Context.Provider value={contextValues}>{children}</Context.Provider>;
@@ -29,9 +31,9 @@ export default function Layout() {
   return (
     <Provider>
       <Stack
-        screenOptions={({ route }) => ({
+        screenOptions={{
           headerShown: false,
-        })}>
+        }}>
         <Stack.Screen
           name="index"
         />

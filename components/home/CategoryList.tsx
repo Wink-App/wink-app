@@ -6,7 +6,7 @@ import { categories, Category } from "../../context/types/category.type";
 
 import { TextMid } from "../../utils/text/Text";
 
-import { colorBorderLine, stylesBase } from "../../utils/styles";
+import { colorPurple, secondaryTextLight, stylesBase } from "../../utils/styles";
 
 // TODO: We'll probably need to move the state out to use the category selected to query the products
 
@@ -16,11 +16,10 @@ export default function CategoryList() {
     <View
       style={{
         width: "100%",
-        ...stylesBase.flexRowStartCenter,
-        paddingLeft: 20,
-        borderBottomWidth: 1,
-        borderColor: colorBorderLine,
+        ...stylesBase.flexRowCenter,
+        paddingTop: 5,
         gap: 20,
+        backgroundColor: colorPurple,
       }}>
       {categories.map((category) => (
         <CategoryC
@@ -45,14 +44,15 @@ function CategoryC({ category, isSelected, onSelect }: CategoryCProps) {
     <TouchableOpacity
       key={category.id}
       style={{
-        borderBottomColor: isSelected ? "black" : "transparent",
-        borderBottomWidth: isSelected ? 1 : 0,
+        borderBottomColor: isSelected ? "white" : "transparent",
+        borderBottomWidth: isSelected ? 1.5 : 0,
       }}
       onPress={onSelect}>
       <TextMid
+        bold={isSelected}
         style={{
           lineHeight: 40,
-          color: isSelected ? "black" : "grey",
+          color: isSelected ? "white" : secondaryTextLight,
         }}>
         {category.label}
       </TextMid>

@@ -26,7 +26,8 @@ export default function ViewAppLayout({
   const tabBarHeight = useBottomTabBarHeight();
   const currentstyle: ViewStyle = {
     ...(center ? stylesBase.flexColumnCenter : stylesBase.flexColumnStartLeft),
-    padding: padding ? 20 : 0,
+    paddingTop: 20,
+    paddingHorizontal: padding ? 20 : 0,
     paddingBottom: tabBarPadding ? tabBarHeight : 0,
     gap: 20,
     ...style,
@@ -46,10 +47,6 @@ export default function ViewAppLayout({
  * Componenti generali: 
  * SafeAreaLayout
  * View with main styles
- * 
- * ScrollView vertical
- * FlatList horizontal
- * FlatList vertical?
  * 
  * KeyboardAvoidingView
  * DismissKeyboard

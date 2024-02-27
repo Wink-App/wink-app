@@ -1,9 +1,10 @@
 import { useRouter } from "expo-router";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text, View } from "react-native";
+import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text } from "react-native";
 
 import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
+import AppView from "@/appLayouts/AppView";
 
 import { ButtonText } from "../components/elements/Button";
 import TransitionElement from "../components/transitions/TransitionElement";
@@ -11,7 +12,7 @@ import { HorizontalScroll } from "@/components/wrappers/Scroll";
 import { TextBig } from "../utils/text/Text";
 import { windowWidth } from "../utils/utils";
 
-import { colorOrange, colorPurple, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
+import { colorOrange, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
 
 type SlideProps = {
   id?: number;
@@ -23,17 +24,7 @@ type SlideProps = {
 };
 
 export default function Index() {
-  const {
-    wrapper,
-    container,
-    scrollView,
-    dots,
-    dot,
-    dotActive,
-    dotInactive,
-    actionContainer,
-    action,
-  } = styles;
+  const { action } = styles;
 
   const router = useRouter();
 
@@ -89,10 +80,12 @@ export default function Index() {
   }, []);
 
   return (
-    <View style={wrapper}>
+    <AppView
+      height100
+      backgroundColorPurple>
       <SafeAreaLayout>
-        <View style={container}>
-          <View style={scrollView}>
+        <AppView height100 flexColumnCenter>
+          <AppView height={325}>
             <HorizontalScroll
               pagingEnabled
               onScroll={handleScroll}>
@@ -100,21 +93,23 @@ export default function Index() {
                 <Slide key={slide.id} text={slide.text} />
               ))}
             </HorizontalScroll>
-          </View>
-          <View style={dots}>
+          </AppView>
+          <AppView flexRowCenter height={10} gap={20}>
             {slides.map((slide, index) => (
-              <View
+              <AppView
                 key={slide.id}
-                style={[
-                  dot,
+                width={10}
+                height={10}
+                borderRadius={5}
+                backgroundColor={
                   idCurrentSlide === index
-                    ? dotActive
-                    : dotInactive,
-                ]}
+                    ? colorOrange
+                    : colorWhite
+                }
               />
             ))}
-          </View>
-          <View style={actionContainer}>
+          </AppView>
+          <AppView flexRowCenter height={30} marginTop={50}>
             {hasReachedLastSlide && (
               <TransitionElement>
                 <ButtonText
@@ -124,62 +119,28 @@ export default function Index() {
                 </ButtonText>
               </TransitionElement>
             )}
-          </View>
-        </View>
+          </AppView>
+        </AppView>
       </SafeAreaLayout >
-    </View >
+    </AppView>
   );
 }
 
 function Slide({ text }: SlideProps) {
   const {
-    slide,
     title,
     body,
   } = styles;
   return (
-    <View style={slide}>
+    <AppView windowWidth flexColumnStartLeft height={300} paddingHorizontal={30}>
       <Text style={title}>{text.firstLine}</Text>
       <Text style={title}>{text.secondLine}</Text>
       <Text style={body}>{text.body}</Text>
-    </View>
+    </AppView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: colorPurple,
-  },
-  container: {
-    height: "100%",
-    ...stylesBase.flexColumnCenter,
-  },
-  scrollView: {
-    height: 325,
-  },
-  slide: {
-    width: windowWidth,
-    ...stylesBase.flexColumnStartLeft,
-    height: 300,
-    paddingHorizontal: 30,
-  },
-  dots: {
-    ...stylesBase.flexRowCenter,
-    height: 10,
-    gap: 20,
-  },
-  dot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-  },
-  dotActive: {
-    backgroundColor: colorOrange,
-  },
-  dotInactive: {
-    backgroundColor: colorWhite,
-  },
   title: {
     ...stylesBase.fontBogartBold,
     color: colorOrange,
@@ -192,11 +153,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
     marginTop: 20,
-  },
-  actionContainer: {
-    ...stylesBase.flexRowCenter,
-    height: 30,
-    marginTop: 50,
   },
   action: {
     ...stylesBase.fontBogartMedium,

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import { FullLineButtonBack } from "../components/elements/Button";
 import { AvoidKeyboard, DismissKeyboard } from "../components/transitions/Keyboard";
@@ -7,6 +7,7 @@ import { windowHeight } from "../utils/utils";
 
 import { colorBlack, colorGreyBackground, stylesBase } from "../utils/styles";
 
+import AppView from "./AppView";
 import SafeAreaLayout from "./SafeAreaLayout";
 
 type AuthOptionLayoutProps = {
@@ -26,34 +27,19 @@ export default function AuthOptionLayout({
     <AvoidKeyboard style={{ backgroundColor: colorGreyBackground }}>
       <SafeAreaLayout>
         <DismissKeyboard>
-          <View
-            style={{
-              height: "100%",
-              ...stylesBase.flexColumnSpaceBetCenter,
-              paddingHorizontal: 30,
-            }}>
-            <View
-              style={{
-                width: "100%",
-                ...stylesBase.flexColumnStartLeft,
-                gap: windowHeight * 0.065,
-              }}>
+          <AppView height100 flexColumnSpaceBetCenter paddingHorizontal={30}>
+            <AppView width100 flexColumnStartLeft gap={windowHeight * 0.065}>
               <FullLineButtonBack
                 style={{ marginTop: 20 }}
               />
-              <View
-                style={{
-                  width: "100%",
-                  ...stylesBase.flexColumnStartLeft,
-                  gap: 15,
-                }}>
+              <AppView width100 flexColumnStartLeft gap={15}>
                 <Text style={styles.title}>{title}</Text>
                 <TextMid secondary style={styles.subTitle}>{subTitle}</TextMid>
                 {children}
-              </View>
-            </View>
+              </AppView>
+            </AppView>
             {Button}
-          </View>
+          </AppView>
         </DismissKeyboard>
       </SafeAreaLayout>
     </AvoidKeyboard>

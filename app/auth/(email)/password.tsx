@@ -1,13 +1,9 @@
 import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
-import { View } from "react-native";
 
+import AppView from "@/appLayouts/AppView";
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
-
-import "@/firebase.config";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
 
 import { useProfile } from "@/context/user";
 import { useDebounceEffect, usePassword } from "@/context/hooks/inputs";
@@ -17,9 +13,7 @@ import InputLabel from "@/components/elements/InputLabel";
 import TransitionElement from "@/components/transitions/TransitionElement";
 import { TextMid } from "@/utils/text/Text";
 
-import { secondaryText, stylesBase, TextBold, TextBullet } from "@/utils/styles";
-
-const auth = getAuth();
+import { secondaryText, TextBold, TextBullet } from "@/utils/styles";
 
 export default function Password() {
 
@@ -51,20 +45,12 @@ export default function Password() {
 
   const handleContinue = async () => {
     if (isNewUser) {
-      const response = await createUserWithEmailAndPassword(auth, insertedEmail, password);
-      const userid = response.user.uid;
+      // await createUserWithEmailAndPassword
 
-      const db = getDatabase();
-      // TODO: Do we need to put insertedEmail in this data object?
-      const data = {
-        insertedEmail
-      };
-
-      await set(ref(db, `users/${userid}`), data);
       router.push("/main/tabs/home/");
     } else {
       try {
-        await signInWithEmailAndPassword(auth, insertedEmail, password);
+        // await signInWithEmailAndPassword
         router.push("/main/tabs/home/");
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -155,16 +141,12 @@ export default function Password() {
         </TransitionElement>
       )}
       {isNewUser === false && (
-        <View
-          style={{
-            width: "100%",
-            ...stylesBase.flexRowEndCenter,
-          }}>
+        <AppView width100 flexRowEndCenter>
           <ButtonText
             onPress={handleForgotPassword}>
             <TextMid bold secondary underlined>Password dimenticata?</TextMid>
           </ButtonText>
-        </View>
+        </AppView>
       )}
       {isNewUser === true && (
         <>

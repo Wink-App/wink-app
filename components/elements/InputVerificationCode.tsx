@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { NativeSyntheticEvent, TextInputKeyPressEventData, View } from "react-native";
+import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+
+import AppView from "@/appLayouts/AppView";
 
 import { colorBorderLine, colorGreyLighter, stylesBase } from "../../utils/styles";
 
@@ -56,25 +58,21 @@ export function InputVerificationCode({
   };
 
   return (
-    <View
-      style={{
-        width: "100%",
-        ...stylesBase.flexRowSpaceBetCenter
-      }}>
+    <AppView width100 flexRowSpaceBetCenter>
       {Array.from({ length: maxValueChar }, (_, i) => {
         const [isFocused, setIsFocused] = useState(false);
         return (
-          <View
+          <AppView
             key={i}
+            width={45}
+            height={45}
+            flexRowCenter
+            borderRadius={9}
+            backgroundColor={colorGreyLighter}
             style={{
-              width: 45,
-              height: 45,
-              borderRadius: 9,
-              backgroundColor: colorGreyLighter,
               borderColor: isInvalidChar ? "red" : (
                 isFocused ? "black" : colorBorderLine),
               borderWidth: 0.5,
-              ...stylesBase.flexRowCenter,
             }}>
             <TextInput
               ref={(ref: TextInput) => (inputRefs.current[i] = ref)}
@@ -96,9 +94,9 @@ export function InputVerificationCode({
               autoComplete="one-time-code"
               caretHidden
             />
-          </View>
+          </AppView>
         );
       })}
-    </View>
+    </AppView>
   );
 }

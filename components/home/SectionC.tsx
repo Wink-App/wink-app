@@ -2,10 +2,11 @@ import { useRouter } from "expo-router";
 
 import { View } from "react-native";
 
+import AppView from "@/appLayouts/AppView";
+
 import { Section } from "../../context/types/section.type";
 
 import { TextBig, TextMid, TextSmall } from "../../utils/text/Text";
-import { windowWidth } from "../../utils/utils";
 
 import { stylesBase } from "../../utils/styles";
 
@@ -49,11 +50,7 @@ function SectionHeader({ children, onPress }: SectionHeaderProps) {
     seeAll,
   } = styles;
   return (
-    <View
-      style={{
-        width: windowWidth,
-        ...stylesBase.flexRowSpaceBetCenter,
-      }}>
+    <AppView windowWidth flexRowSpaceBetCenter>
       <TextBig style={sectionLabel}>
         {children}
       </TextBig>
@@ -69,7 +66,7 @@ function SectionHeader({ children, onPress }: SectionHeaderProps) {
           <TextSmall secondary> {">"}</TextSmall>
         </TextMid>
       </ButtonText>
-    </View>
+    </AppView>
   );
 }
 

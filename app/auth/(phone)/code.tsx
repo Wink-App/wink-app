@@ -5,8 +5,6 @@ import { Alert } from "react-native";
 
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
-import { getDatabase, ref, set } from "firebase/database";
-
 import { useProfile } from "@/context/user";
 import { useNumber } from "@/context/hooks/inputs";
 
@@ -36,14 +34,7 @@ export default function Code() {
 
   const handleContinue = async () => {
     try {
-      const result = await phoneSignUpResult.confirm(code);
-      const db = getDatabase();
-      const data = {
-        phone: result.user.phoneNumber
-      };
-      if (result.additionalUserInfo.isNewUser) {
-        await set(ref(db, `users/${result.user.uid}`), data);
-      };
+      // await confirmCode
       router.push("/main/tabs/home/");
     } catch (error: any) {
       if (error.code === "auth/invalid-verification-code") {

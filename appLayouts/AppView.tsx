@@ -1,11 +1,9 @@
-import { View, ViewStyle } from "react-native";
-
-import { windowWidth as windowWidthUtil } from "@/utils/utils";
+import { DimensionValue, View, ViewStyle } from "react-native";
 
 import { stylesBase } from "@/utils/styles";
 
 type AppViewProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   windowWidth?: boolean;
 
@@ -13,7 +11,7 @@ type AppViewProps = {
   height100?: boolean;
 
   width?: number;
-  height?: number;
+  height?: number | string;
 
   flexRowCenter?: boolean;
   flexRowSpaceBetCenter?: boolean;
@@ -28,6 +26,15 @@ type AppViewProps = {
 
   gap?: number;
   padding?: number;
+  paddingTop?: number;
+  paddingHorizontal?: number;
+
+  marginTop?: number;
+
+  borderRadius?: number;
+
+  backgroundColorPurple?: boolean;
+  backgroundColor?: string;
 
   redBorder?: boolean;
 
@@ -36,47 +43,73 @@ type AppViewProps = {
 
 export default function AppView({
   children,
+
   windowWidth = false,
+
   width100 = false,
   height100 = false,
+
   width = null,
   height = null,
+
   flexRowCenter = false,
   flexRowSpaceBetCenter = false,
   flexRowStartCenter = false,
   flexRowEndCenter = false,
+
   flexColumnCenter = false,
   flexColumnStartLeft = false,
   flexColumnStartCenter = false,
   flexColumnEndCenter = false,
   flexColumnSpaceBetCenter = false,
+
   gap = null,
   padding = null,
+  paddingTop = null,
+  paddingHorizontal = null,
+
+  marginTop = null,
+
+  borderRadius = null,
+
+  backgroundColorPurple = false,
+  backgroundColor = null,
+
   redBorder = false,
+
   style = {},
 }: AppViewProps) {
-  const styles: ViewStyle = { ...style };
+  const styles: ViewStyle[] = [style];
 
-  if (windowWidth) styles.width = windowWidthUtil;
-  else if (width100) styles.width = "100%";
-  else if (width) styles.width = width;
+  if (windowWidth) styles.push(stylesBase.windowWidth);
+  else if (width100) styles.push(stylesBase.width100);
+  else if (width) styles.push({ width: width as DimensionValue });
 
-  if (height100) styles.height = "100%";
-  else if (height) styles.height = height;
+  if (height100) styles.push(stylesBase.height100);
+  else if (height) styles.push({ height: height as DimensionValue });
 
-  if (flexRowCenter) Object.assign(styles, stylesBase.flexRowCenter);
-  else if (flexRowSpaceBetCenter) Object.assign(styles, stylesBase.flexRowSpaceBetCenter);
-  else if (flexRowStartCenter) Object.assign(styles, stylesBase.flexRowStartCenter);
-  else if (flexRowEndCenter) Object.assign(styles, stylesBase.flexRowEndCenter);
-  else if (flexColumnCenter) Object.assign(styles, stylesBase.flexColumnCenter);
-  else if (flexColumnStartLeft) Object.assign(styles, stylesBase.flexColumnStartLeft);
-  else if (flexColumnStartCenter) Object.assign(styles, stylesBase.flexColumnStartCenter);
-  else if (flexColumnEndCenter) Object.assign(styles, stylesBase.flexColumnEndCenter);
-  else if (flexColumnSpaceBetCenter) Object.assign(styles, stylesBase.flexColumnSpaceBetCenter);
+  if (flexRowCenter) styles.push(stylesBase.flexRowCenter);
+  else if (flexRowSpaceBetCenter) styles.push(stylesBase.flexRowSpaceBetCenter);
+  else if (flexRowStartCenter) styles.push(stylesBase.flexRowStartCenter);
+  else if (flexRowEndCenter) styles.push(stylesBase.flexRowEndCenter);
+  else if (flexColumnCenter) styles.push(stylesBase.flexColumnCenter);
+  else if (flexColumnStartLeft) styles.push(stylesBase.flexColumnStartLeft);
+  else if (flexColumnStartCenter) styles.push(stylesBase.flexColumnStartCenter);
+  else if (flexColumnEndCenter) styles.push(stylesBase.flexColumnEndCenter);
+  else if (flexColumnSpaceBetCenter) styles.push(stylesBase.flexColumnSpaceBetCenter);
 
-  if (gap) styles.gap = gap;
-  if (padding) styles.padding = padding;
-  if (redBorder) Object.assign(styles, stylesBase.redBorder);
+  if (gap) styles.push({ gap });
+  if (padding) styles.push({ padding });
+  if (paddingTop) styles.push({ paddingTop });
+  if (paddingHorizontal) styles.push({ paddingHorizontal });
+
+  if (marginTop) styles.push({ marginTop });
+
+  if (backgroundColorPurple) styles.push(stylesBase.backgroundColorPurple);
+  else if (backgroundColor) styles.push({ backgroundColor });
+
+  if (borderRadius) styles.push({ borderRadius });
+  if (redBorder) styles.push(stylesBase.redBorder);
 
   return <View style={styles}>{children}</View>;
 }

@@ -1,7 +1,8 @@
 import { useRouter } from "expo-router";
 
-import { Image, StyleSheet, View } from "react-native";
+import { Image } from "react-native";
 
+import AppView from "@/appLayouts/AppView";
 import ViewAppLayout from "@/appLayouts/ViewAppLayout";
 
 import { sections } from "@/context/types/section.type";
@@ -12,29 +13,22 @@ import SectionC from "@/components/home/SectionC";
 import { ExpoScrollView } from "@/components/wrappers/Scroll";
 import { TextMid, TextSmall } from "@/utils/text/Text";
 
-import { colorGreyBackground, colorPurple, stylesBase } from "@/utils/styles";
+import { colorGreyBackground, colorPurple } from "@/utils/styles";
 
 export default function Home() {
-  const { wrapper, container } = styles;
-
   const router = useRouter();
 
   const handlePress = () => {
     router.push("/main/tabs/home/location");
   };
   return (
-    <View style={wrapper}>
+    <AppView backgroundColorPurple style={{ flex: 1 }}>
       <ViewAppLayout
         center
         padding={false}
         tabBarPadding
-        style={container}>
-        <View
-          style={{
-            width: "100%",
-            ...stylesBase.flexColumnCenter,
-            gap: 20,
-          }}>
+        style={{ backgroundColor: colorPurple }}>
+        <AppView width100 flexColumnCenter gap={20}>
           <Image
             source={require("@/assets/logos/WinkLogo2.png")}
             style={{ height: 35, objectFit: "contain" }}
@@ -46,32 +40,17 @@ export default function Home() {
               <TextSmall bold white> {">"}</TextSmall>
             </TextMid>
           </ButtonText>
-        </View>
+        </AppView>
         <ExpoScrollView
           style={{ backgroundColor: colorGreyBackground }}>
           <CategoryList />
-          <View
-            style={{
-              width: "100%",
-              ...stylesBase.flexColumnStartLeft,
-              gap: 20,
-            }}>
+          <AppView width100 flexColumnStartLeft gap={20}>
             {sections.map((section) => (
               <SectionC key={section.id} section={section} />
             ))}
-          </View>
+          </AppView>
         </ExpoScrollView>
       </ViewAppLayout>
-    </View>
+    </AppView>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: colorPurple,
-  },
-  container: {
-    backgroundColor: colorPurple,
-  },
-});

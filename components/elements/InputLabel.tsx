@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
+import AppView from "@/appLayouts/AppView";
+
 import { TextMid } from "../../utils/text/Text";
 
 import {
@@ -80,10 +82,7 @@ export default function InputLabel({
   };
 
   return (
-    <View
-      style={{
-        ...stylesBase.flexColumnStartLeft,
-      }}>
+    <View style={stylesBase.flexColumnStartLeft}>
       {label && (
         <TextMid
           secondary
@@ -96,14 +95,14 @@ export default function InputLabel({
         </TextMid>
       )}
 
-      <View
+      <AppView
+        flexRowCenter
+        paddingHorizontal={16}
+        borderRadius={9}
+        backgroundColor={colorGreyLighter}
         style={{
-          paddingHorizontal: 16,
-          borderRadius: 9,
-          backgroundColor: colorGreyLighter,
           borderColor: isInvalidChar ? "red" : colorBorderLine,
           borderWidth: 0.5,
-          ...stylesBase.flexRowCenter,
         }}>
         {isPhoneNumber && (
           <TextMid
@@ -179,7 +178,7 @@ export default function InputLabel({
             </TouchableOpacity>
           </TransitionElement>
         )}
-      </View>
+      </AppView>
     </View>
   );
 }

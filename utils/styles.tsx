@@ -1,5 +1,7 @@
 import { StyleSheet, Text, TextStyle } from "react-native";
 
+import { windowWidth as windowWidthUtil } from "@/utils/utils";
+
 export const colorPurple = "#9262D2";
 export const colorOrange = "#FFC24D";
 
@@ -17,13 +19,14 @@ export const secondaryTextLight = "rgba(255, 255, 255, 0.7)";
 export const colorBorderLine = "#0000002a";
 
 export const stylesBase = StyleSheet.create({
-  redBorder: {
-    borderWidth: 1,
-    borderColor: "red",
+  windowWidth: {
+    width: windowWidthUtil,
   },
-  borderTop: {
-    borderTopWidth: 1,
-    borderTopColor: colorBorderLine,
+  width100: {
+    width: "100%",
+  },
+  height100: {
+    height: "100%",
   },
   fontBogartBold: {
     fontFamily: "Bogart-Bold-trial",
@@ -81,6 +84,17 @@ export const stylesBase = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  backgroundColorPurple: {
+    backgroundColor: colorPurple,
+  },
+  redBorder: {
+    borderWidth: 1,
+    borderColor: "red",
+  },
+  borderTop: {
+    borderTopWidth: 1,
+    borderTopColor: colorBorderLine,
   },
 });
 

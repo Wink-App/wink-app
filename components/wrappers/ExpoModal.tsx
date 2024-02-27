@@ -1,6 +1,5 @@
 import React from "react";
-import { ViewStyle } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Pressable, ViewStyle } from "react-native";
 import Modal from "react-native-modal";
 
 import AppView from "@/appLayouts/AppView";
@@ -53,12 +52,12 @@ export function ModalBottomHalf({
         }}>
         <AppView width100 flexRowSpaceBetCenter>
           {ModalTitle}
-          <TouchableOpacity onPress={handleClose}>
+          <Pressable onPress={handleClose}>
             <ExpoSvg
               source={require("@/assets/icons/X.svg")}
               size={25}
             />
-          </TouchableOpacity>
+          </Pressable>
         </AppView>
         {children}
       </AppView>

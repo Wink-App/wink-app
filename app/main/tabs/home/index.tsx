@@ -8,12 +8,13 @@ import ViewAppLayout from "@/appLayouts/ViewAppLayout";
 import { sections } from "@/context/types/section.type";
 
 import { ButtonText } from "@/components/elements/Button";
+import ExpoSvg from "@/components/elements/ExpoSvg";
 import CategoryList from "@/components/home/CategoryList";
 import SectionC from "@/components/home/SectionC";
 import { ExpoScrollView } from "@/components/wrappers/Scroll";
-import { TextMid, TextSmall } from "@/utils/text/Text";
+import { TextMid } from "@/utils/text/Text";
 
-import { colorGreyBackground, colorPurple } from "@/utils/styles";
+import { colorGreyBackground, colorPurple, stylesBase } from "@/utils/styles";
 
 export default function Home() {
   const router = useRouter();
@@ -34,11 +35,19 @@ export default function Home() {
             style={{ height: 35, objectFit: "contain" }}
           />
           <ButtonText
-            onPress={handlePress}>
+            onPress={handlePress}
+            style={{
+              ...stylesBase.flexRowCenter,
+              gap: 6,
+            }}>
             <TextMid bold white>
               Via Venti Settembre, 32
-              <TextSmall bold white> {">"}</TextSmall>
             </TextMid>
+            <ExpoSvg
+              source={require("@/assets/icons/ArrowDownWhite.svg")}
+              size={6}
+              style={{ marginTop: -0.5 }}
+            />
           </ButtonText>
         </AppView>
         <ExpoScrollView

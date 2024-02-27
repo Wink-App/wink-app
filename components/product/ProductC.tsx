@@ -1,5 +1,6 @@
 import { useRouter } from "expo-router";
 
+import { useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 import { useProfile } from "@/context/user";
@@ -42,6 +43,12 @@ export default function ProductC({ product, view }: ProductCProps) {
   const router = useRouter();
   const { setSelectedProduct } = useProfile();
 
+  const [isFav, setIsFav] = useState<boolean>(false);
+
+  const handleAddFav = () => {
+    setIsFav(!isFav);
+  };
+
   const handlePressIn = () => {
     setSelectedProduct(product);
   };
@@ -59,7 +66,7 @@ export default function ProductC({ product, view }: ProductCProps) {
         ...container,
         width: size[view].width,
       }}>
-      <ButtonAddFav />
+      <ButtonAddFav isFav={isFav} handleAddFav={handleAddFav} />
       <Pressable
         onPressIn={handlePressIn}
         onPress={handlePress}

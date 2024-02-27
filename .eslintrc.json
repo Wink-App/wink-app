@@ -78,7 +78,6 @@
           ],
           [
             "/lib",
-            "firebase",
             "@supabase/auth-helpers-react",
             "@supabase/supabase-js"
           ],

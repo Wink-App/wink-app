@@ -2,15 +2,17 @@ import { useRouter } from "expo-router";
 
 import { View } from "react-native";
 
+import AppView from "@/appLayouts/AppView";
+
 import { Section } from "../../context/types/section.type";
 
-import { TextBig, TextMid, TextSmall } from "../../utils/text/Text";
-import { windowWidth } from "../../utils/utils";
+import { TextBig, TextMid } from "../../utils/text/Text";
 
 import { stylesBase } from "../../utils/styles";
 
 import { useHome } from "../../app/main/tabs/home/_layout";
 import { ButtonText } from "../elements/Button";
+import ExpoSvg from "../elements/ExpoSvg";
 import ProductC from "../product/ProductC";
 import { HorizontalScroll } from "../wrappers/Scroll";
 
@@ -49,11 +51,7 @@ function SectionHeader({ children, onPress }: SectionHeaderProps) {
     seeAll,
   } = styles;
   return (
-    <View
-      style={{
-        width: windowWidth,
-        ...stylesBase.flexRowSpaceBetCen,
-      }}>
+    <AppView windowWidth flexRowSpaceBetCenter>
       <TextBig style={sectionLabel}>
         {children}
       </TextBig>
@@ -62,14 +60,19 @@ function SectionHeader({ children, onPress }: SectionHeaderProps) {
         style={{
           paddingRight: 20,
           marginBottom: -1.25,
-          ...stylesBase.flexRowCenter
+          ...stylesBase.flexRowCenter,
+          gap: 3,
         }}>
         <TextMid secondary style={seeAll}>
           Vedi tutto
-          <TextSmall secondary> {">"}</TextSmall>
         </TextMid>
+        <ExpoSvg
+          source={require("@/assets/icons/ArrowRightSecondary.svg")}
+          size={6}
+          style={{ marginTop: 2 }}
+        />
       </ButtonText>
-    </View>
+    </AppView>
   );
 }
 

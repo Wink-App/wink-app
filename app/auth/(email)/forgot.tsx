@@ -4,9 +4,6 @@ import { useEffect } from "react";
 
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
-import "@/firebase.config";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-
 import { useProfile } from "@/context/user";
 import { useEmail } from "@/context/hooks/inputs";
 
@@ -28,11 +25,9 @@ export default function Forgot() {
 
   const subTitle = "Ti invieremo un link via email per reimpostare la tua password.";
 
-  const auth = getAuth();
-
   const handleSend = async () => {
     setInsertedEmail(email);
-    await sendPasswordResetEmail(auth, insertedEmail);
+    // await sendPasswordResetEmail(auth, insertedEmail);
     router.push("/auth/(email)/check");
   };
 

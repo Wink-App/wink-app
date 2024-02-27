@@ -1,8 +1,9 @@
 import { useRouter } from "expo-router";
 
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
+import AppView from "@/appLayouts/AppView";
 
 import useFacebookAuth from "../../context/hooks/useFacebookAuth";
 import useGoogleAuth from "../../context/hooks/useGoogleAuth";
@@ -10,17 +11,11 @@ import useGoogleAuth from "../../context/hooks/useGoogleAuth";
 import { ButtonAuth } from "../../components/elements/Button";
 import { windowWidth } from "../../utils/utils";
 
-import { colorPurple, colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
+import { colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
 
 export default function Home() {
 
-  const {
-    wrapper,
-    whiteCircle,
-    container,
-    logo,
-    policy,
-  } = styles;
+  const { whiteCircle, logo, policy } = styles;
 
   const logoDir = require("../../assets/logos/WinkLogo1.png");
 
@@ -46,10 +41,10 @@ export default function Home() {
   const bodyCopy = "Continuando, accetti automaticamente i nostri\n";
 
   return (
-    <View style={wrapper}>
-      <View style={whiteCircle}>
+    <AppView height100 flexColumnEndCenter backgroundColorPurple>
+      <AppView flexColumnCenter style={whiteCircle}>
         <SafeAreaLayout>
-          <View style={container}>
+          <AppView height100 flexColumnStartCenter gap={20}>
             <Image
               source={logoDir}
               style={logo}
@@ -80,31 +75,20 @@ export default function Home() {
               <TextUnderlined>Privacy Policy</TextUnderlined>&nbsp;e&nbsp;
               <TextUnderlined>Cookie Policy</TextUnderlined>.
             </Text>
-          </View>
+          </AppView>
         </SafeAreaLayout>
-      </View>
-    </View>
+      </AppView>
+    </AppView>
   );
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: "100%",
-    backgroundColor: colorPurple,
-    ...stylesBase.flexColumnEndCenter,
-  },
   whiteCircle: {
     width: windowWidth * 1.5,
     height: "82%",
     backgroundColor: colorWhite,
     borderTopLeftRadius: windowWidth * 1.5 / 2,
     borderTopRightRadius: windowWidth * 1.5 / 2,
-    ...stylesBase.flexColumnCenter,
-  },
-  container: {
-    height: "100%",
-    ...stylesBase.flexColumnStartCenter,
-    gap: 20,
   },
   logo: {
     width: 170,

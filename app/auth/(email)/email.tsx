@@ -2,8 +2,6 @@ import { useRouter } from "expo-router";
 
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
-import "@/firebase.config";
-
 import { useProfile } from "@/context/user";
 import { useEmail } from "@/context/hooks/inputs";
 

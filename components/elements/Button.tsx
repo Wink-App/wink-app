@@ -4,6 +4,8 @@ import { Image, ImageSource } from "expo-image";
 import { TextStyle, View, ViewStyle } from "react-native";
 import { BaseButton, TouchableOpacity } from "react-native-gesture-handler";
 
+import AppView from "@/appLayouts/AppView";
+
 import { TextBig } from "../../utils/text/Text";
 
 import {
@@ -144,7 +146,7 @@ export function ButtonAuth({
         width: 300,
         height: 50,
         borderRadius: 25,
-        ...stylesBase.flexRowSpaceBetCen,
+        ...stylesBase.flexRowSpaceBetCenter,
         paddingHorizontal: 15,
       }}
       onPress={onPress}>
@@ -156,12 +158,7 @@ export function ButtonAuth({
         }}
       />
       <TextBig bold>{label}</TextBig>
-      <View
-        style={{
-          width: 25,
-          height: 25,
-        }}
-      />
+      <View style={{ width: 25, height: 25 }} />
     </BaseButton>
   );
 }
@@ -205,14 +202,9 @@ export function ButtonBack({
 
 export function FullLineButtonBack({ style = {} }: { style?: ViewStyle }) {
   return (
-    <View
-      style={{
-        width: "100%",
-        ...stylesBase.flexRowStartCenter,
-        ...style
-      }}>
+    <AppView width100 flexRowStartCenter style={style}>
       <ButtonBack />
-    </View>
+    </AppView>
   );
 }
 

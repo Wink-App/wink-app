@@ -1,17 +1,12 @@
 import { useRouter } from "expo-router";
 
-import { View } from "react-native";
-
+import AppView from "@/appLayouts/AppView";
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
-
-import "@/firebase.config";
 
 import { useProfile } from "@/context/user";
 
 import { ButtonPrimary, ButtonText } from "@/components/elements/Button";
 import { TextMid } from "@/utils/text/Text";
-
-import { stylesBase } from "@/utils/styles";
 
 export default function Check() {
 
@@ -33,11 +28,7 @@ export default function Check() {
       title="Controlla la tua email"
       subTitle={subTitle}
       Button={
-        <View
-          style={{
-            width: "100%",
-            ...stylesBase.flexColumnCenter,
-          }}>
+        <AppView width100 flexColumnCenter>
           <ButtonPrimary
             text="Torna al login"
             fullWidth
@@ -49,7 +40,7 @@ export default function Check() {
             onPress={handleResend}>
             <TextMid bold secondary underlined>Reinvia email</TextMid>
           </ButtonText>
-        </View>
+        </AppView>
       }>
       <TextMid
         bold

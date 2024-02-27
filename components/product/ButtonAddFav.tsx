@@ -4,13 +4,22 @@ import { secondaryTextLight, stylesBase } from "@/utils/styles";
 
 import ExpoSvg from "../elements/ExpoSvg";
 
-export default function ButtonAddFav() {
+type ButtonAddFavProps = {
+  isFav: boolean;
+  handleAddFav: () => void;
+};
+
+export default function ButtonAddFav({ isFav, handleAddFav }: ButtonAddFavProps) {
   const { container, fav } = styles;
+  const source = isFav
+    ? require("@/assets/icons/FavouritesFilled.svg")
+    : require("@/assets/icons/Favourites.svg");
   return (
     <Pressable
+      onPress={handleAddFav}
       style={container}>
       <ExpoSvg
-        source={require("@/assets/icons/Favourites.svg")}
+        source={source}
         style={fav}
       />
     </Pressable>

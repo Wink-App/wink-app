@@ -1,11 +1,12 @@
 import React from "react";
-import { View, ViewStyle } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { Pressable, ViewStyle } from "react-native";
 import Modal from "react-native-modal";
+
+import AppView from "@/appLayouts/AppView";
 
 import { SetState } from "@/context/types/types";
 
-import { colorGreyBackground, stylesBase } from "@/utils/styles";
+import { colorGreyBackground } from "@/utils/styles";
 
 import ExpoSvg from "../elements/ExpoSvg";
 
@@ -36,34 +37,30 @@ export function ModalBottomHalf({
       swipeDirection="down"
       onSwipeComplete={handleClose}
       style={{ margin: 0 }}>
-      <View
+      <AppView
+        width100
+        height="45%"
+        flexColumnStartLeft
+        gap={20}
+        paddingTop={25}
+        padding={20}
+        backgroundColor={colorGreyBackground}
         style={{
-          width: "100%",
-          height: "45%",
-          ...stylesBase.flexColumnStartLeft,
-          gap: 20,
-          backgroundColor: colorGreyBackground,
-          paddingTop: 25,
-          padding: 20,
           position: "absolute",
           bottom: 0,
           ...style,
         }}>
-        <View
-          style={{
-            width: "100%",
-            ...stylesBase.flexRowSpaceBetCen,
-          }}>
+        <AppView width100 flexRowSpaceBetCenter>
           {ModalTitle}
-          <TouchableOpacity onPress={handleClose}>
+          <Pressable onPress={handleClose}>
             <ExpoSvg
               source={require("@/assets/icons/X.svg")}
               size={25}
             />
-          </TouchableOpacity>
-        </View>
+          </Pressable>
+        </AppView>
         {children}
-      </View>
+      </AppView>
     </Modal>
   );
 }

@@ -1,5 +1,6 @@
 import { useRouter } from "expo-router";
 
+import { useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 import { useProfile } from "@/context/user";
@@ -37,10 +38,16 @@ const size: Record<CurrentView, any> = {
 };
 
 export default function ProductC({ product, view }: ProductCProps) {
-  const { container, body, image, info } = styles;
+  const { container, body, image } = styles;
 
   const router = useRouter();
   const { setSelectedProduct } = useProfile();
+
+  const [isFav, setIsFav] = useState<boolean>(false);
+
+  const handleAddFav = () => {
+    setIsFav(!isFav);
+  };
 
   const handlePressIn = () => {
     setSelectedProduct(product);
@@ -59,7 +66,7 @@ export default function ProductC({ product, view }: ProductCProps) {
         ...container,
         width: size[view].width,
       }}>
-      <ButtonAddFav />
+      <ButtonAddFav isFav={isFav} handleAddFav={handleAddFav} />
       <Pressable
         onPressIn={handlePressIn}
         onPress={handlePress}
@@ -71,7 +78,7 @@ export default function ProductC({ product, view }: ProductCProps) {
             height: size[view].imageHeight,
           }}
         />
-        <View style={info}>
+        <View style={stylesBase.flexColumnStartLeft}>
           <TextMid bold>{product.name}</TextMid>
           <TextMid><Price>{product.price}</Price></TextMid>
           <TextSmall secondary>{product.time}</TextSmall>
@@ -100,8 +107,5 @@ const styles = StyleSheet.create({
     width: "100%",
     objectFit: "cover",
     borderRadius: 5,
-  },
-  info: {
-    ...stylesBase.flexColumnStartLeft,
   },
 });

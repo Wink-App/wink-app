@@ -1,26 +1,25 @@
 import { useState } from "react";
-import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
+import AppView from "@/appLayouts/AppView";
 
 import { categories, Category } from "../../context/types/category.type";
 
 import { TextMid } from "../../utils/text/Text";
 
-import { colorPurple, secondaryTextLight, stylesBase } from "../../utils/styles";
+import { secondaryTextLight } from "../../utils/styles";
 
 // TODO: We'll probably need to move the state out to use the category selected to query the products
 
 export default function CategoryList() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   return (
-    <View
-      style={{
-        width: "100%",
-        ...stylesBase.flexRowCenter,
-        paddingTop: 5,
-        gap: 20,
-        backgroundColor: colorPurple,
-      }}>
+    <AppView
+      width100
+      flexRowCenter
+      gap={20}
+      paddingTop={5}
+      backgroundColorPurple>
       {categories.map((category) => (
         <CategoryC
           key={category.id}
@@ -29,7 +28,7 @@ export default function CategoryList() {
           onSelect={() => setSelectedCategory(category)}
         />
       ))}
-    </View>
+    </AppView>
   );
 }
 

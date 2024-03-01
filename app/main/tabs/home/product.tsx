@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 
-import AppView from "@/appLayouts/AppView";
 import ViewAppLayout from "@/appLayouts/ViewAppLayout";
 
 import { useProfile } from "@/context/user";
 
+import AppText from "@/components/app/AppText";
+import AppView from "@/components/app/AppView";
 import { ButtonPrimary } from "@/components/elements/Button";
 import { HeaderBackElements } from "@/components/elements/HeaderBackElements";
 import Price from "@/components/product/Price";
 import { ModalBottomHalf } from "@/components/wrappers/ExpoModal";
 import { ExpoScrollView } from "@/components/wrappers/Scroll";
-import { TextBig, TextMid } from "@/utils/text/Text";
 
 export default function Product() {
   const { image } = styles;
@@ -25,9 +25,9 @@ export default function Product() {
       padding={false}
       tabBarPadding>
       <HeaderBackElements center padding>
-        <TextBig>{selectedProduct.name}</TextBig>
+        <AppText big>{selectedProduct.name}</AppText>
       </HeaderBackElements>
-      <ExpoScrollView>
+      <ExpoScrollView gap={20}>
         <Image
           source={{ uri: selectedProduct.image }}
           style={image}
@@ -38,14 +38,14 @@ export default function Product() {
           gap={20}
           paddingHorizontal={20}>
           <AppView flexColumnStartLeft gap={10} marginTop={10}>
-            <TextMid>{selectedProduct.category}&nbsp;&nbsp;-&nbsp;&nbsp;{selectedProduct.storeName}</TextMid>
-            <TextBig bold>{selectedProduct.name}</TextBig>
-            <TextBig><Price>{selectedProduct.price}</Price></TextBig>
+            <AppText mid>{selectedProduct.category}&nbsp;&nbsp;-&nbsp;&nbsp;{selectedProduct.storeName}</AppText>
+            <AppText big bold>{selectedProduct.name}</AppText>
+            <AppText big><Price>{selectedProduct.price}</Price></AppText>
           </AppView>
 
           <AppView flexColumnStartLeft gap={5}>
-            <TextMid secondary>Tempo di consegna stimato:</TextMid>
-            <TextMid>{selectedProduct.time}</TextMid>
+            <AppText mid secondary>Tempo di consegna stimato:</AppText>
+            <AppText mid>{selectedProduct.time}</AppText>
           </AppView>
 
           <AppView width100 flexColumnStartLeft gap={5} marginTop={10}>
@@ -66,7 +66,7 @@ export default function Product() {
         <ModalBottomHalf
           isVisible={showSizeModal}
           setIsVisible={setShowSizeModal}>
-          <TextBig>Seleziona la taglia</TextBig>
+          <AppText big>Seleziona la taglia</AppText>
           {selectedProduct.sizes && selectedProduct.sizes.map((size) => (
             <Size key={size} size={size} />
           ))}
@@ -79,7 +79,7 @@ export default function Product() {
 function Size({ size }: { size: string }) {
   return (
     <AppView width100 height={30} flexRowStartCenter>
-      <TextMid>{size}</TextMid>
+      <AppText mid>{size}</AppText>
     </AppView>
   );
 }

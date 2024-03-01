@@ -2,10 +2,10 @@ import { View } from "react-native";
 
 import ViewAppLayout from "@/appLayouts/ViewAppLayout";
 
+import AppText from "@/components/app/AppText";
 import { HeaderBackElements } from "@/components/elements/HeaderBackElements";
 import ProductC from "@/components/product/ProductC";
 import { VerticalScroll } from "@/components/wrappers/Scroll";
-import { TextBig } from "@/utils/text/Text";
 import { windowWidth } from "@/utils/utils";
 
 import { useHome } from "./_layout";
@@ -19,7 +19,7 @@ export default function Section() {
       padding
       tabBarPadding>
       <HeaderBackElements center>
-        <TextBig>{selectedSection.name}</TextBig>
+        <AppText big>{selectedSection.name}</AppText>
       </HeaderBackElements>
       <VerticalScroll
         numColumns={2}

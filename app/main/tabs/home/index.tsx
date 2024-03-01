@@ -2,17 +2,17 @@ import { useRouter } from "expo-router";
 
 import { Image } from "react-native";
 
-import AppView from "@/appLayouts/AppView";
 import ViewAppLayout from "@/appLayouts/ViewAppLayout";
 
 import { sections } from "@/context/types/section.type";
 
+import AppText from "@/components/app/AppText";
+import AppView from "@/components/app/AppView";
 import { ButtonText } from "@/components/elements/Button";
 import ExpoSvg from "@/components/elements/ExpoSvg";
 import CategoryList from "@/components/home/CategoryList";
 import SectionC from "@/components/home/SectionC";
 import { ExpoScrollView } from "@/components/wrappers/Scroll";
-import { TextMid } from "@/utils/text/Text";
 
 import { colorGreyBackground, colorPurple, stylesBase } from "@/utils/styles";
 
@@ -40,20 +40,18 @@ export default function Home() {
               ...stylesBase.flexRowCenter,
               gap: 6,
             }}>
-            <TextMid bold white>
-              Via Venti Settembre, 32
-            </TextMid>
+            <AppText mid bold white>Via Venti Settembre, 32</AppText>
             <ExpoSvg
               source={require("@/assets/icons/ArrowDownWhite.svg")}
-              size={6}
-              style={{ marginTop: -0.5 }}
+              size={9}
             />
           </ButtonText>
         </AppView>
         <ExpoScrollView
+          gap={20}
           style={{ backgroundColor: colorGreyBackground }}>
           <CategoryList />
-          <AppView width100 flexColumnStartLeft gap={20}>
+          <AppView width100 flexColumnStartLeft gap={30}>
             {sections.map((section) => (
               <SectionC key={section.id} section={section} />
             ))}

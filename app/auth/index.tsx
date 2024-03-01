@@ -1,21 +1,22 @@
 import { useRouter } from "expo-router";
 
-import { Image, StyleSheet, Text } from "react-native";
+import { Image, StyleSheet } from "react-native";
 
 import SafeAreaLayout from "../../appLayouts/SafeAreaLayout";
-import AppView from "@/appLayouts/AppView";
 
 import useFacebookAuth from "../../context/hooks/useFacebookAuth";
 import useGoogleAuth from "../../context/hooks/useGoogleAuth";
 
 import { ButtonAuth } from "../../components/elements/Button";
+import AppText from "@/components/app/AppText";
+import AppView from "@/components/app/AppView";
 import { windowWidth } from "../../utils/utils";
 
-import { colorWhite, secondaryText, stylesBase, TextUnderlined } from "../../utils/styles";
+import { colorWhite, TextUnderlined } from "../../utils/styles";
 
 export default function Home() {
 
-  const { whiteCircle, logo, policy } = styles;
+  const { whiteCircle, logo } = styles;
 
   const logoDir = require("../../assets/logos/WinkLogo1.png");
 
@@ -69,12 +70,12 @@ export default function Home() {
               authProvider="phone"
               onPress={handlePhoneAuth}
             />
-            <Text style={policy}>
+            <AppText secondary altFontSize={10} marginTop={50} style={{ textAlign: "center" }}>
               {bodyCopy}
               <TextUnderlined>Termini e Condizioni</TextUnderlined>,&nbsp;
               <TextUnderlined>Privacy Policy</TextUnderlined>&nbsp;e&nbsp;
               <TextUnderlined>Cookie Policy</TextUnderlined>.
-            </Text>
+            </AppText>
           </AppView>
         </SafeAreaLayout>
       </AppView>
@@ -95,12 +96,5 @@ const styles = StyleSheet.create({
     height: 170,
     marginTop: 30,
     marginBottom: 5,
-  },
-  policy: {
-    ...stylesBase.fontRegular,
-    color: secondaryText,
-    textAlign: "center",
-    fontSize: 10,
-    marginTop: 50,
   },
 });

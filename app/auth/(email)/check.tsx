@@ -1,12 +1,12 @@
 import { useRouter } from "expo-router";
 
-import AppView from "@/appLayouts/AppView";
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
 import { useProfile } from "@/context/user";
 
+import AppText from "@/components/app/AppText";
+import AppView from "@/components/app/AppView";
 import { ButtonPrimary, ButtonText } from "@/components/elements/Button";
-import { TextMid } from "@/utils/text/Text";
 
 export default function Check() {
 
@@ -38,19 +38,13 @@ export default function Check() {
           <ButtonText
             style={{ height: 50, marginBottom: 10 }}
             onPress={handleResend}>
-            <TextMid bold secondary underlined>Reinvia email</TextMid>
+            <AppText mid bold secondary underlined>Reinvia email</AppText>
           </ButtonText>
         </AppView>
       }>
-      <TextMid
-        bold
-        secondary
-        style={{
-          lineHeight: 21,
-          marginTop: -10,
-        }}>
+      <AppText mid bold secondary lineHeight={21} marginTop={-10}>
         {insertedEmail}
-      </TextMid>
+      </AppText>
     </AuthOptionLayout>
   );
 }

@@ -8,9 +8,9 @@ import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 import { useProfile } from "@/context/user";
 import { useNumber } from "@/context/hooks/inputs";
 
+import AppText from "@/components/app/AppText";
 import { ButtonPrimary } from "@/components/elements/Button";
 import { InputVerificationCode } from "@/components/elements/InputVerificationCode";
-import { TextMid } from "@/utils/text/Text";
 
 export default function Code() {
 
@@ -61,15 +61,9 @@ export default function Code() {
           enabled={isValid}
         />
       }>
-      <TextMid
-        bold
-        secondary
-        style={{
-          lineHeight: 21,
-          marginTop: -10,
-        }}>
+      <AppText mid bold secondary lineHeight={21} marginTop={-10}>
         +39 {insertedPhone}
-      </TextMid>
+      </AppText>
       <InputVerificationCode
         maxValueChar={6}
         isInvalidChar={isInvalidChar}

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextStyle } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { windowWidth as windowWidthUtil } from "@/utils/utils";
 
@@ -27,18 +27,6 @@ export const stylesBase = StyleSheet.create({
   },
   height100: {
     height: "100%",
-  },
-  fontBogartBold: {
-    fontFamily: "Bogart-Bold-trial",
-  },
-  fontBogartMedium: {
-    fontFamily: "Bogart-Medium-trial",
-  },
-  fontBold: {
-    fontFamily: "Poppins-SemiBold",
-  },
-  fontRegular: {
-    fontFamily: "Poppins-Regular",
   },
   flexRowCenter: {
     flexDirection: "row",
@@ -96,61 +84,39 @@ export const stylesBase = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: colorBorderLine,
   },
+  fontBogartBold: {
+    fontFamily: "Bogart-Bold-trial",
+  },
+  fontBogartMedium: {
+    fontFamily: "Bogart-Medium-trial",
+  },
+  fontBold: {
+    fontFamily: "Poppins-SemiBold",
+  },
+  fontRegular: {
+    fontFamily: "Poppins-Regular",
+  },
+  fontSizeSmall: {
+    fontSize: 12,
+  },
+  fontSizeMid: {
+    fontSize: 14,
+  },
+  fontSizeBig: {
+    fontSize: 16,
+  },
+  colorSecondaryText: {
+    color: secondaryText,
+  },
+  colorSecondaryTextLight: {
+    color: secondaryTextLight,
+  },
+  underlineText: {
+    textDecorationLine: "underline",
+    textDecorationColor: colorBorderLine,
+  },
 });
 
-type TextUnderlinedProps = {
-  children: React.ReactNode;
-  style?: TextStyle;
-  onPress?: () => void;
-};
-
-export function TextUnderlined({
-  children,
-  style = {},
-  onPress = () => { },
-}: TextUnderlinedProps) {
-  return (
-    <Text
-      onPress={onPress}
-      style={{
-        textDecorationLine: "underline",
-        textDecorationColor: colorBorderLine,
-        ...style,
-      }}>
-      {children}
-    </Text>
-  );
-}
-
-type TextBulletProps = {
-  children: React.ReactNode;
-  color?: TextStyle["color"];
-  style?: TextStyle;
-};
-
-export function TextBullet({
-  children,
-  color,
-  style = {},
-}: TextBulletProps) {
-  return (
-    <Text style={{ ...stylesBase.fontRegular, color, ...style }}>
-      &nbsp;•&nbsp;&nbsp;{children}
-    </Text>
-  );
-}
-
-type TextProps = {
-  children: React.ReactNode;
-  fontSize?: TextStyle["fontSize"];
-  color?: TextStyle["color"];
-};
-
-export function TextBold({ children, fontSize, color }: TextProps) {
-  const style = {
-    ...stylesBase.fontBold,
-    fontSize,
-    color,
-  };
-  return <Text style={style}>{children}</Text>;
+export function Bullet() {
+  return <>&nbsp;•&nbsp;&nbsp;</>;
 }

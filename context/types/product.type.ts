@@ -45,7 +45,7 @@ export const products1: Product[] = [
 export const products2: Product[] = [
   {
     id: "4",
-    name: "Converse Chuck Taylor",
+    name: "Converse Chuck",
     price: 70,
     category: "Scarpe",
     image: "https://www.converse.com/dw/image/v2/BJJF_PRD/on/demandware.static/-/Sites-cnv-master-catalog-we/default/dw3618b251/images/l_08/162054C_L_08X1.jpg?sw=406",

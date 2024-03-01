@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-import AppView from "@/appLayouts/AppView";
+import AppView from "@/components/app/AppView";
 
 import { ButtonBack } from "./Button";
 

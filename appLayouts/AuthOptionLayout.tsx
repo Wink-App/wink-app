@@ -1,13 +1,11 @@
-import { StyleSheet, Text } from "react-native";
-
+import AppView from "../components/app/AppView";
 import { FullLineButtonBack } from "../components/elements/Button";
 import { AvoidKeyboard, DismissKeyboard } from "../components/transitions/Keyboard";
-import { TextMid } from "../utils/text/Text";
+import AppText from "@/components/app/AppText";
 import { windowHeight } from "../utils/utils";
 
-import { colorBlack, colorGreyBackground, stylesBase } from "../utils/styles";
+import { colorGreyBackground } from "../utils/styles";
 
-import AppView from "./AppView";
 import SafeAreaLayout from "./SafeAreaLayout";
 
 type AuthOptionLayoutProps = {
@@ -33,8 +31,8 @@ export default function AuthOptionLayout({
                 style={{ marginTop: 20 }}
               />
               <AppView width100 flexColumnStartLeft gap={15}>
-                <Text style={styles.title}>{title}</Text>
-                <TextMid secondary style={styles.subTitle}>{subTitle}</TextMid>
+                <AppText bold altFontSize={22} lineHeight={33}>{title}</AppText>
+                <AppText mid secondary lineHeight={21} marginTop={-10}>{subTitle}</AppText>
                 {children}
               </AppView>
             </AppView>
@@ -45,16 +43,3 @@ export default function AuthOptionLayout({
     </AvoidKeyboard>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    ...stylesBase.fontBold,
-    color: colorBlack,
-    fontSize: 22,
-    lineHeight: 33,
-  },
-  subTitle: {
-    lineHeight: 21,
-    marginTop: -10,
-  },
-});

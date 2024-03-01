@@ -1,18 +1,18 @@
 import { useRouter } from "expo-router";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { NativeScrollEvent, NativeSyntheticEvent, StyleSheet, Text } from "react-native";
+import { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
-import AppView from "@/appLayouts/AppView";
 
 import { ButtonText } from "../components/elements/Button";
 import TransitionElement from "../components/transitions/TransitionElement";
+import AppText from "@/components/app/AppText";
+import AppView from "@/components/app/AppView";
 import { HorizontalScroll } from "@/components/wrappers/Scroll";
-import { TextBig } from "../utils/text/Text";
 import { windowWidth } from "../utils/utils";
 
-import { colorOrange, colorWhite, secondaryTextLight, stylesBase } from "../utils/styles";
+import { colorOrange, colorWhite } from "../utils/styles";
 
 type SlideProps = {
   id?: number;
@@ -24,8 +24,6 @@ type SlideProps = {
 };
 
 export default function Index() {
-  const { action } = styles;
-
   const router = useRouter();
 
   const slides: SlideProps[] = useMemo(() => [
@@ -115,7 +113,7 @@ export default function Index() {
                 <ButtonText
                   style={{ height: 50 }}
                   onPress={handleNavigateToRegister}>
-                  <TextBig style={action}>Avanti</TextBig>
+                  <AppText altFont="Bogart" big secondaryLight lineHeight={24}>Avanti</AppText>
                 </ButtonText>
               </TransitionElement>
             )}
@@ -127,36 +125,11 @@ export default function Index() {
 }
 
 function Slide({ text }: SlideProps) {
-  const {
-    title,
-    body,
-  } = styles;
   return (
     <AppView windowWidth flexColumnStartLeft height={300} paddingHorizontal={30}>
-      <Text style={title}>{text.firstLine}</Text>
-      <Text style={title}>{text.secondLine}</Text>
-      <Text style={body}>{text.body}</Text>
+      <AppText altFont="Bogart" bold altFontSize={38} lineHeight={50} altColor={colorOrange}>{text.firstLine}</AppText>
+      <AppText altFont="Bogart" bold altFontSize={38} lineHeight={50} altColor={colorOrange}>{text.secondLine}</AppText>
+      <AppText altFont="Bogart" altFontSize={20} lineHeight={30} white marginTop={20}>{text.body}</AppText>
     </AppView>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    ...stylesBase.fontBogartBold,
-    color: colorOrange,
-    fontSize: 38,
-    lineHeight: 50,
-  },
-  body: {
-    ...stylesBase.fontBogartMedium,
-    color: colorWhite,
-    fontSize: 20,
-    lineHeight: 30,
-    marginTop: 20,
-  },
-  action: {
-    ...stylesBase.fontBogartMedium,
-    color: secondaryTextLight,
-    lineHeight: 24,
-  },
-});

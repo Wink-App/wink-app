@@ -4,9 +4,7 @@ import { Image, ImageSource } from "expo-image";
 import { TextStyle, View, ViewStyle } from "react-native";
 import { BaseButton, TouchableOpacity } from "react-native-gesture-handler";
 
-import AppView from "@/appLayouts/AppView";
-
-import { TextBig } from "../../utils/text/Text";
+import AppView from "@/components/app/AppView";
 
 import {
   colorBlack,
@@ -17,6 +15,8 @@ import {
   colorWhite,
   stylesBase,
 } from "../../utils/styles";
+
+import AppText from "../app/AppText";
 
 type ButtonPrimaryProps = {
   text: string;
@@ -61,13 +61,7 @@ export function ButtonPrimary({
       }}
       onPress={onPress}
       enabled={enabled}>
-      <TextBig
-        bold
-        style={{
-          color: textColor,
-        }}>
-        {text}
-      </TextBig>
+      <AppText big bold altColor={textColor}>{text}</AppText>
     </BaseButton>
   );
 }
@@ -157,7 +151,7 @@ export function ButtonAuth({
           height: 25,
         }}
       />
-      <TextBig bold>{label}</TextBig>
+      <AppText big bold>{label}</AppText>
       <View style={{ width: 25, height: 25 }} />
     </BaseButton>
   );

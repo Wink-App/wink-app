@@ -6,7 +6,7 @@ import { Image, View } from "react-native";
 
 import SafeAreaLayout from "../appLayouts/SafeAreaLayout";
 
-import { TextBig } from "../utils/text/Text";
+import AppText from "@/components/app/AppText";
 import { windowWidth } from "../utils/utils";
 
 import { colorWhite, stylesBase } from "../utils/styles";
@@ -151,12 +151,9 @@ function CustomToast({
             width: 15,
           }}
         />
-        <TextBig
-          style={{
-            paddingHorizontal: 25,
-          }}>
+        <AppText big style={{ paddingHorizontal: 25 }}>
           {message}
-        </TextBig>
+        </AppText>
       </View>
     </View>
   );

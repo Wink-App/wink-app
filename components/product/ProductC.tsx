@@ -6,10 +6,9 @@ import { Image, Pressable, StyleSheet, View } from "react-native";
 import { useProfile } from "@/context/user";
 import { Product } from "../../context/types/product.type";
 
-import { TextMid, TextSmall } from "../../utils/text/Text";
-
 import { stylesBase } from "../../utils/styles";
 
+import AppText from "../app/AppText";
 import { ButtonText } from "../elements/Button";
 import ButtonAddFav from "./ButtonAddFav";
 import Price from "./Price";
@@ -79,15 +78,15 @@ export default function ProductC({ product, view }: ProductCProps) {
           }}
         />
         <View style={stylesBase.flexColumnStartLeft}>
-          <TextMid bold>{product.name}</TextMid>
-          <TextMid><Price>{product.price}</Price></TextMid>
-          <TextSmall secondary>{product.time}</TextSmall>
+          <AppText mid bold>{product.name}</AppText>
+          <AppText mid><Price>{product.price}</Price></AppText>
+          <AppText small secondary>{product.time}</AppText>
         </View>
       </Pressable>
       <ButtonText onPress={handlePressStore}>
-        <TextSmall secondary underlined>
+        <AppText small secondary underlined>
           Altro da {product.storeName}
-        </TextSmall>
+        </AppText>
       </ButtonText>
     </View>
   );

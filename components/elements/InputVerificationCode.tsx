@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputKeyPressEventData } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-import AppView from "@/appLayouts/AppView";
+import AppView from "@/components/app/AppView";
 
 import { colorBorderLine, colorGreyLighter, stylesBase } from "../../utils/styles";
 

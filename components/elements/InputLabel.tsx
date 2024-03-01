@@ -4,9 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 
-import AppView from "@/appLayouts/AppView";
-
-import { TextMid } from "../../utils/text/Text";
+import AppView from "@/components/app/AppView";
 
 import {
   colorBorderLine,
@@ -16,6 +14,7 @@ import {
   stylesBase,
 } from "../../utils/styles";
 
+import AppText from "../app/AppText";
 import TransitionElement from "../transitions/TransitionElement";
 
 type InputMode = "default" | "email-address" | "number-pad";
@@ -84,15 +83,9 @@ export default function InputLabel({
   return (
     <View style={stylesBase.flexColumnStartLeft}>
       {label && (
-        <TextMid
-          secondary
-          style={{
-            lineHeight: 21,
-            marginLeft: 3,
-            marginBottom: 5,
-          }}>
+        <AppText mid secondary lineHeight={21} style={{ marginLeft: 3, marginBottom: 5 }}>
           {label}
-        </TextMid>
+        </AppText>
       )}
 
       <AppView
@@ -105,14 +98,7 @@ export default function InputLabel({
           borderWidth: 0.5,
         }}>
         {isPhoneNumber && (
-          <TextMid
-            secondary
-            style={{
-              lineHeight: 21,
-              marginRight: 5,
-            }}>
-            +39
-          </TextMid>
+          <AppText mid secondary lineHeight={21} style={{ marginRight: 5 }}>+39</AppText>
         )}
 
         <TextInput

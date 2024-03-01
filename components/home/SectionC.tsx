@@ -1,17 +1,16 @@
 import { useRouter } from "expo-router";
 
 import { View } from "react-native";
-
-import AppView from "@/appLayouts/AppView";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { Section } from "../../context/types/section.type";
 
-import { TextBig, TextMid } from "../../utils/text/Text";
+import AppView from "@/components/app/AppView";
 
-import { stylesBase } from "../../utils/styles";
+import { colorGreyDarker, stylesBase } from "../../utils/styles";
 
 import { useHome } from "../../app/main/tabs/home/_layout";
-import { ButtonText } from "../elements/Button";
+import AppText from "../app/AppText";
 import ExpoSvg from "../elements/ExpoSvg";
 import ProductC from "../product/ProductC";
 import { HorizontalScroll } from "../wrappers/Scroll";
@@ -27,7 +26,7 @@ export default function SectionC({ section }: { section: Section }) {
   };
 
   return (
-    <>
+    <AppView width100 flexColumnStartLeft gap={10}>
       <SectionHeader onPress={handlePress}>{section.name}</SectionHeader>
       <HorizontalScroll
         ItemSeparatorComponent={<View style={{ width: 20 }} />}
@@ -36,7 +35,7 @@ export default function SectionC({ section }: { section: Section }) {
           <ProductC key={product.id} product={product} view="Home" />
         ))}
       </HorizontalScroll>
-    </>
+    </AppView>
   );
 }
 
@@ -46,42 +45,25 @@ type SectionHeaderProps = {
 };
 
 function SectionHeader({ children, onPress }: SectionHeaderProps) {
-  const {
-    sectionLabel,
-    seeAll,
-  } = styles;
   return (
-    <AppView windowWidth flexRowSpaceBetCenter>
-      <TextBig style={sectionLabel}>
+    <AppView flexRowCenter gap={10}>
+      <AppText big bold lineHeight={40} style={{ paddingLeft: 20 }}>
         {children}
-      </TextBig>
-      <ButtonText
-        onPress={onPress}
+      </AppText>
+      <TouchableOpacity
         style={{
-          paddingRight: 20,
-          marginBottom: -1.25,
+          height: 20,
+          width: 20,
           ...stylesBase.flexRowCenter,
-          gap: 3,
-        }}>
-        <TextMid secondary style={seeAll}>
-          Vedi tutto
-        </TextMid>
+          backgroundColor: colorGreyDarker,
+          borderRadius: 20,
+        }}
+        onPress={onPress}>
         <ExpoSvg
-          source={require("@/assets/icons/ArrowRightSecondary.svg")}
-          size={6}
-          style={{ marginTop: 2 }}
+          source={require("@/assets/icons/ArrowRightBlack.svg")}
+          size={9}
         />
-      </ButtonText>
+      </TouchableOpacity>
     </AppView>
   );
 }
-
-const styles = {
-  sectionLabel: {
-    lineHeight: 40,
-    paddingLeft: 20,
-  },
-  seeAll: {
-    lineHeight: 40,
-  },
-};

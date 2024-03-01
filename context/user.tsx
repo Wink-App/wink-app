@@ -63,6 +63,7 @@ const Provider = ({ children }: ProviderProps) => {
 
   async function getIsNewUserFromEmail({ email }: { email: string }) {
     setInsertedEmail(email);
+    setIsNewUser(true);
     // try {
     //   const signInMethods = await fetchSignInMethodsForEmail(myAuth, email);
     //   if (signInMethods.length > 0) {

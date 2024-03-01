@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import AppView from "@/appLayouts/AppView";
-
 import { categories, Category } from "../../context/types/category.type";
 
-import { TextMid } from "../../utils/text/Text";
+import AppView from "@/components/app/AppView";
 
 import { secondaryTextLight } from "../../utils/styles";
+
+import AppText from "../app/AppText";
 
 // TODO: We'll probably need to move the state out to use the category selected to query the products
 
@@ -47,14 +47,9 @@ function CategoryC({ category, isSelected, onSelect }: CategoryCProps) {
         borderBottomWidth: isSelected ? 1.5 : 0,
       }}
       onPress={onSelect}>
-      <TextMid
-        bold={isSelected}
-        style={{
-          lineHeight: 40,
-          color: isSelected ? "white" : secondaryTextLight,
-        }}>
+      <AppText mid bold={isSelected} lineHeight={40} altColor={isSelected ? "white" : secondaryTextLight}>
         {category.label}
-      </TextMid>
+      </AppText>
     </TouchableOpacity>
   );
 }

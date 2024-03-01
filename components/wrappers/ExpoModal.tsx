@@ -2,9 +2,9 @@ import React from "react";
 import { Pressable, ViewStyle } from "react-native";
 import Modal from "react-native-modal";
 
-import AppView from "@/appLayouts/AppView";
-
 import { SetState } from "@/context/types/types";
+
+import AppView from "@/components/app/AppView";
 
 import { colorGreyBackground } from "@/utils/styles";
 

@@ -8,12 +8,13 @@ import { stylesBase } from "@/utils/styles";
 
 type ExpoScrollViewProps = {
   children: React.ReactNode;
+  gap?: number;
   style?: ViewStyle;
 };
 
-export function ExpoScrollView({ children, style = {} }: ExpoScrollViewProps) {
+export function ExpoScrollView({ children, gap, style = {} }: ExpoScrollViewProps) {
   const { container } = styles;
-  const renderStyle = { ...container, ...style };
+  const renderStyle = { ...container, gap, ...style };
   return <ScrollView contentContainerStyle={renderStyle}>{children}</ScrollView>;
 }
 
@@ -21,7 +22,6 @@ const styles = StyleSheet.create({
   container: {
     width: windowWidth,
     ...stylesBase.flexColumnStartLeft,
-    gap: 20,
     paddingBottom: 40,
   },
 });

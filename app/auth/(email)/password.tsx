@@ -2,18 +2,18 @@ import { useRouter } from "expo-router";
 
 import { useEffect, useState } from "react";
 
-import AppView from "@/appLayouts/AppView";
 import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 
 import { useProfile } from "@/context/user";
 import { useDebounceEffect, usePassword } from "@/context/hooks/inputs";
 
+import AppText from "@/components/app/AppText";
+import AppView from "@/components/app/AppView";
 import { ButtonPrimary, ButtonText } from "@/components/elements/Button";
 import InputLabel from "@/components/elements/InputLabel";
 import TransitionElement from "@/components/transitions/TransitionElement";
-import { TextMid } from "@/utils/text/Text";
 
-import { secondaryText, TextBold, TextBullet } from "@/utils/styles";
+import { Bullet, TextBold } from "@/utils/styles";
 
 export default function Password() {
 
@@ -107,15 +107,9 @@ export default function Password() {
           enabled={enableContinue}
         />
       }>
-      <TextMid
-        bold
-        secondary
-        style={{
-          lineHeight: 21,
-          marginTop: -10,
-        }}>
+      <AppText mid bold secondary lineHeight={21} marginTop={-10}>
         {insertedEmail}
-      </TextMid>
+      </AppText>
       <InputLabel
         value={password}
         isInvalidChar={isInvalidChar}
@@ -129,47 +123,30 @@ export default function Password() {
       />
       {isNewUser === false && errorMessage && (
         <TransitionElement>
-          <TextMid
-            bold
-            style={{
-              color: "red",
-              lineHeight: 21,
-              marginTop: -5,
-            }}>
+          <AppText mid bold lineHeight={21} altColor="red" marginTop={-5}>
             {errorMessage}
-          </TextMid>
+          </AppText>
         </TransitionElement>
       )}
       {isNewUser === false && (
         <AppView width100 flexRowEndCenter>
           <ButtonText
             onPress={handleForgotPassword}>
-            <TextMid bold secondary underlined>Password dimenticata?</TextMid>
+            <AppText mid bold secondary underlined>Password dimenticata?</AppText>
           </ButtonText>
         </AppView>
       )}
       {isNewUser === true && (
         <>
-          <TextBullet
-            color={secondaryText}
-            style={{
-              fontSize: 14,
-              lineHeight: 21,
-              marginTop: -5,
-            }}>
-            Almeno <TextBold color={rules.colorLenght}>9 caratteri</TextBold>
-          </TextBullet>
-          <TextBullet
-            color={secondaryText}
-            style={{
-              fontSize: 14,
-              lineHeight: 21,
-              marginTop: -10,
-            }}>
+          <AppText mid secondary lineHeight={21} marginTop={-5}>
+            <Bullet />Almeno <TextBold color={rules.colorLenght}>9 caratteri</TextBold>
+          </AppText>
+          <AppText mid secondary lineHeight={21} marginTop={-10}>
+            <Bullet />
             <TextBold color={rules.colorLetter}>Lettera</TextBold>,&nbsp;
             <TextBold color={rules.colorNumber}>numero</TextBold>,&nbsp;
             <TextBold color={rules.colorSpecialChar}>carattere speciale</TextBold>
-          </TextBullet>
+          </AppText>
           <InputLabel
             value={confirmPassword}
             isInvalidChar={isInvalidCharConfirm}
@@ -184,15 +161,9 @@ export default function Password() {
       )}
       {isNewUser === true && arePasswordsEqual === false && (
         <TransitionElement>
-          <TextMid
-            bold
-            style={{
-              color: "red",
-              lineHeight: 21,
-              marginTop: -5,
-            }}>
+          <AppText mid bold lineHeight={21} altColor="red" marginTop={-5}>
             Le password non corrispondono.
-          </TextMid>
+          </AppText>
         </TransitionElement>
       )}
     </AuthOptionLayout>

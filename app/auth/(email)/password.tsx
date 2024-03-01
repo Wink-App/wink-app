@@ -7,13 +7,13 @@ import AuthOptionLayout from "@/appLayouts/AuthOptionLayout";
 import { useProfile } from "@/context/user";
 import { useDebounceEffect, usePassword } from "@/context/hooks/inputs";
 
-import AppText from "@/components/app/AppText";
+import AppText, { TextBold } from "@/components/app/AppText";
 import AppView from "@/components/app/AppView";
 import { ButtonPrimary, ButtonText } from "@/components/elements/Button";
 import InputLabel from "@/components/elements/InputLabel";
 import TransitionElement from "@/components/transitions/TransitionElement";
 
-import { Bullet, TextBold } from "@/utils/styles";
+import { Bullet } from "@/utils/styles";
 
 export default function Password() {
 

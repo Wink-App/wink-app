@@ -8,13 +8,13 @@ import useFacebookAuth from "../../context/hooks/useFacebookAuth";
 import useGoogleAuth from "../../context/hooks/useGoogleAuth";
 
 import { ButtonAuth } from "../../components/elements/Button";
-import AppText from "@/components/app/AppText";
+import AppText, { TextUnderlined } from "@/components/app/AppText";
 import AppView from "@/components/app/AppView";
 import { windowWidth } from "../../utils/utils";
 
-import { colorWhite, TextUnderlined } from "../../utils/styles";
+import { colorWhite } from "../../utils/styles";
 
-export default function Home() {
+export default function Auth() {
 
   const { whiteCircle, logo } = styles;
 

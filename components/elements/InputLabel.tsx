@@ -1,5 +1,3 @@
-import { Image } from "expo-image";
-
 import { useEffect, useRef, useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData, View } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
@@ -16,6 +14,7 @@ import {
 
 import AppText from "../app/AppText";
 import TransitionElement from "../transitions/TransitionElement";
+import ExpoSvg from "./ExpoSvg";
 
 type InputMode = "default" | "email-address" | "number-pad";
 
@@ -34,7 +33,7 @@ type InputLabelProps = {
   isPassword?: boolean;
   isPhoneNumber?: boolean;
   // isUsername?: boolean;
-  // isSearch?: boolean;
+  isSearch?: boolean;
   // isDescription?: boolean;
   // isOptional?: boolean;
   // Element?: JSX.Element | null;
@@ -57,6 +56,7 @@ export default function InputLabel({
   placeholder,
   isPassword = false,
   isPhoneNumber = false,
+  isSearch = false,
   inputmode = "default",
   autoComplete = "off",
   autoFocus = false,
@@ -101,6 +101,14 @@ export default function InputLabel({
           <AppText mid secondary lineHeight={21} style={{ marginRight: 5 }}>+39</AppText>
         )}
 
+        {isSearch && (
+          <ExpoSvg
+            source={require("../../assets/icons/SearchInput.svg")}
+            size={15}
+            style={{ marginRight: 10 }}
+          />
+        )}
+
         <TextInput
           ref={inputRef}
           style={{
@@ -133,12 +141,9 @@ export default function InputLabel({
                 marginRight: 10,
               }}
               onPress={toggleShowPassword}>
-              <Image
+              <ExpoSvg
                 source={showPassword ? require("../../assets/icons/Visible.svg") : require("../../assets/icons/Hidden.svg")}
-                style={{
-                  height: 15,
-                  width: 15,
-                }}
+                size={15}
               />
             </TouchableOpacity>
           </TransitionElement>
@@ -154,12 +159,9 @@ export default function InputLabel({
                 borderRadius: 20,
               }}
               onPress={clearFunction}>
-              <Image
+              <ExpoSvg
                 source={require("../../assets/icons/X.svg")}
-                style={{
-                  height: 15,
-                  width: 15,
-                }}
+                size={15}
               />
             </TouchableOpacity>
           </TransitionElement>

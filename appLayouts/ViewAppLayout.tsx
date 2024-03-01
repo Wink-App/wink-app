@@ -1,6 +1,8 @@
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { View, ViewStyle } from "react-native";
 
+import { DismissKeyboard } from "@/components/transitions/Keyboard";
+
 import { stylesBase } from "@/utils/styles";
 
 import SafeAreaLayout from "./SafeAreaLayout";
@@ -12,6 +14,8 @@ type ViewAppLayoutProps = {
   padding: boolean;
   tabBarPadding: boolean;
 
+  dismissKeyboard?: boolean;
+
   style?: ViewStyle;
 };
 
@@ -20,6 +24,7 @@ export default function ViewAppLayout({
   center = false,
   padding = false,
   tabBarPadding = false,
+  dismissKeyboard = false,
   style = {},
 }: ViewAppLayoutProps) {
 
@@ -32,6 +37,19 @@ export default function ViewAppLayout({
     gap: 20,
     ...style,
   };
+
+  if (dismissKeyboard) {
+    return (
+      <SafeAreaLayout>
+        <DismissKeyboard>
+          <View
+            style={currentstyle}>
+            {children}
+          </View>
+        </DismissKeyboard>
+      </SafeAreaLayout>
+    );
+  }
 
   return (
     <SafeAreaLayout>

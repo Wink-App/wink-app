@@ -16,10 +16,10 @@ import AppText from "../app/AppText";
 import TransitionElement from "../transitions/TransitionElement";
 import ExpoSvg from "./ExpoSvg";
 
-type InputMode = "default" | "email-address" | "number-pad";
+export type InputMode = "default" | "email-address" | "number-pad";
 
 // email does not enable devide keychain. password is iOS only.
-type AutoComplete = "off" | "email" | "password" | "username" | "current-password" | "new-password";
+export type AutoComplete = "off" | "email" | "password" | "username" | "current-password" | "new-password";
 
 type InputLabelProps = {
   widthValue?: string;
@@ -38,7 +38,7 @@ type InputLabelProps = {
   // isOptional?: boolean;
   // Element?: JSX.Element | null;
 
-  inputmode?: InputMode;
+  inputMode?: InputMode;
   autoComplete?: AutoComplete;
 
   autoFocus?: boolean;
@@ -57,7 +57,7 @@ export default function InputLabel({
   isPassword = false,
   isPhoneNumber = false,
   isSearch = false,
-  inputmode = "default",
+  inputMode = "default",
   autoComplete = "off",
   autoFocus = false,
   onChange,
@@ -122,7 +122,7 @@ export default function InputLabel({
           placeholderTextColor={secondaryText}
           onChange={onChange}
           clearButtonMode="never"
-          keyboardType={inputmode}
+          keyboardType={inputMode}
           secureTextEntry={showPassword}
           spellCheck={false}
           clearTextOnFocus={false}

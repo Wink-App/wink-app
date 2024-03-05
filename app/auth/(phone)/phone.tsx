@@ -49,7 +49,7 @@ export default function Phone() {
         isInvalidChar={isInvalidChar}
         placeholder="Inserisci il tuo numero"
         isPhoneNumber
-        inputmode="number-pad"
+        inputMode="number-pad"
         autoFocus
         onChange={(e) => setPhoneNumber(e.nativeEvent.text)}
         clearFunction={() => setPhoneNumber("")}

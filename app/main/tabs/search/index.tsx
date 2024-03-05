@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import ViewAppLayout from "@/appLayouts/ViewAppLayout";
 
-import InputLabel from "@/components/elements/InputLabel";
+import InputSearch from "@/components/elements/InputSearch";
 
 export default function Search() {
 
@@ -13,10 +13,8 @@ export default function Search() {
       padding
       tabBarPadding
       dismissKeyboard>
-      <InputLabel
+      <InputSearch
         value={search}
-        placeholder="Search"
-        isSearch
         onChange={(e) => setSearch(e.nativeEvent.text)}
         clearFunction={() => setSearch("")}
       />

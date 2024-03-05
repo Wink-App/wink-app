@@ -10,7 +10,7 @@ type AppViewProps = {
   width100?: boolean;
   height100?: boolean;
 
-  width?: number;
+  width?: number | string;
   height?: number | string;
 
   flexRowCenter?: boolean;

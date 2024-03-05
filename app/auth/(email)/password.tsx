@@ -115,7 +115,7 @@ export default function Password() {
         isInvalidChar={isInvalidChar}
         placeholder="Inserisci password"
         isPassword
-        inputmode="default"
+        inputMode="default"
         autoComplete={isNewUser ? "new-password" : "current-password"}
         autoFocus
         onChange={(e) => setPassword(e.nativeEvent.text)}
@@ -152,7 +152,7 @@ export default function Password() {
             isInvalidChar={isInvalidCharConfirm}
             placeholder="Conferma password"
             isPassword
-            inputmode="default"
+            inputMode="default"
             autoComplete="current-password"
             onChange={(e) => setConfirmPassword(e.nativeEvent.text)}
             clearFunction={() => setConfirmPassword("")}

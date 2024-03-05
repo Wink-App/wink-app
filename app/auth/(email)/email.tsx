@@ -39,7 +39,7 @@ export default function Email() {
         value={email}
         isInvalidChar={isInvalidChar}
         placeholder="Inserisci la tua email"
-        inputmode="email-address"
+        inputMode="email-address"
         autoComplete="username"
         autoFocus
         onChange={(e) => setEmail(e.nativeEvent.text)}
